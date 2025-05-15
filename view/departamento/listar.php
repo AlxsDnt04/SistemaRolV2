@@ -42,7 +42,9 @@ $departamento = $departamento->obtenerTodos();
                   <td><?= htmlspecialchars($dep['area']) ?></td>
                   <td class="text-center">
                     <a href="formulario.php?id=<?= $dep['id_departamento'] ?>" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+                    <!-- ELIMINAR -->
+                    <a href="../../controllers/DepartamentoController.php?id=<?= $dep['id_departamento'] ?>&accion=eliminar" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?');">Eliminar</a>
+
                   </td>
                 </tr>
               <?php endforeach; ?>
