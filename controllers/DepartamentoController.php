@@ -3,47 +3,25 @@ require_once '../models/Departamento.php';
 
 $departamento = new Departamento();
 
+// Eliminar por GET directamente desde la URL
+if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
+    // llamar a la funcion eliminar
+    $departamento->eliminar($_GET['id']);
+    header('Location: ../view/departamento/listar.php');
+    exit;
+}
+
+// Crear o actualizar por POST desde el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // metodo1
-    /* actualizar */
+    // Validar que el campo id_departamento no esté vacío    
     if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
+        // Actualizar
         $departamento->actualizar($_POST);
-        exit;
-    }
-    /* eliminar */
-    elseif (isset($_GET['accion']) && $_GET['accion'] === 'eliminar') {
-            $departamento->eliminar($id);
-        
-        // Redirigir al listado después de eliminar
-        header('Location: ../../view/departamento/listar.php');
-        exit;
     } else {
+        // crear
         $departamento->crear($_POST);
-        header('Location: ../view/departamento/listar.php');
     }
-
-    // metodo2
-    /*  $accion = $_POST['accion'];
-
-    if ($accion === 'crear') {
-        // Crear un nuevo departamento
-        $departamento->crear([
-            'nombre' => $_POST['nombre'],
-            'ubicacion' => $_POST['ubicacion'],
-            'area' => $_POST['area']
-        ]);
-    } elseif ($accion === 'editar') {
-        // Editar un departamento existente
-        $departamento->actualizar([
-            'id_departamento' => $_POST['id_departamento'],
-            'nombre' => $_POST['nombre'],
-            'ubicacion' => $_POST['ubicacion'],
-            'area' => $_POST['area']
-        ]);
-    }
- */
-    // Redirigir al listado después de guardar
     header('Location: ../view/departamento/listar.php');
     exit;
 }
