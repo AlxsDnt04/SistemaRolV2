@@ -14,6 +14,7 @@ if (isset($_GET['id'])) {
 <head>
   <meta charset="UTF-8">
   <title>Insertar Departamento</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/insertarDep.css"> 
 
@@ -22,8 +23,9 @@ if (isset($_GET['id'])) {
 <body>
   <div class="container">
     <div class="header">
-      <h4 class="mb-0">Insertar Departamento</h4>
-      <a href="listar.php" class="btn btn-light btn-sm">Ver Departamentos</a>
+      <h4 class="mb-0"><i class="fa-solid fa-plus"></i> Insertar Departamento</h4>
+      <a href="listar.php" class="btn btn-light btn-sm">
+        <i class="fa-solid fa-list"></i> Ver Departamentos</a>
     </div>
 
     <form action="../../controllers/DepartamentoController.php" method="POST">
@@ -50,7 +52,8 @@ if (isset($_GET['id'])) {
 
 
       <div class="mt-4 text-center">
-        <button type="submit" class="btn btn-success px-5">Guardar</button>
+        <button type="submit" class="btn btn-success px-5">
+          <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
       </div>
     </form>
   </div>
