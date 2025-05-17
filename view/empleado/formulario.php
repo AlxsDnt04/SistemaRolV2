@@ -2,10 +2,21 @@
 require_once '../../models/Empleado.php';
 $empleado = new Empleado();
 
+// Verificar si se está editando un empleado
 if (isset($_GET['id'])) {
+  // Obtener el empleado por ID
   $data = $empleado->obtenerPorId($_GET['id']);
 } else {
-  $data = ['id_empleado' => '', 'ci_empleado' => '', 'nombre' => '', 'apellido' => '', 'telefono' => '', 'direccion' => '', 'correo' => '', 'id_departamento' => ''];
+  // Si no se está editando, inicializar un array vacío
+  $data = [
+    'ci_empleado' => '',
+    'nombre' => '',
+    'apellido' => '',
+    'telefono' => '',
+    'direccion' => '',
+    'correo' => '',
+    'id_departamento' => ''
+  ];
 }
 ?>
 <!DOCTYPE html>
@@ -16,7 +27,7 @@ if (isset($_GET['id'])) {
   <title>Insertar Empleado</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/insertarDep.css">
+  <link rel="stylesheet" href="../../assets/css/insertar.css">
 </head>
 
 <body>
@@ -52,29 +63,32 @@ if (isset($_GET['id'])) {
           <label for="correo" class="form-label">Correo</label>
           <input type="email" class="form-control" id="correo" name="correo" maxlength="50" value="<?= htmlspecialchars($data['correo']) ?>" required>
         </div>
+
         <div class="col-md-6">
-          <label for="departamento" class="form-label">Departamento</label>
-          <!-- obtener departamentos y mostrar en lista de opciones -->
-          <select class="form-select" id="departamento" name="id_departamento" required>
+          <label for="id_departamento" class="form-label">Departamento</label>
+          <select class="form-select" id="id_departamento" name="id_departamento" required>
             <option value="" disabled <?= empty($data['id_departamento']) ? 'selected' : '' ?>>Seleccione un departamento</option>
             <?php
             require_once '../../models/Departamento.php';
             $departamento = new Departamento();
             $departamentos = $departamento->obtenerTodos();
+            // recorrer departamentos y mostrar en la lista de opciones
             foreach ($departamentos as $dep) {
+              // verificar si el departamento es el seleccionado
               $selected = ($data['id_departamento'] == $dep['id_departamento']) ? 'selected' : '';
+              // mostrar la opcion
               echo "<option value=\"{$dep['id_departamento']}\" $selected>" . htmlspecialchars($dep['nombre']) . "</option>";
             }
             ?>
+          </select>
         </div>
+
       </div>
 
 
-      <!-- Campo oculto para identificar si es creación, edición o eliminación -->
+      <!-- Campo oculto para identificar si es creación, edición -->
       <input type="hidden" name="accion" value="<?= isset($_GET['id']) ? 'editar' : 'crear' ?>">
       <input type="hidden" name="ci_empleado" value="<?= htmlspecialchars($data['ci_empleado']) ?>">
-
-
 
       <div class="mt-4 text-center">
         <button type="submit" class="btn btn-success px-5"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>

@@ -14,7 +14,21 @@ if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'
 // Crear o actualizar por POST desde el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Validar que el campo id_departamento no esté vacío    
+    // Validar campos requeridos antes de crear o actualizar
+    $errores = [];
+    if (empty($_POST['ci_empleado']) || !is_numeric($_POST['ci_empleado'])) {
+        $errores[] = "El campo 'CI Empleado' es obligatorio y debe ser numérico.";
+    }
+    if (empty($_POST['id_departamento']) || !is_numeric($_POST['id_departamento'])) {
+        $errores[] = "El campo 'Departamento' es obligatorio y debe ser numérico.";
+    }
+
+    if (!empty($errores)) {
+        // Aquí puedes redirigir o mostrar errores según tu lógica
+        // Por ejemplo:
+        die(implode('<br>', $errores));
+    }
+
     if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
         // Actualizar
         $empleado->actualizar($_POST);
