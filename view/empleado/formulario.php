@@ -88,7 +88,10 @@ if (isset($_GET['id'])) {
 
       <!-- Campo oculto para identificar si es creación, edición -->
       <input type="hidden" name="accion" value="<?= isset($_GET['id']) ? 'editar' : 'crear' ?>">
-      <input type="hidden" name="ci_empleado" value="<?= htmlspecialchars($data['ci_empleado']) ?>">
+      <!-- Campo oculto para el ID del empleado -->
+      <?php if (isset($_GET['id'])) : ?>
+        <input type="hidden" name="id_empleado" value="<?= htmlspecialchars($_GET['id']) ?>">
+      <?php endif; ?>
 
       <div class="mt-4 text-center">
         <button type="submit" class="btn btn-success px-5"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
