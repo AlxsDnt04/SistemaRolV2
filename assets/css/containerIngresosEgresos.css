@@ -1,0 +1,12 @@
+/* Ajuste para centrar el contenido */
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* ancho de inputs */
+input [type="text"],
+input, input, select, textarea {
+    width: 50%
+}

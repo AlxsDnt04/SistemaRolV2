@@ -12,7 +12,7 @@ class Rol
 
     public function obtenerEmpleados()
     {
-        return $this->db->query("SELECT * from empleados")->fetchAll(PDO::FETCH_ASSOC);
+        return $this->db->query("SELECT * from empleado")->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
