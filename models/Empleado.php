@@ -33,7 +33,7 @@ class Empleado
     //metodo para consultar todos los empleados
     public function obtenerTodos()
     {
-        return $this->db->query("SELECT * from empleado")->fetchAll(PDO::FETCH_ASSOC);
+        return $this->db->query("SELECT e.ci_empleado, e.nombre, e.apellido, e.correo, e.direccion, e.telefono, d.nombre as departamento_nombre, d.area FROM empleado e INNER JOIN departamento d on e.id_departamento = d.id_departamento;")->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // metodo para obtener todos los departamentos por id

@@ -24,8 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!empty($errores)) {
-        // Aquí puedes redirigir o mostrar errores según tu lógica
-        // Por ejemplo:
+        // Aquí puedes redirigir o mostrar errores 
         die(implode('<br>', $errores));
     }
 

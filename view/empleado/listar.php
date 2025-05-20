@@ -17,7 +17,6 @@ $empleados = $empleado->obtenerTodos();
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/listado.css">
-  <link rel="stylesheet" href="../../assets/css/tablaListas.css">
 
 </head>
 
@@ -29,52 +28,53 @@ $empleados = $empleado->obtenerTodos();
         <a href="formulario.php" class="btn btn-outline-light btn-sm"><i class="fa-solid fa-user-plus"></i> Nuevo Empleado</a>
       </div>
       <div class="card-body">
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>Cedula</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Teléfono</th>
-              <th>Dirección</th>
-              <th>Correo</th>
-              <th>Departamento</th>
-              <th class="text-center">Acciones</th>
-            </tr>
-          </thead>
-            <?php if (!empty($empleados)) : ?>
-              <?php foreach ($empleados as $emp) : ?>
-                <tr>
-                  <td><?= htmlspecialchars($emp['ci_empleado']) ?></td>
-                  <td><?= htmlspecialchars($emp['nombre']) ?></td>
-                  <td><?= htmlspecialchars($emp['apellido']) ?></td>
-                  <td><?= htmlspecialchars($emp['telefono']) ?></td>
-                  <td><?= htmlspecialchars($emp['direccion']) ?></td>
-                  <td><?= htmlspecialchars($emp['correo']) ?></td>
-                  <td>
-                    <?php
-                      $dep = $departamento->obtenerPorId($emp['id_departamento']);
-                      echo htmlspecialchars(is_array($dep) && isset($dep['nombre']) ? $dep['nombre'] : '');
-                    ?>
-                  </td>
-                  <td class="text-center">
-                    <a href="formulario.php?id=<?= $emp['ci_empleado'] ?>" class="btn btn-warning btn-sm">
-                      <i class="fa-solid fa-pen-to-square"></i> Editar
-                    </a>
-                    <!-- ELIMINAR -->
-                    <a href="../../controllers/EmpleadoController.php?accion=eliminar&id=<?= $emp['ci_empleado'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
-                      <i class="fa-solid fa-trash"></i> Eliminar
-                    </a>
-                  </td>
-                </tr>
-              <?php endforeach; ?>
-            <?php else : ?>            
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle">
+            <thead>
               <tr>
-                <td colspan="8" class="text-center text-warning">No hay empleados registrados.</td>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Departamento</th>
+                <th>Area</th>
+                <th class="text-center">Acciones</th>
               </tr>
-            <?php endif; ?>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <?php if (!empty($empleados)) : ?>
+                <?php foreach ($empleados as $emp) : ?>
+                  <tr>
+                    <td><?= htmlspecialchars($emp['ci_empleado']) ?></td>
+                    <td><?= htmlspecialchars($emp['nombre']) ?></td>
+                    <td><?= htmlspecialchars($emp['apellido']) ?></td>
+                    <td><?= htmlspecialchars($emp['correo']) ?></td>
+                    <td><?= htmlspecialchars($emp['direccion']) ?></td>
+                    <td><?= htmlspecialchars($emp['telefono']) ?></td>
+                    <td><?= htmlspecialchars($emp['departamento_nombre']) ?></td>
+                    <td><?= htmlspecialchars($emp['area']) ?></td>
+                    
+                    <td class="text-center">
+                      <a href="formulario.php?id=<?= $emp['ci_empleado'] ?>" class="btn btn-warning btn-sm">
+                        <i class="fa-solid fa-pen-to-square"></i> Editar
+                      </a>
+                      <!-- ELIMINAR -->
+                      <a href="../../controllers/EmpleadoController.php?accion=eliminar&id=<?= $emp['ci_empleado'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
+                        <i class="fa-solid fa-trash"></i> Eliminar
+                      </a>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php else : ?>            
+                <tr>
+                  <td colspan="9" class="text-center text-warning">No hay empleados registrados.</td>
+                </tr>
+              <?php endif; ?>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
