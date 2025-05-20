@@ -52,6 +52,7 @@ $departamento = $departamento->obtenerTodos();
 
                   </td>
                 </tr>
+                <!-- php endforeach para cerrar el foreach -->
               <?php endforeach; ?>
             <?php else : ?>
               <tr>
