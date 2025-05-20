@@ -93,6 +93,7 @@ if (isset($_GET['id'])) {
         <input type="hidden" name="id_empleado" value="<?= htmlspecialchars($_GET['id']) ?>">
       <?php endif; ?>
 
+      <!-- boton guardar -->
       <div class="mt-4 text-center">
         <button type="submit" class="btn btn-success px-5"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
       </div>
