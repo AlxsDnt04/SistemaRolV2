@@ -49,7 +49,6 @@ $departamento = $departamento->obtenerTodos();
                     <!-- ELIMINAR -->
                     <a href="../../controllers/DepartamentoController.php?accion=eliminar&id=<?= $dep['id_departamento'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?');">
                       <i class="fa-solid fa-trash"></i> Eliminar</a>
-
                   </td>
                 </tr>
                 <!-- php endforeach para cerrar el foreach -->

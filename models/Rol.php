@@ -10,6 +10,7 @@ class Rol
         $this->db = Database::connect();
     }
 
+    //metodo para obtener datos de los empleados
     public function obtenerEmpleados()
     {
         return $this->db->query("SELECT * from empleado")->fetchAll(PDO::FETCH_ASSOC);
