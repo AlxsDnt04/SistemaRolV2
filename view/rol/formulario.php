@@ -36,7 +36,7 @@ $data=[
 
   <div class="container mt-5 p-4 shadow rounded bg-light">
     <div class="header">
-      <h4 class="mb-0"><i class="fa-solid fa-plus"></i> Ingresos y Egresos</h4>
+      <h4 class="mb-0"><i class="fa-solid fa-money-bill-wave"></i> Ingresos y Egresos</h4>
       <a href="listar.php" class="btn btn-light btn-sm">
         <i class="fa-solid fa-list"></i> Ver Ingresos y Egresos</a>
     </div>
@@ -153,6 +153,7 @@ $data=[
             <label for="otros" class="form-label">Otros</label>
             <input type="number" class="form-control" id="otros" name="otros" placeholder="Otros egresos">
           </div>
+          <!-- Campos ocultos para cálculos -->
           <input type="hidden" class="form-control" id="totalEgresos" name="totalEgresos" readonly>
         </div>
       </div>

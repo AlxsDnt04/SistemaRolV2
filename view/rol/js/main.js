@@ -30,9 +30,7 @@ function calcularEgresos() {
   /* suma egresos */
   const multas = parseFloat(document.getElementById("multas").value);
   const atrasos = parseFloat(document.getElementById("atrasos").value);
-  const alimentacion = parseFloat(
-    document.getElementById("alimentacion").value
-  );
+  const alimentacion = parseFloat(document.getElementById("alimentacion").value);
   const anticipo = parseFloat(document.getElementById("anticipo").value);
   const otros = parseFloat(document.getElementById("otros").value);
   // Calcular el total de egresos
@@ -67,11 +65,6 @@ formulario.addEventListener("submit", (e) => {
   //INGRESOS
   // Obtener los valores de los campos de texto
   const campos = {
-    //datos personales
-    nombre: document.getElementById("nombre").value,
-    apellido: document.getElementById("apellido").value,
-    cedula: document.getElementById("cedula").value,
-    telefono: document.getElementById("telefono").value,
     //ingresos
     total25: document.getElementById("temp_total_25").value,
     total50: document.getElementById("temp_total_50").value,
