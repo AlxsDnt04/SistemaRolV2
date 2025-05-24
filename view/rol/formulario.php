@@ -3,7 +3,9 @@ require_once '../../models/Rol.php';
 // Instancia de la clase Rol en modelo
 $rolModel = new Rol();
 $rol = $rolModel->obtenerEmpleados();
-// Array para almacenar los datos del formulario
+
+
+// Array para almacenar los datos del formulario y enviar a post
 $data=[
   'empleadoInfo' => '',
   'mes' => '',
@@ -15,8 +17,8 @@ $data=[
   'anticipo' => '',
   'otros' => '',
 ];
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,10 +26,8 @@ $data=[
   <meta charset="UTF-8">
   <title>Cálculo de rol de pagos</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="../../assets/css/containerIngresosEgresos.css">
-  <link rel="stylesheet" href="../../assets/css/fuentes.css">
   <link rel="stylesheet" href="../../assets/css/insertar.css">
 
 </head>
@@ -37,10 +37,10 @@ $data=[
   <div class="container mt-5 p-4 shadow rounded bg-light">
     <div class="header">
       <h4 class="mb-0"><i class="fa-solid fa-money-bill-wave"></i> Ingresos y Egresos</h4>
-      <a href="listar.php" class="btn btn-light btn-sm">
+      <a href="#" class="btn btn-light btn-sm">
         <i class="fa-solid fa-list"></i> Ver Ingresos y Egresos</a>
     </div>
-    <form id="rolPagos">
+    <form id="rolPagos" method="POST" action="../../controllers/RolController.php">
 
       <!-- Datos personales -->
       <div class="mb-4">
@@ -65,7 +65,7 @@ $data=[
         </div> -->
         <div>
           <label>Empleado</label>
-          <select class="form-select" name="id_departamento" id="empleadoInfo" required>
+          <select class="form-select" name="empleadoInfo" id="empleadoInfo" required>
             <option value="">Seleccione un empleado</option>
             <?php foreach ($rol as $d): ?>
               <option value="<?= $d['ci_empleado'] ?>">
@@ -172,6 +172,7 @@ $data=[
     </form>
   </div>
 
+  <script src="js/main.js"></script>   
 </body>
 
 </html>

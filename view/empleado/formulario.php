@@ -41,7 +41,7 @@ if (isset($_GET['id'])) {
       <div class="row">
         <div class="col-md-6">
           <label for="cedula" class="form-label">Cedula</label>
-          <input type="text" class="form-control" id="cedula" name="ci_empleado" maxlength="10" value="<?= htmlspecialchars($data['ci_empleado']) ?>" required>
+            <input type="text" class="form-control" id="cedula" name="ci_empleado" maxlength="10" value="<?= htmlspecialchars($data['ci_empleado']) ?>" required pattern="\d*" title="Solo se permiten números" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
         </div>
         <div class="col-md-6">
           <label for="nombre" class="form-label">Nombre</label>
@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
         </div>
         <div class="col-md-6">
           <label for="telefono" class="form-label">Teléfono</label>
-          <input type="text" class="form-control" id="telefono" name="telefono" maxlength="10" value="<?= htmlspecialchars($data['telefono']) ?>" required>
+          <input type="text" class="form-control" id="telefono" name="telefono" maxlength="10" value="<?= htmlspecialchars($data['telefono']) ?>" required pattern="\d*" title="Solo se permiten números" oninput="this.value = this.value.replace(/[^0-9]/g, '');" >
         </div>
         <div class="col-md-6">
           <label for="direccion" class="form-label">Dirección</label>

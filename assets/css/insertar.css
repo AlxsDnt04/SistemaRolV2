@@ -31,6 +31,20 @@ body {
   }
 }
 
+.container label, h3{
+  color: #fff;
+}
+
+.container select{
+  background-color: #1f2536;
+  border: 1px solid #5a5a8a;
+  color: #fff;
+}
+.container input::placeholder{
+  color: #5a5a8a;
+  font-weight: 400;
+}
+
 .header {
   background: rgba(11, 135, 147, 0.3);
   border: 2px solid rgba(11, 135, 147, 0.5);
@@ -67,6 +81,8 @@ body {
   display: block;
 }
 
+
+
 .form-control {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid #5a5a8a;
@@ -78,7 +94,7 @@ body {
   backdrop-filter: blur(2px);
 }
 
-.form-control:focus {
+.form-control:focus, .container select:focus {
   background-color: rgba(255, 255, 255, 0.08);
   color: #0b8793;
   border-color: #0b8793;

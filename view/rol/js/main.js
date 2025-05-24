@@ -54,16 +54,16 @@ function netoAPagar() {
 /* accion del boton submit */
 const formulario = document.getElementById("rolPagos");
 formulario.addEventListener("submit", (e) => {
-  /* e.preventDefault(); // Evitar el envío del formulario */
+  e.preventDefault(); // Evitar el envío del formulario */
   calcularIngreso();
   calcularEgresos();
   netoAPagar();
   // crear formulario oculto y enviar los datos al php
   const form = document.createElement("form");
   form.method = "POST";
-  form.action = "../../../controller/RolController.php";
-  //INGRESOS
-  // Obtener los valores de los campos de texto
+  form.action = "../../controllers/RolController.php";
+  
+  
   const campos = {
     //ingresos
     total25: document.getElementById("temp_total_25").value,

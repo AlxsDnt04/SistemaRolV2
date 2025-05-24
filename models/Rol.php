@@ -17,7 +17,7 @@ class Rol
     }
 
     // funcion para insertar los datos en la base
-    public function guardar($data)
+    public function insertarRol($data)
     {
         $stat = $this->db->prepare("INSERT INTO rol ( 
         mes, 
