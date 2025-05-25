@@ -62,6 +62,35 @@ $departamento = $departamento->obtenerTodos();
       </div>
     </div>
   </div>
+
+<?php if (isset($_GET['success'])): ?>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    <?php if ($_GET['success'] == '1'): ?>
+      
+    Swal.fire({
+      icon: 'success',
+      title: '¡Procedimiento exitoso!',
+      showConfirmButton: false,
+      timer: 1800,
+      location: 'top-right',
+      position: 'top-end',
+      toast: true,
+    });
+    <?php elseif ($_GET['success'] == '2'): ?>
+      Swal.fire({
+        icon: 'success',
+        title: '¡Eliminación exitosa!',
+        showConfirmButton: false,
+        timer: 1800,
+        location: 'top-right',
+        position: 'top-end',
+        toast: true,
+      });
+    <?php endif; ?>
+  </script>
+<?php endif; ?>
+
 </body>
 
 </html>

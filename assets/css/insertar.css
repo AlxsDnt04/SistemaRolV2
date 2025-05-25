@@ -44,6 +44,13 @@ body {
   color: #5a5a8a;
   font-weight: 400;
 }
+/* contenedor input desabilitado */
+.container input:disabled{
+  background-color: #1f2536;
+  border: 1px solid #5a5a8a;
+  color: #5a5a8a;
+  cursor: not-allowed;
+}
 
 .header {
   background: rgba(11, 135, 147, 0.3);

@@ -7,7 +7,7 @@ $empleado = new Empleado();
 if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
     // llamar a la funcion eliminar
     $empleado->eliminar($_GET['id']);
-    header('Location: ../view/empleado/listar.php');
+    header('Location: ../view/empleado/listar.php?success=2');
     exit;
 }
 
@@ -35,6 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // crear
         $empleado->crear($_POST);
     }
-    header('Location: ../view/empleado/listar.php');
+    header('Location: ../view/empleado/listar.php?success=1');
     exit;
 }

@@ -2,7 +2,7 @@
 require_once '../../models/Empleado.php';
 $empleado = new Empleado();
 
-// Verificar si se está editando un empleado
+// Verificar si se está editando un empleado y bloquear el campo de cédula
 if (isset($_GET['id'])) {
   // Obtener el empleado por ID
   $data = $empleado->obtenerPorId($_GET['id']);
@@ -41,7 +41,7 @@ if (isset($_GET['id'])) {
       <div class="row">
         <div class="col-md-6">
           <label for="cedula" class="form-label">Cedula</label>
-            <input type="text" class="form-control" id="cedula" name="ci_empleado" maxlength="10" value="<?= htmlspecialchars($data['ci_empleado']) ?>" required pattern="\d*" title="Solo se permiten números" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            <input type="text" class="form-control" id="cedula" name="ci_empleado" maxlength="10" value="<?= htmlspecialchars($data['ci_empleado']) ?>" required pattern="\d*" title="Solo se permiten números" oninput="this.value = this.value.replace(/[^0-9]/g, ''); " <?= isset($_GET['id']) ? 'readonly' : '' ?>>
         </div>
         <div class="col-md-6">
           <label for="nombre" class="form-label">Nombre</label>

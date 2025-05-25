@@ -30,7 +30,9 @@ function calcularEgresos() {
   /* suma egresos */
   const multas = parseFloat(document.getElementById("multas").value);
   const atrasos = parseFloat(document.getElementById("atrasos").value);
-  const alimentacion = parseFloat(document.getElementById("alimentacion").value);
+  const alimentacion = parseFloat(
+    document.getElementById("alimentacion").value
+  );
   const anticipo = parseFloat(document.getElementById("anticipo").value);
   const otros = parseFloat(document.getElementById("otros").value);
   // Calcular el total de egresos
@@ -62,19 +64,25 @@ formulario.addEventListener("submit", (e) => {
   const form = document.createElement("form");
   form.method = "POST";
   form.action = "../../controllers/RolController.php";
-  
-  
+
   const campos = {
-    //ingresos
+    mes: document.getElementById("mes").value,
     total25: document.getElementById("temp_total_25").value,
     total50: document.getElementById("temp_total_50").value,
     total100: document.getElementById("temp_total_100").value,
+    empleadoInfo: document.getElementById("empleadoInfo").value,
+    bonos: document.getElementById("bonos").value,
     total_ingresos: document.getElementById("temp_total_ingresos").value,
-    // egresos
     iesst: document.getElementById("iess").value,
+    sueldo: document.getElementById("sueldo").value,
+    multas: document.getElementById("multas").value,
+    atrasos: document.getElementById("atrasos").value,
+    alimentacion: document.getElementById("alimentacion").value,
+    anticipo: document.getElementById("anticipo").value,
+    otros: document.getElementById("otros").value,
     totalEgres: document.getElementById("totalEgresos").value,
-    //total a pagar
     total_a_pagar: document.getElementById("total_a_pagar").value,
+    empleadoInfo: document.getElementById("empleadoInfo").value,
   };
   // iteracion para ingresos
   for (const key in campos) {

@@ -6,7 +6,7 @@ $rol = $rolModel->obtenerEmpleados();
 
 
 // Array para almacenar los datos del formulario y enviar a post
-$data=[
+/* $data = [
   'empleadoInfo' => '',
   'mes' => '',
   'bonos' => '',
@@ -16,7 +16,7 @@ $data=[
   'alimentacion' => '',
   'anticipo' => '',
   'otros' => '',
-];
+]; */
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +27,6 @@ $data=[
   <title>Cálculo de rol de pagos</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-
   <link rel="stylesheet" href="../../assets/css/insertar.css">
 
 </head>
@@ -41,7 +40,6 @@ $data=[
         <i class="fa-solid fa-list"></i> Ver Ingresos y Egresos</a>
     </div>
     <form id="rolPagos" method="POST" action="../../controllers/RolController.php">
-
       <!-- Datos personales -->
       <div class="mb-4">
         <!-- <h3 class="mb-3 border-bottom pb-2">Datos Personales</h3>
@@ -83,41 +81,41 @@ $data=[
           <h3 class="mb-3 border-bottom pb-2">Ingresos</h3>
           <div class="mb-3">
             <label for="mes" class="form-label">Mes</label>
-            <select name="mes" id="mes" class="form-select">
+            <select name="mes" id="mes" class="form-select" required>
               <option value="" disabled selected>Seleccione un mes</option>
-              <option value="1">Enero</option>
-              <option value="2">Febrero</option>
-              <option value="3">Marzo</option>
-              <option value="4">Abril</option>
-              <option value="5">Mayo</option>
-              <option value="6">Junio</option>
-              <option value="7">Julio</option>
-              <option value="8">Agosto</option>
-              <option value="9">Septiembre</option>
-              <option value="10">Octubre</option>
-              <option value="11">Noviembre</option>
-              <option value="12">Diciembre</option>
+              <option value="Enero">Enero</option>
+              <option value="Febrero">Febrero</option>
+              <option value="Marzo">Marzo</option>
+              <option value="Abril">Abril</option>
+              <option value="Mayo">Mayo</option>
+              <option value="Junio">Junio</option>
+              <option value="Julio">Julio</option>
+              <option value="Agosto">Agosto</option>
+              <option value="Septiembre">Septiembre</option>
+              <option value="Octubre">Octubre</option>
+              <option value="Noviembre">Noviembre</option>
+              <option value="Diciembre">Diciembre</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="sueldo" class="form-label">Sueldo</label>
-            <input type="number" class="form-control" id="sueldo" name="sueldo" placeholder="Ingrese su sueldo">
+            <input type="number" class="form-control" id="sueldo" name="sueldo" placeholder="Ingrese su sueldo" required>
           </div>
           <div class="mb-3">
             <label for="hora25" class="form-label">Hora 25%</label>
-            <input type="number" class="form-control" id="hora25" name="hora25" placeholder="Valor hora 25%">
+            <input type="number" class="form-control" id="hora25" name="hora25" placeholder="Valor hora 25%" value="0">
           </div>
           <div class="mb-3">
             <label for="hora50" class="form-label">Hora 50%</label>
-            <input type="number" class="form-control" id="hora50" name="hora50" placeholder="Valor hora 50%">
+            <input type="number" class="form-control" id="hora50" name="hora50" placeholder="Valor hora 50%" value="0">
           </div>
           <div class="mb-3">
             <label for="hora100" class="form-label">Hora 100%</label>
-            <input type="number" class="form-control" id="hora100" name="hora100" placeholder="Valor hora 100%">
+            <input type="number" class="form-control" id="hora100" name="hora100" placeholder="Valor hora 100%" value="0" >
           </div>
           <div class="mb-3">
             <label for="bonos" class="form-label">Bonos</label>
-            <input type="number" class="form-control" id="bonos" name="bonos" placeholder="Valor bonos">
+            <input type="number" class="form-control" id="bonos" name="bonos" placeholder="Valor bonos" value="0">
           </div>
           <!-- Campos ocultos para cálculos -->
           <input type="hidden" id="temp_total_25">
@@ -131,7 +129,7 @@ $data=[
           <h3 class="mb-3 border-bottom pb-2">Egresos</h3>
           <div class="mb-3">
             <label for="iess" class="form-label">IESS</label>
-            <input type="number" class="form-control" id="iess" name="iess" readonly>
+            <input type="number" class="form-control" id="iess" name="iess" readonly placeholder="No se ingresa ningún valor" >
           </div>
           <div class="mb-3">
             <label for="multas" class="form-label">Multas</label>
