@@ -1,27 +1,26 @@
 <?php
-require_once '../../models/Departamento.php';
-$departamento = new Departamento();
-$departamento = $departamento->obtenerTodos();
+require_once '../../models/Rol.php';
+$rol = new Rol();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
   <meta charset="UTF-8">
-  <title>Listado de Departamentos</title>
+  <title>Lista de Roles</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/listado.css">
-
 </head>
 
 <body>
   <div class="container">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0"><i class="fa-solid fa-building"></i> Listado de Departamentos</h5>
+        <h5 class="mb-0"><i class="fa-solid fa-building"></i> Listado de Roles</h5>
         <a href="formulario.php" class="btn btn-outline-light btn-sm">
-          <i class="fa-solid fa-plus"></i> Nuevo Departamento</a>
+          <i class="fa-solid fa-plus"></i>Nuevo registro de rol</a>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover">
@@ -63,33 +62,15 @@ $departamento = $departamento->obtenerTodos();
     </div>
   </div>
 
-<?php if (isset($_GET['success'])): ?>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    <?php if ($_GET['success'] == '1'): ?>
-      
-    Swal.fire({
-      icon: 'success',
-      title: '¡Procedimiento exitoso!',
-      showConfirmButton: false,
-      timer: 1800,
-      location: 'top-right',
-      position: 'top-end',
-      toast: true,
-    });
-    <?php elseif ($_GET['success'] == '2'): ?>
-      Swal.fire({
-        icon: 'success',
-        title: '¡Eliminación exitosa!',
-        showConfirmButton: false,
-        timer: 1800,
-        location: 'top-right',
-        position: 'top-end',
-        toast: true,
-      });
-    <?php endif; ?>
-  </script>
-<?php endif; ?>
+  <!-- alertas -->
+<?php
+  if (isset($_GET['success'])): ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../assets/javascript/alertas.js"></script>
+    <script>
+      mostrarAlertaSwal('<?= htmlspecialchars($_GET['success']) ?>');
+    </script>
+  <?php endif; ?>
 
 </body>
 

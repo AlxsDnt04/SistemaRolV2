@@ -15,22 +15,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $data = [
-      'mes' => $_POST['mes'],
-      'hora25' => $_POST['total25'],
-      'hora50' => $_POST['total50'],
-      'hora100' => $_POST['total100'],
-      'bonos' => $_POST['bonos'],
-      'totalIngreso' => $_POST['total_ingresos'],
-      'iess' => $_POST['iesst'],
-      'sueldo' => $_POST['sueldo'],
-      'multas' => $_POST['multas'],
-      'atrasos' => $_POST['atrasos'],
-      'alimentacion' => $_POST['alimentacion'],
-      'anticipo' => $_POST['anticipo'],
-      'otros' => $_POST['otros'],
-      'totalEgreso' => $_POST['totalEgres'],
-      'totalPagar' => $_POST['total_a_pagar'],
-      'empleadoInfo' => $_POST['empleadoInfo'],
+      'meses' => $_POST['meses'] ?? null,
+      'hora25' => $_POST['total25'] ?? null,
+      'hora50' => $_POST['total50'] ?? null,
+      'hora100' => $_POST['total100'] ?? null,
+      'bonos' => $_POST['bonos'] ?? null,
+      'totalIngreso' => $_POST['total_ingresos'] ?? null,
+      'iess' => $_POST['iesst'] ?? null,
+      'sueldo' => $_POST['sueldo'] ?? null,
+      'multas' => $_POST['multas'] ?? null,
+      'atrasos' => $_POST['atrasos'] ?? null,
+      'alimentacion' => $_POST['alimentacion'] ?? null,
+      'anticipo' => $_POST['anticipo'] ?? null,
+      'otros' => $_POST['otros'] ?? null,
+      'totalEgreso' => $_POST['totalEgres'] ?? null,
+      'totalPagar' => $_POST['total_a_pagar'] ?? null,
+      'empleadoInfo' => $_POST['empleadoInfo'] ?? null,
     ];
 
     if(isset($_POST['accion']) && $_POST['accion'] === 'editar') {

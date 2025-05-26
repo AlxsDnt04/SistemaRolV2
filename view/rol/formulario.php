@@ -6,9 +6,9 @@ $rol = $rolModel->obtenerEmpleados();
 
 
 // Array para almacenar los datos del formulario y enviar a post
-/* $data = [
+$data = [
   'empleadoInfo' => '',
-  'mes' => '',
+  'meses' => '',
   'bonos' => '',
   'sueldo' => '',
   'multas' => '',
@@ -16,7 +16,7 @@ $rol = $rolModel->obtenerEmpleados();
   'alimentacion' => '',
   'anticipo' => '',
   'otros' => '',
-]; */
+];
 ?>
 
 <!DOCTYPE html>
@@ -36,31 +36,12 @@ $rol = $rolModel->obtenerEmpleados();
   <div class="container mt-5 p-4 shadow rounded bg-light">
     <div class="header">
       <h4 class="mb-0"><i class="fa-solid fa-money-bill-wave"></i> Ingresos y Egresos</h4>
-      <a href="#" class="btn btn-light btn-sm">
+      <a href="listar.php" class="btn btn-light btn-sm">
         <i class="fa-solid fa-list"></i> Ver Ingresos y Egresos</a>
     </div>
-    <form id="rolPagos" method="POST" action="../../controllers/RolController.php">
+    <form id="rolPagos" method="post" action="../../controllers/RolController.php">
       <!-- Datos personales -->
       <div class="mb-4">
-        <!-- <h3 class="mb-3 border-bottom pb-2">Datos Personales</h3>
-        <div class="row">
-          <div class="col-md-3 mb-3">
-            <label for="cedula" class="form-label">Cédula</label>
-            <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Ingrese su cédula" maxlength="10">
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre">
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="apellido" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese su apellido">
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="telefono" class="form-label">Teléfono</label>
-            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su teléfono">
-          </div>
-        </div> -->
         <div>
           <label>Empleado</label>
           <select class="form-select" name="empleadoInfo" id="empleadoInfo" required>
@@ -73,15 +54,14 @@ $rol = $rolModel->obtenerEmpleados();
           </select>
         </div>
       </div>
-
       <!-- Ingresos y Egresos en dos columnas -->
       <div class="row">
         <!-- Ingresos -->
         <div class="col-md-6">
           <h3 class="mb-3 border-bottom pb-2">Ingresos</h3>
           <div class="mb-3">
-            <label for="mes" class="form-label">Mes</label>
-            <select name="mes" id="mes" class="form-select" required>
+            <label for="meses" class="form-label">Mes</label>
+            <select name="meses" class="form-select" required>
               <option value="" disabled selected>Seleccione un mes</option>
               <option value="Enero">Enero</option>
               <option value="Febrero">Febrero</option>
@@ -99,7 +79,7 @@ $rol = $rolModel->obtenerEmpleados();
           </div>
           <div class="mb-3">
             <label for="sueldo" class="form-label">Sueldo</label>
-            <input type="number" class="form-control" id="sueldo" name="sueldo" placeholder="Ingrese su sueldo" required>
+            <input type="number" step="0.01" class="form-control" id="sueldo" name="sueldo" placeholder="Ingrese su sueldo" required>
           </div>
           <div class="mb-3">
             <label for="hora25" class="form-label">Hora 25%</label>
@@ -111,7 +91,7 @@ $rol = $rolModel->obtenerEmpleados();
           </div>
           <div class="mb-3">
             <label for="hora100" class="form-label">Hora 100%</label>
-            <input type="number" class="form-control" id="hora100" name="hora100" placeholder="Valor hora 100%" value="0" >
+            <input type="number" class="form-control" id="hora100" name="hora100" placeholder="Valor hora 100%" value="0">
           </div>
           <div class="mb-3">
             <label for="bonos" class="form-label">Bonos</label>
@@ -129,7 +109,7 @@ $rol = $rolModel->obtenerEmpleados();
           <h3 class="mb-3 border-bottom pb-2">Egresos</h3>
           <div class="mb-3">
             <label for="iess" class="form-label">IESS</label>
-            <input type="number" class="form-control" id="iess" name="iess" readonly placeholder="No se ingresa ningún valor" >
+            <input type="number" class="form-control" id="iess" name="iess" readonly placeholder="No se ingresa ningún valor">
           </div>
           <div class="mb-3">
             <label for="multas" class="form-label">Multas</label>
@@ -162,6 +142,15 @@ $rol = $rolModel->obtenerEmpleados();
         <input type="hidden" class="form-control" id="total_a_pagar" name="totalPagar" readonly>
       </div>
 
+
+      <!-- Campo oculto para identificar si es creación, edición -->
+      <input type="hidden" name="accion" value="<?= isset($_GET['id']) ? 'editar' : 'crear' ?>">
+      <!-- Campo oculto para el ID del rol -->
+      <?php if (isset($_GET['id'])) : ?>
+        <input type="hidden" name="id_rol" value="<?= htmlspecialchars($_GET['id']) ?>">
+      <?php endif; ?>
+
+
       <!-- Botones -->
       <div class="text-center">
         <button type="submit" class="btn btn-success me-2">Calcular</button>
@@ -170,7 +159,7 @@ $rol = $rolModel->obtenerEmpleados();
     </form>
   </div>
 
-  <script src="js/main.js"></script>   
+  <script src="js/main.js"></script>
 </body>
 
 </html>

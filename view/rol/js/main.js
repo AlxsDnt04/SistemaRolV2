@@ -66,23 +66,22 @@ formulario.addEventListener("submit", (e) => {
   form.action = "../../controllers/RolController.php";
 
   const campos = {
-    mes: document.getElementById("mes").value,
+    //mes: document.getElementById("mes").value, // dato sin calcular
     total25: document.getElementById("temp_total_25").value,
     total50: document.getElementById("temp_total_50").value,
     total100: document.getElementById("temp_total_100").value,
-    empleadoInfo: document.getElementById("empleadoInfo").value,
-    bonos: document.getElementById("bonos").value,
+    bonos: document.getElementById("bonos").value, // dato sin calcular
     total_ingresos: document.getElementById("temp_total_ingresos").value,
     iesst: document.getElementById("iess").value,
-    sueldo: document.getElementById("sueldo").value,
-    multas: document.getElementById("multas").value,
-    atrasos: document.getElementById("atrasos").value,
-    alimentacion: document.getElementById("alimentacion").value,
-    anticipo: document.getElementById("anticipo").value,
-    otros: document.getElementById("otros").value,
+    sueldo: document.getElementById("sueldo").value, // dato sin calcular
+    multas: document.getElementById("multas").value, // dato sin calcular
+    atrasos: document.getElementById("atrasos").value, // dato sin calcular
+    alimentacion: document.getElementById("alimentacion").value, // dato sin calcular
+    anticipo: document.getElementById("anticipo").value, // dato sin calcular
+    otros: document.getElementById("otros").value, // dato sin calcular
     totalEgres: document.getElementById("totalEgresos").value,
     total_a_pagar: document.getElementById("total_a_pagar").value,
-    empleadoInfo: document.getElementById("empleadoInfo").value,
+    empleadoInfo: document.getElementById("empleadoInfo").value, // dato sin calcular
   };
   // iteracion para ingresos
   for (const key in campos) {
