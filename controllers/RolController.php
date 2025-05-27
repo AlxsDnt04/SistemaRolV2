@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $data = [
-      'meses' => $_POST['meses'] ?? null,
+      'mes' => $_POST['meses'] ?? null,
       'hora25' => $_POST['total25'] ?? null,
       'hora50' => $_POST['total50'] ?? null,
       'hora100' => $_POST['total100'] ?? null,
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'anticipo' => $_POST['anticipo'] ?? null,
       'otros' => $_POST['otros'] ?? null,
       'totalEgreso' => $_POST['totalEgres'] ?? null,
-      'totalPagar' => $_POST['total_a_pagar'] ?? null,
+      'totalPagar' => $_POST['totalPagar'] ?? null,
       'empleadoInfo' => $_POST['empleadoInfo'] ?? null,
     ];
 

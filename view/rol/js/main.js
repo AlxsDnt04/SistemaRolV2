@@ -5,16 +5,13 @@ function calcularIngreso() {
   const hora_50 = parseFloat(document.getElementById("hora50").value);
   const hora_100 = parseFloat(document.getElementById("hora100").value);
   const bonos = parseFloat(document.getElementById("bonos").value);
-  //hora normal
-  const hora_normal = parseFloat((sueldo / 160).toFixed(2));
-  //calculo al 25%
-  const total_hora_25 = hora_normal * hora_25 * 1.25;
+
+  const hora_normal = parseFloat((sueldo / 160).toFixed(2)); //hora normal
+  const total_hora_25 = hora_normal * hora_25 * 1.25; //calculo al 25%
   document.getElementById("temp_total_25").value = total_hora_25; // Mostrar el total al 25% en el campo correspondiente
-  //calculos al 50%
-  const total_hora_50 = hora_normal * hora_50 * 1.5;
+  const total_hora_50 = hora_normal * hora_50 * 1.5; //calculos al 50%
   document.getElementById("temp_total_50").value = total_hora_50; // Mostrar el total al 50% en el campo correspondiente
-  //calculos al 100%
-  const total_hora_100 = hora_normal * hora_100 * 2;
+  const total_hora_100 = hora_normal * hora_100 * 2; //calculos al 100%
   document.getElementById("temp_total_100").value = total_hora_100; // Mostrar el total al 100% en el campo correspondiente
   //calculo total (sueldo + bonos + hora25 + hora50 + hora100)
   const total_ingresos =
@@ -56,32 +53,25 @@ function netoAPagar() {
 /* accion del boton submit */
 const formulario = document.getElementById("rolPagos");
 formulario.addEventListener("submit", (e) => {
-  e.preventDefault(); // Evitar el envío del formulario */
+  /* e.preventDefault(); */ 
   calcularIngreso();
   calcularEgresos();
   netoAPagar();
   // crear formulario oculto y enviar los datos al php
-  const form = document.createElement("form");
+  /* const form = document.createElement("form");
   form.method = "POST";
   form.action = "../../controllers/RolController.php";
 
   const campos = {
-    //mes: document.getElementById("mes").value, // dato sin calcular
+    
     total25: document.getElementById("temp_total_25").value,
     total50: document.getElementById("temp_total_50").value,
     total100: document.getElementById("temp_total_100").value,
-    bonos: document.getElementById("bonos").value, // dato sin calcular
     total_ingresos: document.getElementById("temp_total_ingresos").value,
     iesst: document.getElementById("iess").value,
-    sueldo: document.getElementById("sueldo").value, // dato sin calcular
-    multas: document.getElementById("multas").value, // dato sin calcular
-    atrasos: document.getElementById("atrasos").value, // dato sin calcular
-    alimentacion: document.getElementById("alimentacion").value, // dato sin calcular
-    anticipo: document.getElementById("anticipo").value, // dato sin calcular
-    otros: document.getElementById("otros").value, // dato sin calcular
     totalEgres: document.getElementById("totalEgresos").value,
     total_a_pagar: document.getElementById("total_a_pagar").value,
-    empleadoInfo: document.getElementById("empleadoInfo").value, // dato sin calcular
+    
   };
   // iteracion para ingresos
   for (const key in campos) {
@@ -93,5 +83,5 @@ formulario.addEventListener("submit", (e) => {
   }
   // imprimir el formulario mediante php
   document.body.appendChild(form);
-  form.submit();
+  form.submit(); */
 });

@@ -20,7 +20,7 @@ $rol = new Rol();
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0"><i class="fa-solid fa-building"></i> Listado de Roles</h5>
         <a href="formulario.php" class="btn btn-outline-light btn-sm">
-          <i class="fa-solid fa-plus"></i>Nuevo registro de rol</a>
+          <i class="fa-solid fa-plus"></i> Nuevo registro de rol</a>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover">

@@ -5,7 +5,12 @@ $departamento = new Departamento();
 if (isset($_GET['id'])) {
   $data = $departamento->obtenerPorId($_GET['id']);
 } else {
-  $data = ['id_departamento' => '', 'nombre' => '', 'ubicacion' => '', 'area' => ''];
+  $data = [
+    'id_departamento' => '',
+    'nombre' => '',
+    'ubicacion' => '',
+    'area' => ''
+  ];
 }
 ?>
 <!DOCTYPE html>
@@ -16,7 +21,7 @@ if (isset($_GET['id'])) {
   <title>Insertar Departamento</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/insertar.css"> 
+  <link rel="stylesheet" href="../../assets/css/insertar.css">
 
 </head>
 
@@ -44,7 +49,7 @@ if (isset($_GET['id'])) {
         </div>
       </div>
 
-      
+
       <!-- Campo oculto para identificar si es creación, edición o eliminación -->
       <input type="hidden" name="accion" value="<?= isset($_GET['id']) ? 'editar' : 'crear' ?>">
       <input type="hidden" name="id_departamento" value="<?= htmlspecialchars($data['id_departamento']) ?>">

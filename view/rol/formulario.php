@@ -4,19 +4,41 @@ require_once '../../models/Rol.php';
 $rolModel = new Rol();
 $rol = $rolModel->obtenerEmpleados();
 
-
-// Array para almacenar los datos del formulario y enviar a post
-$data = [
-  'empleadoInfo' => '',
-  'meses' => '',
-  'bonos' => '',
-  'sueldo' => '',
-  'multas' => '',
-  'atrasos' => '',
-  'alimentacion' => '',
-  'anticipo' => '',
-  'otros' => '',
-];
+if (isset($_GET['id'])) {
+    // Si se pasa un ID, se asume que es una edición
+    $rolData = $rolModel->obtenerTodoslosRoles($_GET['id']);
+    if ($rolData) {
+        // Si se encuentra el rol, se asigna a las variables del formulario
+        $data = [
+            'empleadoInfo' => $rolData['ci_empleado'],
+            'meses' => $rolData['mes'],
+            'bonos' => $rolData['bonos'],
+            'sueldo' => $rolData['sueldo'],
+            'multas' => $rolData['multas'],
+            'atrasos' => $rolData['atrasos'],
+            'alimentacion' => $rolData['alimentacion'],
+            'anticipo' => $rolData['anticipo'],
+            'otros' => $rolData['otros'],
+        ];
+    } else {
+        // Si no se encuentra el rol, redirigir o mostrar un error
+        header('Location: listar.php?error=Rol no encontrado');
+        exit;
+    }
+} else {
+    // Si no hay ID, es una creación nueva
+    $data = [
+        'empleadoInfo' => '',
+        'meses' => '',
+        'bonos' => '',
+        'sueldo' => '',
+        'multas' => '',
+        'atrasos' => '',
+        'alimentacion' => '',
+        'anticipo' => '',
+        'otros' => '',
+    ];
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +61,7 @@ $data = [
       <a href="listar.php" class="btn btn-light btn-sm">
         <i class="fa-solid fa-list"></i> Ver Ingresos y Egresos</a>
     </div>
-    <form id="rolPagos" method="post" action="../../controllers/RolController.php">
+    <form id="rolPagos"  action="../../controllers/RolController.php" method="POST" >
       <!-- Datos personales -->
       <div class="mb-4">
         <div>
@@ -98,10 +120,10 @@ $data = [
             <input type="number" class="form-control" id="bonos" name="bonos" placeholder="Valor bonos" value="0">
           </div>
           <!-- Campos ocultos para cálculos -->
-          <input type="hidden" id="temp_total_25">
-          <input type="hidden" id="temp_total_50">
-          <input type="hidden" id="temp_total_100">
-          <input type="hidden" id="temp_total_ingresos">
+          <input type="hidden" id="temp_total_25" name="total25">
+          <input type="hidden" id="temp_total_50" name="total50">
+          <input type="hidden" id="temp_total_100" name="total100">
+          <input type="hidden" id="temp_total_ingresos" name="total_ingresos">
         </div>
 
         <!-- Egresos -->
@@ -109,7 +131,7 @@ $data = [
           <h3 class="mb-3 border-bottom pb-2">Egresos</h3>
           <div class="mb-3">
             <label for="iess" class="form-label">IESS</label>
-            <input type="number" class="form-control" id="iess" name="iess" readonly placeholder="No se ingresa ningún valor">
+            <input type="number" class="form-control" id="iess" name="iesst" readonly placeholder="No se ingresa ningún valor">
           </div>
           <div class="mb-3">
             <label for="multas" class="form-label">Multas</label>
@@ -132,7 +154,7 @@ $data = [
             <input type="number" class="form-control" id="otros" name="otros" placeholder="Otros egresos">
           </div>
           <!-- Campos ocultos para cálculos -->
-          <input type="hidden" class="form-control" id="totalEgresos" name="totalEgresos" readonly>
+          <input type="hidden" class="form-control" id="totalEgresos" name="totalEgres" readonly>
         </div>
       </div>
 

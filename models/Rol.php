@@ -86,7 +86,7 @@ class Rol
         ci_empleado
         ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         return $stat->execute([
-            $_POST['meses'], // directo del formulario
+            $data['mes'], // directo del formulario
             $data['hora25'],
             $data['hora50'],
             $data['hora100'],
