@@ -58,6 +58,10 @@ body {
   font-weight: 600;
 }
 
+#titulo-tabla{
+  color: #ffffff
+}
+
 .btn-outline-light.btn-sm {
   border-color: #fff;
   color: #fff;

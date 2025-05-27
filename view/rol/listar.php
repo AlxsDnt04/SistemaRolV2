@@ -1,6 +1,7 @@
 <?php
 require_once '../../models/Rol.php';
 $rol = new Rol();
+$empleados = $rol->obtenerEmpleados();
 ?>
 
 <!DOCTYPE html>
@@ -23,13 +24,20 @@ $rol = new Rol();
           <i class="fa-solid fa-plus"></i> Nuevo registro de rol</a>
       </div>
       <div class="card-body">
+      <div>
+        
+      </div>
         <table class="table table-bordered table-hover">
+          <h1 id="titulo-tabla">Ingresos</h1>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Ubicación</th>
-              <th>Área</th>
+              <th>Mes</th>
+              <th>Hora 25</th>
+              <th>Hora 50</th>
+              <th>Hora 100</th>
+              <th>Bonos</th>
+              <th>Sueldo</th>
+              <th>Total Ingresos</th>
               <th class="text-center">Acciones</th>
             </tr>
           </thead>
@@ -40,6 +48,8 @@ $rol = new Rol();
                   <td><?= htmlspecialchars($dep['id_departamento']) ?></td>
                   <td><?= htmlspecialchars($dep['nombre']) ?></td>
                   <td><?= htmlspecialchars($dep['ubicacion']) ?></td>
+                  <td><?= htmlspecialchars($dep['area']) ?></td>
+                  <td><?= htmlspecialchars($dep['area']) ?></td>
                   <td><?= htmlspecialchars($dep['area']) ?></td>
                   <td class="text-center">
                     <a href="formulario.php?id=<?= $dep['id_departamento'] ?>" class="btn btn-warning btn-sm">
