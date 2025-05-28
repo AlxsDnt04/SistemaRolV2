@@ -19,9 +19,13 @@ body {
   max-height: 400px;
   padding: 30px;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: visible;  
-  scrollbar-color: #0b8793 transparent;
+}
+/* Permite scroll horizontal y vertical en la tabla dentro del card */
+.table-responsive-custom {
+  width: 100%;
+  max-height: 400px; 
+  overflow-x: visible;
+  overflow-y: auto;
 }
 .container table{
   width: 100%;

@@ -104,4 +104,30 @@ class Rol
             $data['empleadoInfo'] //directo del formulario
         ]);
     }
+
+    public function consultaRolInnerJoin()
+    {
+        return $this->db->query("
+        SELECT 
+        e.ci_empleado, 
+        e.nombre, e.apellido, 
+        r.id_rol,
+        r.mes,
+        r.hora25, 
+        r.hora50, 
+        r.hora100, 
+        r.bonos, 
+        r.sueldo, 
+        r.totalIngreso, 
+        r.iess, 
+        r.multas, 
+        r.atrasos, 
+        r.alimentacion, 
+        r.anticipos, 
+        r.otros, 
+        r.totalEgreso, 
+        r.totalPagar, 
+        r.fecha_registro 
+        FROM rol r INNER JOIN empleado e ON e.ci_empleado = r.ci_empleado;")->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

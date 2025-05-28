@@ -1,7 +1,7 @@
 <?php
 require_once '../../models/Rol.php';
 $rol = new Rol();
-$empleados = $rol->obtenerEmpleados();
+$consultaRol = $rol->consultaRolInnerJoin();
 ?>
 
 <!DOCTYPE html>
@@ -24,38 +24,60 @@ $empleados = $rol->obtenerEmpleados();
           <i class="fa-solid fa-plus"></i> Nuevo registro de rol</a>
       </div>
       <div class="card-body">
-      <div>
-        
-      </div>
+        <div>
+
+        </div>
+        <div class="table-responsive-custom">
         <table class="table table-bordered table-hover">
-          <h1 id="titulo-tabla">Ingresos</h1>
+          <h1 id="titulo-tabla">Roles registrados</h1>
           <thead>
             <tr>
+              <th>Usuario</th>
               <th>Mes</th>
-              <th>Hora 25</th>
-              <th>Hora 50</th>
-              <th>Hora 100</th>
+              <th>Hora 25%</th>
+              <th>Hora 50%</th>
+              <th>Hora 100%</th>
               <th>Bonos</th>
               <th>Sueldo</th>
+              <th>IESS</th>
+              <th>Multas</th>
+              <th>Atrasos</th>
+              <th>Alimentación</th>
+              <th>Anticipos</th>
+              <th>Otros</th>
               <th>Total Ingresos</th>
+              <th>Total Egresos</th>
+              <th>Total a Pagar</th>
+              <th>Fecha de Registro</th>
               <th class="text-center">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <?php if (!empty($departamento)) : ?>
-              <?php foreach ($departamento as $dep) : ?>
+            <?php if (!empty($consultaRol)) : ?>
+              <?php foreach ($consultaRol as $dep) : ?>
                 <tr>
-                  <td><?= htmlspecialchars($dep['id_departamento']) ?></td>
-                  <td><?= htmlspecialchars($dep['nombre']) ?></td>
-                  <td><?= htmlspecialchars($dep['ubicacion']) ?></td>
-                  <td><?= htmlspecialchars($dep['area']) ?></td>
-                  <td><?= htmlspecialchars($dep['area']) ?></td>
-                  <td><?= htmlspecialchars($dep['area']) ?></td>
+                  <td><?= htmlspecialchars($dep['ci_empleado'] . ' - ' . $dep['nombre'] . ' ' . $dep['apellido']) ?></td>
+                  <td><?= htmlspecialchars($dep['mes']) ?></td>
+                  <td><?= htmlspecialchars($dep['hora25']) ?></td>
+                  <td><?= htmlspecialchars($dep['hora50']) ?></td>
+                  <td><?= htmlspecialchars($dep['hora100']) ?></td>
+                  <td><?= htmlspecialchars($dep['bonos']) ?></td>
+                  <td><?= htmlspecialchars($dep['sueldo']) ?></td>
+                  <td><?= htmlspecialchars($dep['iess']) ?></td>
+                  <td><?= htmlspecialchars($dep['multas']) ?></td>
+                  <td><?= htmlspecialchars($dep['atrasos']) ?></td>
+                  <td><?= htmlspecialchars($dep['alimentacion']) ?></td>
+                  <td><?= htmlspecialchars($dep['anticipos']) ?></td>
+                  <td><?= htmlspecialchars($dep['otros']) ?></td>
+                  <td><?= htmlspecialchars($dep['totalIngreso']) ?></td>
+                  <td><?= htmlspecialchars($dep['totalEgreso']) ?></td>
+                  <td><?= htmlspecialchars($dep['totalPagar']) ?></td>
+                  <td><?= htmlspecialchars($dep['fecha_registro']) ?></td>
                   <td class="text-center">
-                    <a href="formulario.php?id=<?= $dep['id_departamento'] ?>" class="btn btn-warning btn-sm">
+                    <a href="formulario.php?id=<?= $dep['id_rol'] ?>" class="btn btn-warning btn-sm">
                       <i class="fa-solid fa-pen-to-square"></i> Editar</a>
                     <!-- ELIMINAR -->
-                    <a href="../../controllers/DepartamentoController.php?accion=eliminar&id=<?= $dep['id_departamento'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?');">
+                    <a href="../../controllers/DepartamentoController.php?accion=eliminar&id=<?= $dep['id_rol'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?');">
                       <i class="fa-solid fa-trash"></i> Eliminar</a>
 
                   </td>
@@ -69,11 +91,12 @@ $empleados = $rol->obtenerEmpleados();
           </tbody>
         </table>
       </div>
-    </div>
+      </div>
+      </div>
   </div>
 
   <!-- alertas -->
-<?php
+  <?php
   if (isset($_GET['success'])): ?>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../assets/javascript/alertas.js"></script>
