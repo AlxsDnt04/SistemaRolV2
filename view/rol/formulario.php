@@ -59,7 +59,7 @@ if (isset($_GET['id'])) {
     <div class="header">
       <h4 class="mb-0"><i class="fa-solid fa-money-bill-wave"></i> Ingresos y Egresos</h4>
       <a href="listar.php" class="btn btn-light btn-sm">
-        <i class="fa-solid fa-list"></i> Ver Ingresos y Egresos</a>
+        <i class="fa-solid fa-list"></i> Ver Registro de Roles</a>
     </div>
     <form id="rolPagos"  action="../../controllers/RolController.php" method="POST" >
       <!-- Datos personales -->

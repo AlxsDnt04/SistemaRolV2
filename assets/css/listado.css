@@ -11,23 +11,24 @@ body {
   min-height: 100vh;
 }
 
-.card{
+.tabla-scroll {
+  max-height: 400px;   
+  overflow-x: auto;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.card {
   width: 106%;
 }
 .card-body {
   width: 100%;
-  max-height: 400px;
+  /* max-height: 400px; */
   padding: 30px;
   position: relative;
 }
-/* Permite scroll horizontal y vertical en la tabla dentro del card */
-.table-responsive-custom {
-  width: 100%;
-  max-height: 400px; 
-  overflow-x: visible;
-  overflow-y: auto;
-}
-.container table{
+
+.container table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
@@ -62,8 +63,8 @@ body {
   font-weight: 600;
 }
 
-#titulo-tabla{
-  color: #ffffff
+#titulo-tabla {
+  color: #ffffff;
 }
 
 .btn-outline-light.btn-sm {
@@ -83,7 +84,6 @@ body {
 .card-body {
   padding: 20px;
 }
-
 
 .btn-warning.btn-sm {
   background-color: #f0ad4e;

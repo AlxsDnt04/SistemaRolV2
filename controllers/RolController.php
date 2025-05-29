@@ -3,7 +3,13 @@ require_once '../models/Rol.php';
 // Instanciar el rol
 $rol = new Rol();
 
-
+// Eliminar por GET directamente desde la id de URL
+if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
+    // llamar a la funcion eliminar
+    $rol->eliminar($_GET['id']);
+    header('Location: ../view/empleado/listar.php?success=2');
+    exit;
+}
 
 // crear o actualizar por POST desde el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
