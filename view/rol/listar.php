@@ -75,7 +75,7 @@ $consultaRol = $rol->consultaRolInnerJoin();
                     <td><?= htmlspecialchars($dep['totalPagar']) ?></td>
                     <td><?= htmlspecialchars($dep['fecha_registro']) ?></td>
                     <td><?= htmlspecialchars($dep['id_rol']) ?></td>
-                    <td class="text-center">
+                    <td class="text-center acciones">
                       <a href="formulario.php?id=<?= $dep['id_rol'] ?>" class="btn btn-warning btn-sm">
                         <i class="fa-solid fa-pen-to-square"></i> Editar</a>
                       <!-- ELIMINAR -->

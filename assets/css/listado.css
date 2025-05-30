@@ -18,6 +18,13 @@ body {
   width: 100%;
 }
 
+.acciones{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .card {
   width: 106%;
 }
