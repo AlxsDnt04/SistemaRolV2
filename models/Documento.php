@@ -21,7 +21,11 @@ class Documento
         archivo, 
         ci_empleado) VALUES (?,?,?,?)";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data['mes'],$data['descripcion'], $archivo, $data['ci_empleado']);
+        return $stmt->execute([
+            $data['mes'],
+            $data['descripcion'], 
+            $archivo, 
+            $data['ci_empleado']]);
     }
 
      

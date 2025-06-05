@@ -12,21 +12,26 @@ if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'
 
 // Crear o actualizar por POST desde el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verificar si se ha subido un archivo
+    $archivo = null; //
+    if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
+        $nombreArchivo = basename($_FILES['archivo']['name']);
+        $rutaArchivo = '../uploads/' . $nombreArchivo; // Ruta donde se guardará el archivo
+        move_uploaded_file($_FILES['archivo']['tmp_name'], $rutaArchivo); // Mover el archivo a la ruta deseada
+        $archivo = $rutaArchivo; // Asignar la ruta del archivo a la variable
+
+    }
 
     // Validar que el campo id_departamento no esté vacío    
     if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
         // Actualizar
-        /* $departamento->actualizar($_POST); */
+        $documento->actualizar($_POST, $archivo);
+        
     } else {
         // crear
-        /* $departamento->crear($_POST); */
-        $data = [
-            'mes' => $_POST['meses'],
-            'descripcion' => $_POST['descripcion'],
-            'ci_empleado' => $_POST['empleadoInfo']
-        ];
-        echo $data;
+        $documento->crearDocumento($_POST, $archivo);
+
     }
-    header('Location: ../view/departamento/listar.php?success=1');
+    header('Location: ../view/documento/listar.php?success=1');
     exit;
 }

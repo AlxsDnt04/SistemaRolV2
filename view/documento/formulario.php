@@ -10,9 +10,9 @@ if (isset($_GET['id'])) {
   $data = $documento->obtenerTodos($_GET['id']);
 } else {
   $data = [
-    'meses' => '',
+    'mes' => '',
     'descripcion' => '',
-    'empleadoInfo' => ''
+    'ci_empleado' => ''
   ];
 }
 ?>
@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
       <div class="row">
         <div class="col-md-6">
             <label for="meses" class="form-label">Mes</label>
-            <select name="meses" class="form-select" required>
+            <select name="mes" class="form-select" required>
               <option value="" disabled selected>Seleccione un mes</option>
               <option value="Enero">Enero</option>
               <option value="Febrero">Febrero</option>
@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
           </div>
         <div class="col-md-6">
           <label for="descripcion" class="form-label">Descripción</label>
-          <textarea class="form-control" id="descripcion" name="descripcion" rows="3" maxlength="100" required style="resize: none;"></textarea>
+          <textarea class="form-control" name="descripcion" rows="3" maxlength="100" required style="resize: none;"></textarea>
         </div>
         <div class="col-md-6 mt-3">
           <label for="archivo" class="form-label">Seleccion el archivo</label>
@@ -66,7 +66,7 @@ if (isset($_GET['id'])) {
         </div>
         <div class="col-md-6 mt-3">
           <label for="empleado" class="form-label">Seleccion el empleado</label>
-          <select class="form-select" name="empleadoInfo" id="empleadoInfo" required>
+          <select class="form-select" name="ci_empleado" required>
             <option value="">Seleccione un empleado</option>
             <?php foreach ($rol as $d): ?>
               <option value="<?= $d['ci_empleado'] ?>">
@@ -80,7 +80,7 @@ if (isset($_GET['id'])) {
 
       <!-- Campo oculto para identificar si es creación, edición o eliminación -->
       <input type="hidden" name="accion" value="<?= isset($_GET['id']) ? 'editar' : 'crear' ?>">
-      <!-- <input type="hidden" name="id_departamento" value="<?= htmlspecialchars($data['id_departamento']) ?>"> -->
+      
 
 
 
