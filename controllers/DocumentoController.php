@@ -5,8 +5,8 @@ $documento = new Documento();
 // Eliminar por GET directamente desde la id de URL
 if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
     // llamar a la funcion eliminar
-    $departamento->eliminar($_GET['id']);
-    header('Location: ../view/departamento/listar.php?success=2');
+    $documento->eliminar($_GET['id']);
+    header('Location: ../view/documento/listar.php?success=2');
     exit;
 }
 

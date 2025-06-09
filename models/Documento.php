@@ -34,6 +34,30 @@ class Documento
     {
         return $this->db->query("SELECT * from documento")->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    // metodo para consultar documentos por ci_empleado con inner join
+    public function obtenerDocumentosInnerJ(){
+        $sql = "SELECT d.id, e.ci_empleado, e.nombre, e.apellido, d.descripcion, d.mes, d.fecha_carga, d.archivo, r.id_rol, r.mes AS mes_rol_generado FROM empleado e INNER JOIN documento d ON e.ci_empleado = d.ci_empleado INNER JOIN rol r on r.ci_empleado = d.ci_empleado;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function eliminar($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM documento WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+    
+    //metodo para actualizar un departamento
+    public function actualizar($data)
+    {
+        $stmt = $this->db->prepare("UPDATE documento SET nombre = ?, ubicacion = ?, area = ? WHERE id_departamento = ?");
+        return $stmt->execute([$data['nombre'], $data['ubicacion'], $data['area'], $data['id_departamento']]);
+    }
+
+
+    
     /*
     // metodo para obtener todos los departamentos por id
     public function obtenerPorId($id)
@@ -42,16 +66,7 @@ class Documento
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    //metodo para actualizar un departamento
-    public function actualizar($data)
-    {
-        $stmt = $this->db->prepare("UPDATE departamento SET nombre = ?, ubicacion = ?, area = ? WHERE id_departamento = ?");
-        return $stmt->execute([$data['nombre'], $data['ubicacion'], $data['area'], $data['id_departamento']]);
-    }
-    //metodo para eliminar un departamento
-    public function eliminar($id)
-    {
-        $stmt = $this->db->prepare("DELETE FROM departamento WHERE id_departamento = ?");
-        return $stmt->execute([$id]);
-    } */
+        */
+    
+    
 }

@@ -1,7 +1,7 @@
 <?php
 require_once '../../models/Documento.php';
 $documento = new Documento();
-$consulta = $documento->obtenerTodos();
+$consulta = $documento->obtenerDocumentosInnerJ();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,11 +28,14 @@ $consulta = $documento->obtenerTodos();
           <thead>
             <tr>
               <th>ID</th>
+              <th>Cédula</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Descripcion</th>
               <th>Mes</th>
-              <th>Descripción</th>
-              <th>Empleado</th>
-              <th>Ruta del archivo</th>
               <th>Fecha de carga</th>
+              <th>Archivo</th>
+              <th>id - mes generado</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -40,19 +43,22 @@ $consulta = $documento->obtenerTodos();
             <?php if (!empty($consulta)) : ?>
               <?php foreach ($consulta as $dep) : ?>
                 <tr>
-                  <td><?= htmlspecialchars($dep['id']) ?></td>
-                  <td><?= htmlspecialchars($dep['mes']) ?></td>
-                  <td><?= htmlspecialchars($dep['descripcion']) ?></td>
-                  <td><?= htmlspecialchars($dep['ci_empleado']) ?></td>
-                  <td><?= htmlspecialchars($dep['fecha_carga']) ?></td>
+                    <td class="text-center align-middle"><?= htmlspecialchars($dep['id']) ?></td>
+                  <td class="text-center align-middle"><?= htmlspecialchars($dep['ci_empleado']) ?></td>
+                  <td class="text-center align-middle"><?= htmlspecialchars($dep['nombre']) ?></td>
+                  <td class="text-center align-middle"><?= htmlspecialchars($dep['apellido']) ?></td>
+                  <td class="text-center align-middle"><?= htmlspecialchars($dep['descripcion']) ?></td>
+                  <td class="text-center align-middle"><?= htmlspecialchars($dep['mes']) ?></td>
+                  <td class="text-center align-middle"><?= htmlspecialchars($dep['fecha_carga']) ?></td>
                   <!-- enlace para ver el archivo en el navegador -->
-                 <td>
+                 <td class="text-center align-middle">
                   <?= htmlspecialchars($dep['archivo']) ?>
                   <a href="../../<?= htmlspecialchars($dep['archivo']) ?>" target="_blank" class="btn btn-link btn-sm">
                     <i class="fa-solid fa-eye"></i> Ver</a>
                  </td>
-                
-                  <td class="text-center">
+                 <td class="text-center align-middle"><?= htmlspecialchars($dep['id_rol'] . ' - ' . $dep['mes_rol_generado']) ?></td>
+
+                 <td class="text-center align-middle">
                     <a href="formulario.php?id=<?= $dep['id'] ?>" class="btn btn-warning btn-sm">
                       <i class="fa-solid fa-pen-to-square"></i> Editar</a>
                     <!-- ELIMINAR -->
@@ -67,7 +73,7 @@ $consulta = $documento->obtenerTodos();
               <?php endforeach; ?>
             <?php else : ?>
               <tr>
-                <td colspan="5" class="text-center text-warning">No hay departamentos registrados.</td>
+                <td colspan="10" class="text-center text-warning">No hay documentos registrados.</td>
               </tr>
             <?php endif; ?>
           </tbody>
