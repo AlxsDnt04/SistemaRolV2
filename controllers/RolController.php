@@ -7,7 +7,7 @@ $rol = new Rol();
 if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
     // llamar a la funcion eliminar
     $rol->eliminar($_GET['id']);
-    header('Location: ../view/empleado/listar.php?success=2');
+    header('Location: ../view/rol/listar.php?success=2');
     exit;
 }
 
