@@ -90,7 +90,7 @@ $consultaRol = $rol->consultaRolInnerJoin();
                 <?php endforeach; ?>
               <?php else : ?>
                 <tr>
-                  <td colspan="5" class="text-center text-warning">No hay departamentos registrados.</td>
+                  <td colspan="19" class="text-center text-warning">No hay departamentos registrados.</td>
                 </tr>
               <?php endif; ?>
             </tbody>
