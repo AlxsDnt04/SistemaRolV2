@@ -23,8 +23,8 @@
                         <i class="fa-solid fa-building"></i> Departamentos
                     </a>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="departamentosDropdown">
-                        <li><a class="dropdown-item text-dark bg-white menu-anim" href="formulario.php">Registrar</a></li>
-                        <li><a class="dropdown-item text-dark bg-white menu-anim" href="listar copy.php">Lista</a></li>
+                        <li><a class="dropdown-item text-dark bg-white menu-anim" href="departamento/formulario copy.php">Registrar</a></li>
+                        <li><a class="dropdown-item text-dark bg-white menu-anim" href="departamento/listar copy.php">Lista</a></li>
                     </ul>
                     <a class="nav-link text-white dropdown-toggle menu-anim" href="#" id="usuariosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-users"></i> Usuarios 
