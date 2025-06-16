@@ -5,9 +5,10 @@ $documento = new Documento();
 $rolModel = new Rol();
 
 $rol = $rolModel->obtenerEmpleados();
-
+$esEdicion = false;
 if (isset($_GET['id'])) {
-  $data = $documento->obtenerTodos($_GET['id']);
+  $data = $documento->obtenerPorIddocumento($_GET['id']);
+  $esEdicion = true;
 } else {
   $data = [
     'mes' => '',
@@ -37,6 +38,9 @@ if (isset($_GET['id'])) {
     </div>
 
     <form action="../../controllers/DocumentoController.php" method="POST" enctype="multipart/form-data">
+      <?php if ($esEdicion): ?>
+        <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id']) ?>">
+      <?php endif; ?>
       <div class="row">
         <div class="col-md-6">
             <label for="meses" class="form-label">Mes</label>
@@ -58,7 +62,7 @@ if (isset($_GET['id'])) {
           </div>
         <div class="col-md-6">
           <label for="descripcion" class="form-label">Descripción</label>
-          <textarea class="form-control" name="descripcion" rows="3" maxlength="100" required style="resize: none;"></textarea>
+            <textarea class="form-control" name="descripcion" rows="3" maxlength="100" required style="resize: none;"><?= htmlspecialchars($data['descripcion']) ?></textarea>
         </div>
         <div class="col-md-6 mt-3">
           <label for="archivo" class="form-label">Seleccion el archivo</label>
@@ -76,16 +80,9 @@ if (isset($_GET['id'])) {
           </select>
         </div>
       </div>
-
-
-      <!-- Campo oculto para identificar si es creación, edición o eliminación -->
-      <input type="hidden" name="accion" value="<?= isset($_GET['id']) ? 'editar' : 'crear' ?>">
-      
-
-
-
+      <!-- enviar -->
       <div class="mt-4 text-center">
-        <button type="submit" class="btn btn-success px-5">
+        <button type="submit" class="btn btn-success px-5" <?= $esEdicion ? 'name="actualizar"' : 'name="crear"' ?>>
           <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
       </div>
     </form>

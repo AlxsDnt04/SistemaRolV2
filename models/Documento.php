@@ -50,23 +50,26 @@ class Documento
     }
     
     //metodo para actualizar un departamento
-    public function actualizar($data)
+    public function actualizar($data, $archivoFullPath)
     {
-        $stmt = $this->db->prepare("UPDATE documento SET nombre = ?, ubicacion = ?, area = ? WHERE id_departamento = ?");
-        return $stmt->execute([$data['nombre'], $data['ubicacion'], $data['area'], $data['id_departamento']]);
+        $archivo = 'uploads/'.basename($archivoFullPath);
+        $stmt = $this->db->prepare("UPDATE documento 
+        SET mes = ?, 
+        descripcion = ?, 
+        archivo = ?, 
+        ci_empleado = ? 
+        WHERE id = ?");
+        return $stmt->execute([$data['mes'], $data['descripcion'], $archivo, $data['ci_empleado'], $data['id']]);
     }
 
-
-    
-    /*
-    // metodo para obtener todos los departamentos por id
-    public function obtenerPorId($id)
+    // metodo para obtener todos por id
+    public function obtenerPorIddocumento($id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM departamento WHERE id_departamento = ?");
+        $stmt = $this->db->prepare("SELECT * FROM documento WHERE id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-        */
+    
     
     
 }

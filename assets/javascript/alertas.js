@@ -11,7 +11,10 @@ function mostrarAlertaSwal(tipo) {
     config.title = '¡Procedimiento exitoso!';
   } else if (tipo === '2') {
     config.title = '¡Eliminación exitosa!';
-  } else {
+    } else if (tipo === 'error=1') {
+    config.icon = 'error';
+    config.title = '¡Ha ocurrido un error!';
+    } else {
     return;
   }
 

@@ -23,13 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Validar que el campo id_departamento no esté vacío    
-    if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
+    if (isset($_POST['accion']) && $_POST['accion'] === 'actualizar') {
         // Actualizar
         $documento->actualizar($_POST, $archivo);
         
-    } else {
-        // crear
+    } elseif (isset($_POST['accion']) && $_POST['accion'] === 'crear') {
+        // Crear
         $documento->crearDocumento($_POST, $archivo);
+    } else {
+        // Redirigir si no se especifica acción
+        header('Location: ../view/documento/formulario.php?error=1');
+        exit;
+        
 
     }
     header('Location: ../view/documento/listar.php?success=1');

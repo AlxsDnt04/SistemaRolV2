@@ -60,6 +60,7 @@ $consulta = $documento->obtenerDocumentosInnerJ();
                  <td class="text-center align-middle"><?= htmlspecialchars($dep['id_rol'] . ' - ' . $dep['mes_rol_generado']) ?></td>
 
                  <td class="text-center align-middle">
+                    <!-- EDITAR -->
                     <a href="formulario.php?id=<?= $dep['id'] ?>" class="btn btn-warning btn-sm">
                       <i class="fa-solid fa-pen-to-square"></i> Editar</a>
                     <!-- ELIMINAR -->
