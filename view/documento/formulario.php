@@ -39,7 +39,8 @@ if (isset($_GET['id'])) {
 
     <form action="../../controllers/DocumentoController.php" method="POST" enctype="multipart/form-data">
       <?php if ($esEdicion): ?>
-        <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id']) ?>">
+        <input type="hidden" name="accion" value="actualizar">
+        <input type="hidden" name="id" value="<?=$data['id']?>">
       <?php endif; ?>
       <div class="row">
         <div class="col-md-6">
@@ -66,7 +67,7 @@ if (isset($_GET['id'])) {
         </div>
         <div class="col-md-6 mt-3">
           <label for="archivo" class="form-label">Seleccion el archivo</label>
-          <input type="file" class="form-control" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.txt" required>
+          <input type="file" class="form-control" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.txt">
         </div>
         <div class="col-md-6 mt-3">
           <label for="empleado" class="form-label">Seleccion el empleado</label>

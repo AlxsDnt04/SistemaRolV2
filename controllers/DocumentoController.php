@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $documento->crearDocumento($_POST, $archivo);
     } else {
         // Redirigir si no se especifica acción
-        header('Location: ../view/documento/formulario.php?error=1');
+        header('Location: ../view/documento/listar.php?error=1');
         exit;
         
 
