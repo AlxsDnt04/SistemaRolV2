@@ -1,29 +1,35 @@
 <?php
 require_once '../../models/Empleado.php';
+require_once '../../models/Usuarios.php';
 $emp = new Empleado();
+$usr = new Usuarios();
 $empleado = $emp->obtenerTodos();
 
 if (isset($_GET['id'])) {
-  //$data = $departamento->obtenerPorId($_GET['id']);
+  $esEdicion = true;
+  $data = $usr->obtenerUsuarioPorId($_GET['id']);
 } else {
+  $esEdicion = false;
   $data = [
+    'id' => '',
     'usuario' => '',
     'contrasena' => '',
     'rol' => '',
     'empleado' => ''
   ];
-}  
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
   <meta charset="UTF-8">
-  <title>Insertar Departamento</title>
+  <title>Insertar Usuarios</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/insertar.css">
 </head>
+
 <body>
   <div class="container">
     <div class="header">
@@ -31,11 +37,16 @@ if (isset($_GET['id'])) {
       <a href="listar.php" class="btn btn-light btn-sm">
         <i class="fa-solid fa-list"></i> Ver Usuarios</a>
     </div>
-    <form action="../../controllers/UsuarioController.php" method="POST">
+    <form action="../../controllers/UsuariosController.php" method="POST">
+      <?php if ($esEdicion): ?>
+        <input type="hidden" name="accion" value="actualizar">
+        <input type="hidden" name="id" value="<?=$data['id']?>">
+      <?php endif; ?>
       <div class="row">
         <div class="col-md-6">
           <label for="usuario" class="form-label">Nombre de usuario</label>
-          <input type="text" class="form-control" id="user" name="usuario" maxlength="30" required>
+          <input type="text" class="form-control" id="user" name="usuario" maxlength="30" required
+            value="<?= isset($data['usuario']) ? htmlspecialchars($data['usuario']) : '' ?>">
         </div>
         <div class="col-md-6">
           <label for="contrasena" class="form-label">Contraseña</label>
@@ -55,14 +66,14 @@ if (isset($_GET['id'])) {
             <option value="" disabled>Seleccione un empleado</option>
             <?php foreach ($empleado as $e): ?>
               <option value="<?= htmlspecialchars($e['ci_empleado']) ?>">
-                <?= htmlspecialchars($e['nombre'] . ' ' . $e['apellido']) ?>
+                <?= htmlspecialchars($e['ci_empleado'] . ' - ' . $e['nombre'] . ' ' . $e['apellido']) ?>
               </option>
             <?php endforeach; ?>
           </select>
         </div>
       </div>
-      <!-- Campo oculto para identificar si es creación, edición o eliminación -->
-      <input type="hidden" name="accion" value="<?= isset($_GET['id']) ? 'editar' : 'crear' ?>">
+      <!-- Campo oculto para identificar si es creación, edición -->
+      
       <div class="mt-4 text-center">
         <button type="submit" class="btn btn-success px-5">
           <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
