@@ -41,6 +41,8 @@ if (isset($_GET['id'])) {
       <?php if ($esEdicion): ?>
         <input type="hidden" name="accion" value="actualizar">
         <input type="hidden" name="id" value="<?=$data['id']?>">
+      <?php else: ?>
+        <input type="hidden" name="accion" value="crear">
       <?php endif; ?>
       <div class="row">
         <div class="col-md-6">
@@ -55,17 +57,18 @@ if (isset($_GET['id'])) {
         <div class="col-md-6">
           <label for="rol" class="form-label">Rol del Usuario</label>
           <select class="form-select" id="rol" name="rol" required>
-            <option value="" disabled>Seleccione un rol</option>
-            <option value="admin">Administrador</option>
-            <option value="empleado">Usuario</option>
+            <option value="" disabled <?= empty($data['rol']) ? 'selected' : '' ?>>Seleccione un rol</option>
+            <option value="admin" <?= (isset($data['rol']) && $data['rol'] === 'admin') ? 'selected' : '' ?>>Administrador</option>
+            <option value="empleado" <?= (isset($data['rol']) && $data['rol'] === 'empleado') ? 'selected' : '' ?>>Usuario</option>
           </select>
         </div>
         <div class="col-md-6">
           <label for="empleado" class="form-label">Empleado</label>
-          <select class="form-select" id="empleado" name="empleado" required>
-            <option value="" disabled>Seleccione un empleado</option>
+          <select class="form-select" id="ci_empleado" name="ci_empleado" required>
+            <option value="" disabled <?= empty($data['ci_empleado']) ? 'selected' : '' ?>>Seleccione un empleado</option>
             <?php foreach ($empleado as $e): ?>
-              <option value="<?= htmlspecialchars($e['ci_empleado']) ?>">
+              <option value="<?= htmlspecialchars($e['ci_empleado']) ?>"
+                <?= (isset($data['ci_empleado']) && $data['ci_empleado'] == $e['ci_empleado']) ? 'selected' : '' ?>>
                 <?= htmlspecialchars($e['ci_empleado'] . ' - ' . $e['nombre'] . ' ' . $e['apellido']) ?>
               </option>
             <?php endforeach; ?>

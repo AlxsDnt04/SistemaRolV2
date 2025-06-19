@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuarios->actualizarUsuario($_POST);
     } elseif (isset($_POST['accion']) && $_POST['accion'] === 'crear') {
         // Crear
-        $usuarios->crearUsuario($_POST['usuario'], $_POST['contrasena'], $_POST['rol'], $_POST['empleado']);
+        $usuarios->crearUsuario($_POST['usuario'], $_POST['contrasena'], $_POST['rol'], $_POST['ci_empleado']);
     } else {
         // Redirigir si no se especifica acción
         header('Location: ../view/usuarios/listar.php?error=1');
