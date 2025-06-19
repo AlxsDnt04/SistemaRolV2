@@ -55,6 +55,19 @@ class Usuarios
         $stmt = $this->db->prepare("DELETE FROM usuarios WHERE id = ?");
         return $stmt->execute([$id]);
     }
+
+    public function autenticarUsuario($usuario, $clave)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE usuario = ?");
+        $stmt->execute([$usuario]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($clave, $user['clave'])) {
+            return $user; // Retorna el usuario autenticado
+        }
+        return false; // Usuario o contraseña incorrectos
+    }
+
     /* public function crear($data)
     {
         if (empty($data['ci_empleado']) || !is_numeric($data['ci_empleado'])) {

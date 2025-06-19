@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
     <form action="../../controllers/UsuariosController.php" method="POST">
       <?php if ($esEdicion): ?>
         <input type="hidden" name="accion" value="actualizar">
-        <input type="hidden" name="id" value="<?=$data['id']?>">
+        <input type="hidden" name="id" value="<?= $data['id'] ?>">
       <?php else: ?>
         <input type="hidden" name="accion" value="crear">
       <?php endif; ?>
@@ -69,6 +69,15 @@ if (isset($_GET['id'])) {
             <?php foreach ($empleado as $e): ?>
               <option value="<?= htmlspecialchars($e['ci_empleado']) ?>"
                 <?= (isset($data['ci_empleado']) && $data['ci_empleado'] == $e['ci_empleado']) ? 'selected' : '' ?>>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                    var ciEmpleadoSelect = document.getElementById('ci_empleado');
+                    var usuarioInput = document.getElementById('user');
+                    ciEmpleadoSelect.addEventListener('change', function() {
+                      usuarioInput.value = this.value;
+                    });
+                  });
+                </script>
                 <?= htmlspecialchars($e['ci_empleado'] . ' - ' . $e['nombre'] . ' ' . $e['apellido']) ?>
               </option>
             <?php endforeach; ?>
@@ -76,7 +85,7 @@ if (isset($_GET['id'])) {
         </div>
       </div>
       <!-- Campo oculto para identificar si es creación, edición -->
-      
+
       <div class="mt-4 text-center">
         <button type="submit" class="btn btn-success px-5">
           <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
