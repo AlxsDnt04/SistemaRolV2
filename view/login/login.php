@@ -21,7 +21,7 @@
                                 <div class="card-body p-md-5 mx-md-4">
 
                                     <div class="text-center">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                                        <img src="../../assets/img/logoLogin.png"
                                             style="width: 185px;" alt="logo">
                                         <h4 class="mt-1 mb-5 pb-1">Login al Sistema</h4>
                                     </div>
