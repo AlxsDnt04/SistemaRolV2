@@ -64,7 +64,7 @@ if (isset($_GET['id'])) {
         </div>
         <div class="col-md-6">
           <label for="empleado" class="form-label">Empleado</label>
-          <select class="form-select" id="ci_empleado" name="ci_empleado" required>
+          <select class="form-select" id="ci_empleado" name="ci_empleado">
             <option value="" disabled <?= empty($data['ci_empleado']) ? 'selected' : '' ?>>Seleccione un empleado</option>
             <?php foreach ($empleado as $e): ?>
               <option value="<?= htmlspecialchars($e['ci_empleado']) ?>"

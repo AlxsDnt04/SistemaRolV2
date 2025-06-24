@@ -50,7 +50,12 @@
                                             <button type="button" action data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Crear una</button>
                                             <?php
                                             if (isset($_GET['error'])) : ?>
-                                                <div class="alert alert-danger mt-3"> Usuario o contraseña incorrectos. </div>
+                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                <script src="../../assets/javascript/alertas.js"></script>
+                                                <script>
+                                                    // Dispara la alerta de error usando la función de alertas.js
+                                                    mostrarAlertaSwal('error=<?=$_GET['error']?>');
+                                                </script>
                                             <?php endif; ?>
                                         </div>
 

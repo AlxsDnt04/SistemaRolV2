@@ -56,37 +56,36 @@ $consultaRol = $rol->consultaRolInnerJoin();
             <tbody>
               <?php if (!empty($consultaRol)) : ?>
                 <?php foreach ($consultaRol as $dep) : ?>
-                  <tr>
-                    <td><?= htmlspecialchars($dep['ci_empleado'] . ' - ' . $dep['nombre'] . ' ' . $dep['apellido']) ?></td>
-                    <td><?= htmlspecialchars($dep['mes']) ?></td>
-                    <td><?= htmlspecialchars($dep['hora25']) ?></td>
-                    <td><?= htmlspecialchars($dep['hora50']) ?></td>
-                    <td><?= htmlspecialchars($dep['hora100']) ?></td>
-                    <td><?= htmlspecialchars($dep['bonos']) ?></td>
-                    <td><?= htmlspecialchars($dep['sueldo']) ?></td>
-                    <td><?= htmlspecialchars($dep['iess']) ?></td>
-                    <td><?= htmlspecialchars($dep['multas']) ?></td>
-                    <td><?= htmlspecialchars($dep['atrasos']) ?></td>
-                    <td><?= htmlspecialchars($dep['alimentacion']) ?></td>
-                    <td><?= htmlspecialchars($dep['anticipos']) ?></td>
-                    <td><?= htmlspecialchars($dep['otros']) ?></td>
-                    <td><?= htmlspecialchars($dep['totalIngreso']) ?></td>
-                    <td><?= htmlspecialchars($dep['totalEgreso']) ?></td>
-                    <td><?= htmlspecialchars($dep['totalPagar']) ?></td>
-                    <td><?= htmlspecialchars($dep['fecha_registro']) ?></td>
-                    <td><?= htmlspecialchars($dep['id_rol']) ?></td>
-                    <td class="text-center acciones">
+                    <tr class="text-center align-middle">
+                    <td class="align-middle"><?= htmlspecialchars($dep['ci_empleado'] . ' - ' . $dep['nombre'] . ' ' . $dep['apellido']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['mes']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['hora25']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['hora50']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['hora100']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['bonos']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['sueldo']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['iess']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['multas']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['atrasos']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['alimentacion']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['anticipos']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['otros']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['totalIngreso']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['totalEgreso']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['totalPagar']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['fecha_registro']) ?></td>
+                    <td class="align-middle"><?= htmlspecialchars($dep['id_rol']) ?></td>
+                    <td class="text-center align-middle acciones">
+                      <div class="d-flex justify-content-center gap-1">
                       <a href="formulario.php?id=<?= $dep['id_rol'] ?>" class="btn btn-warning btn-sm">
                         <i class="fa-solid fa-pen-to-square"></i> Editar</a>
-                      <!-- ELIMINAR -->
                       <a href="../../controllers/RolController.php?accion=eliminar&id=<?= $dep['id_rol'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?');">
                         <i class="fa-solid fa-trash"></i> Eliminar</a>
-                      <!-- pdf -->
-                      <a href="../../controllers/ReporteRol.php?id=<?=$dep['id_rol'] ?>" class="btn btn-info btn-sm">
+                      <a href="../../controllers/ReporteRol.php?id=<?= $dep['id_rol'] ?>" class="btn btn-info btn-sm">
                         <i class="fa-solid fa-file-pdf"></i> PDF</a>
-            
+                      </div>
                     </td>
-                  </tr>
+                    </tr>
                 <?php endforeach; ?>
               <?php else : ?>
                 <tr>

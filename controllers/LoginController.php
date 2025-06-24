@@ -13,8 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['usuario'] = $user['usuario'];
         $_SESSION['rol'] = $user['rol'];
         $_SESSION['ci_empleado'] = $user['ci_empleado'];
-        header('Location: ../view/usuarios/listar.php');
+        header('Location: ../view/login/dashboard2.php');
     }else {
-        header('Location: ../view/login/login.php?error=1');
+        header('Location: ../view/login/login.php?error=2');
     }
 }

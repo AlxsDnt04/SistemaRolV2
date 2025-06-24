@@ -66,9 +66,6 @@ $consulta = $documento->obtenerDocumentosInnerJ();
                     <!-- ELIMINAR -->
                     <a href="../../controllers/DocumentoController.php?accion=eliminar&id=<?= $dep['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
                       <i class="fa-solid fa-trash"></i> Eliminar</a>
-                    <!-- Descargar Documento -->
-                    <a href="<?= htmlspecialchars($dep['archivo']) ?>" class="btn btn-info btn-sm" download>
-                      <i class="fa-solid fa-download"></i> Descargar</a>
                   </td>
                 </tr>
                 <!-- php endforeach para cerrar el foreach -->

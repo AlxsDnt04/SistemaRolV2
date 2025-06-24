@@ -14,6 +14,9 @@ function mostrarAlertaSwal(tipo) {
     } else if (tipo === 'error=1') {
     config.icon = 'error';
     config.title = '¡Ha ocurrido un error!';
+    } else if (tipo === 'error=2') {
+    config.icon = 'error';
+    config.title = '¡Usuario o contraseña incorrecto!';
     } else {
     return;
   }
@@ -21,21 +24,3 @@ function mostrarAlertaSwal(tipo) {
   Swal.fire(config);
 }
 
-
-Swal.fire({
-  title: "Are you sure?",
-  text: "You won't be able to revert this!",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, delete it!"
-}).then((result) => {
-  if (result.isConfirmed) {
-    Swal.fire({
-      title: "Deleted!",
-      text: "Your file has been deleted.",
-      icon: "success"
-    });
-  }
-});

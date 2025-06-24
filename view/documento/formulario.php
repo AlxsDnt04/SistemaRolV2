@@ -41,24 +41,24 @@ if (isset($_GET['id'])) {
       <?php if ($esEdicion): ?>
         <input type="hidden" name="accion" value="actualizar">
         <input type="hidden" name="id" value="<?=$data['id']?>">
+        <?php else: ?>
+        <input type="hidden" name="accion" value="crear">
       <?php endif; ?>
       <div class="row">
         <div class="col-md-6">
             <label for="meses" class="form-label">Mes</label>
             <select name="mes" class="form-select" required>
-              <option value="" disabled selected>Seleccione un mes</option>
-              <option value="Enero">Enero</option>
-              <option value="Febrero">Febrero</option>
-              <option value="Marzo">Marzo</option>
-              <option value="Abril">Abril</option>
-              <option value="Mayo">Mayo</option>
-              <option value="Junio">Junio</option>
-              <option value="Julio">Julio</option>
-              <option value="Agosto">Agosto</option>
-              <option value="Septiembre">Septiembre</option>
-              <option value="Octubre">Octubre</option>
-              <option value="Noviembre">Noviembre</option>
-              <option value="Diciembre">Diciembre</option>
+              <option value="" disabled <?= empty($data['mes']) ? 'selected' : '' ?>>Seleccione un mes</option>
+              <?php
+              $meses = [
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+              ];
+              foreach ($meses as $mes) {
+                $selected = ($data['mes'] === $mes) ? 'selected' : '';
+                echo "<option value=\"$mes\" $selected>$mes</option>";
+              }
+              ?>
             </select>
           </div>
         <div class="col-md-6">
@@ -74,8 +74,8 @@ if (isset($_GET['id'])) {
           <select class="form-select" name="ci_empleado" required>
             <option value="">Seleccione un empleado</option>
             <?php foreach ($rol as $d): ?>
-              <option value="<?= $d['ci_empleado'] ?>">
-                <?= htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']) ?>
+              <option value="<?= $d['ci_empleado'] ?>" <?= ($data['ci_empleado'] == $d['ci_empleado']) ? 'selected' : '' ?>>
+              <?= htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']) ?>
               </option>
             <?php endforeach; ?>
           </select>
