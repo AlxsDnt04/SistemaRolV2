@@ -3,18 +3,7 @@ require_once '../../models/Usuarios.php';
 $usuarios = new Usuarios();
 $userQuery = $usuarios->obtenerTodosUsuarios();
 ?>
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Listado de Usuario</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/listado.css">
-</head>
-
-<body>
   <div class="container">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
@@ -73,7 +62,3 @@ $userQuery = $usuarios->obtenerTodosUsuarios();
     </script>
   <?php endif; ?>
 
-
-</body>
-
-</html>

@@ -9,7 +9,7 @@ $departamento = $departamento->obtenerTodos();
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0"><i class="fa-solid fa-building"></i> Listado de Departamentos</h5>
         <a href="../login/dashboard2.php?contenido=departamento/formulario.php" class="btn btn-outline-light btn-sm">
-            <i class="fa-solid fa-plus text-dark"></i> <span class="text-dark">Nuevo Departamento</span></a>
+            <i class="fa-solid fa-plus"></i> <span>Nuevo Departamento</span></a>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover">

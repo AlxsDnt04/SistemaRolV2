@@ -41,25 +41,39 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Cálculo de rol de pagos</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-  <link rel="stylesheet" href="../../assets/css/insertar.css">
-
-</head>
-
-<body>
-
-  <div class="container mt-5 p-4 shadow rounded bg-light">
+  <div class="container"></div>
     <div class="header">
       <h4 class="mb-0"><i class="fa-solid fa-money-bill-wave"></i> Ingresos y Egresos</h4>
       <a href="listar.php" class="btn btn-light btn-sm">
         <i class="fa-solid fa-list"></i> Ver Registro de Roles</a>
+    </div>
+    <div class="card mt-3 mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Resumen de Rol</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Empleado:</strong> 
+            <span id="card_empleado">
+              <?php
+                if (!empty($data['empleadoInfo'])) {
+                  foreach ($rol as $d) {
+                    if ($d['ci_empleado'] == $data['empleadoInfo']) {
+                      echo htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']);
+                      break;
+                    }
+                  }
+                } else {
+                  echo 'No seleccionado';
+                }
+              ?>
+            </span>
+          </li>
+          <li class="list-group-item"><strong>Mes:</strong> <span id="card_mes"><?= htmlspecialchars($data['meses']) ?: 'No seleccionado' ?></span></li>
+          <li class="list-group-item"><strong>Sueldo:</strong> <span id="card_sueldo"><?= htmlspecialchars($data['sueldo']) ?: '0.00' ?></span></li>
+          <li class="list-group-item"><strong>Bonos:</strong> <span id="card_bonos"><?= htmlspecialchars($data['bonos']) ?: '0.00' ?></span></li>
+          <li class="list-group-item"><strong>Total a Pagar:</strong> <span id="card_total"><?= isset($data['totalPagar']) ? htmlspecialchars($data['totalPagar']) : '0.00' ?></span></li>
+        </ul>
+      </div>
     </div>
     <form id="rolPagos"  action="../../controllers/RolController.php" method="POST" >
       <!-- Datos personales -->
@@ -69,7 +83,7 @@ if (isset($_GET['id'])) {
           <select class="form-select" name="empleadoInfo" id="empleadoInfo" required>
             <option value="">Seleccione un empleado</option>
             <?php foreach ($rol as $d): ?>
-              <option value="<?= $d['ci_empleado'] ?>">
+              <option value="<?= $d['ci_empleado'] ?>" <?= ($data['empleadoInfo'] == $d['ci_empleado']) ? 'selected' : '' ?>>
                 <?= htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']) ?>
               </option>
             <?php endforeach; ?>
@@ -84,24 +98,22 @@ if (isset($_GET['id'])) {
           <div class="mb-3">
             <label for="meses" class="form-label">Mes</label>
             <select name="meses" class="form-select" required>
-              <option value="" disabled selected>Seleccione un mes</option>
-              <option value="Enero">Enero</option>
-              <option value="Febrero">Febrero</option>
-              <option value="Marzo">Marzo</option>
-              <option value="Abril">Abril</option>
-              <option value="Mayo">Mayo</option>
-              <option value="Junio">Junio</option>
-              <option value="Julio">Julio</option>
-              <option value="Agosto">Agosto</option>
-              <option value="Septiembre">Septiembre</option>
-              <option value="Octubre">Octubre</option>
-              <option value="Noviembre">Noviembre</option>
-              <option value="Diciembre">Diciembre</option>
+              <option value="" disabled <?= empty($data['meses']) ? 'selected' : '' ?>>Seleccione un mes</option>
+              <?php
+                $meses = [
+                  "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                ];
+                foreach ($meses as $mes) {
+                  $selected = ($data['meses'] == $mes) ? 'selected' : '';
+                  echo "<option value=\"$mes\" $selected>$mes</option>";
+                }
+              ?>
             </select>
           </div>
           <div class="mb-3">
             <label for="sueldo" class="form-label">Sueldo</label>
-            <input type="number" step="0.01" class="form-control" id="sueldo" name="sueldo" placeholder="Ingrese su sueldo" required>
+            <input type="number" step="0.01" class="form-control" id="sueldo" name="sueldo" placeholder="Ingrese su sueldo" required value="<?= htmlspecialchars($data['sueldo']) ?>">
           </div>
           <div class="mb-3">
             <label for="hora25" class="form-label">Hora 25%</label>
@@ -117,7 +129,7 @@ if (isset($_GET['id'])) {
           </div>
           <div class="mb-3">
             <label for="bonos" class="form-label">Bonos</label>
-            <input type="number" class="form-control" id="bonos" name="bonos" placeholder="Valor bonos" value="0">
+            <input type="number" class="form-control" id="bonos" name="bonos" placeholder="Valor bonos" value="<?= htmlspecialchars($data['bonos']) ?: '0' ?>">
           </div>
           <!-- Campos ocultos para cálculos -->
           <input type="hidden" id="temp_total_25" name="total25">
@@ -135,23 +147,23 @@ if (isset($_GET['id'])) {
           </div>
           <div class="mb-3">
             <label for="multas" class="form-label">Multas</label>
-            <input type="number" class="form-control" id="multas" name="multas" placeholder="Valor de multas">
+            <input type="number" class="form-control" id="multas" name="multas" placeholder="Valor de multas" value="<?= htmlspecialchars($data['multas']) ?>">
           </div>
           <div class="mb-3">
             <label for="atrasos" class="form-label">Atrasos</label>
-            <input type="number" class="form-control" id="atrasos" name="atrasos" placeholder="Valor de atrasos">
+            <input type="number" class="form-control" id="atrasos" name="atrasos" placeholder="Valor de atrasos" value="<?= htmlspecialchars($data['atrasos']) ?>">
           </div>
           <div class="mb-3">
             <label for="alimentacion" class="form-label">Alimentación</label>
-            <input type="number" class="form-control" id="alimentacion" name="alimentacion" placeholder="Valor de alimentación">
+            <input type="number" class="form-control" id="alimentacion" name="alimentacion" placeholder="Valor de alimentación" value="<?= htmlspecialchars($data['alimentacion']) ?>">
           </div>
           <div class="mb-3">
             <label for="anticipo" class="form-label">Anticipo</label>
-            <input type="number" class="form-control" id="anticipo" name="anticipo" placeholder="Valor de anticipo">
+            <input type="number" class="form-control" id="anticipo" name="anticipo" placeholder="Valor de anticipo" value="<?= htmlspecialchars($data['anticipo']) ?>">
           </div>
           <div class="mb-3">
             <label for="otros" class="form-label">Otros</label>
-            <input type="number" class="form-control" id="otros" name="otros" placeholder="Otros egresos">
+            <input type="number" class="form-control" id="otros" name="otros" placeholder="Otros egresos" value="<?= htmlspecialchars($data['otros']) ?>">
           </div>
           <!-- Campos ocultos para cálculos -->
           <input type="hidden" class="form-control" id="totalEgresos" name="totalEgres" readonly>
@@ -164,14 +176,12 @@ if (isset($_GET['id'])) {
         <input type="hidden" class="form-control" id="total_a_pagar" name="totalPagar" readonly>
       </div>
 
-
       <!-- Campo oculto para identificar si es creación, edición -->
       <input type="hidden" name="accion" value="<?= isset($_GET['id']) ? 'editar' : 'crear' ?>">
       <!-- Campo oculto para el ID del rol -->
       <?php if (isset($_GET['id'])) : ?>
         <input type="hidden" name="id_rol" value="<?= htmlspecialchars($_GET['id']) ?>">
       <?php endif; ?>
-
 
       <!-- Botones -->
       <div class="text-center">
@@ -182,6 +192,3 @@ if (isset($_GET['id'])) {
   </div>
 
   <script src="js/main.js"></script>
-</body>
-
-</html>

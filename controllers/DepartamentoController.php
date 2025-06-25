@@ -7,7 +7,7 @@ $departamento = new Departamento();
 if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
     // llamar a la funcion eliminar
     $departamento->eliminar($_GET['id']);
-    header('Location: ../view/departamento/listar.php?success=2');
+    header('Location: ../view/login/dashboard2.php?contenido=departamento/listar.php&success=2');
     exit;
 }
 
@@ -22,6 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // crear
         $departamento->crear($_POST);
     }
-    header('Location: ../view/departamento/listar.php?success=1');
+    header('Location: ../view/login/dashboard2.php?contenido=departamento/listar.php&success=1');
     exit;
 }
