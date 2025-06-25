@@ -14,7 +14,7 @@ $empleados = $empleado->obtenerTodos();
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered align-middle">
+          <table class="table table-bordered table-hover table-striped align-middle">
             <thead>
               <tr>
                 <th>Cedula</th>

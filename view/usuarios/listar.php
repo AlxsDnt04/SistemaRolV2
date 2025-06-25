@@ -12,7 +12,7 @@ $userQuery = $usuarios->obtenerTodosUsuarios();
           <i class="fa-solid fa-plus"></i> Agregar usuario</a>
       </div>
       <div class="card-body">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover table-striped table-responsive align-middle">
           <thead>
             <tr>
               <th class="text-center">ID</th>

@@ -12,7 +12,7 @@ $departamento = $departamento->obtenerTodos();
             <i class="fa-solid fa-plus"></i> <span>Nuevo Departamento</span></a>
       </div>
       <div class="card-body">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover table-striped table-responsive aling-middle">
           <thead>
             <tr>
               <th>ID</th>

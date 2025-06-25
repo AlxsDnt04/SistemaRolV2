@@ -7,7 +7,7 @@ $empleado = new Empleado();
 if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
     // llamar a la funcion eliminar
     $empleado->eliminar($_GET['id']);
-    header('Location: ../view/empleado/listar.php?success=2');
+    header('Location: ../view/login/dashboard2.php?contenido=empleado/listar.php&success=2');
     exit;
 }
 
@@ -31,10 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
         // Actualizar
         $empleado->actualizar($_POST);
-    } else {
+    } elseif (isset($_POST['accion']) && $_POST['accion'] === 'crear') {
         // crear
         $empleado->crear($_POST);
+    } else {
+        // Redirigir si no se especifica acción
+        header('Location: ../view/login/dashboard2.php?contenido=empleado/listar.php&error=1');
     }
-    header('Location: ../view/empleado/listar.php?success=1');
+    header('Location: ../view/login/dashboard2.php?contenido=empleado/listar.php&success=1');
     exit;
 }

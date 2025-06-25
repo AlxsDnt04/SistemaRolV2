@@ -13,7 +13,7 @@ $consulta = $documento->obtenerDocumentosInnerJ();
             <i class="fa-solid fa-upload"></i> Subir documento</a>
       </div>
       <div class="card-body">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover table-striped table-responsive align-middle">
           <thead>
             <tr>
               <th>ID</th>
