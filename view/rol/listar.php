@@ -8,7 +8,7 @@ $consultaRol = $rol->consultaRolInnerJoin();
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0"><i class="fa-solid fa-building"></i> Listado de Roles</h5>
-        <a href="formulario.php" class="btn btn-outline-light btn-sm">
+        <a href="../login/dashboard2.php?contenido=rol/formulario.php" class="btn btn-outline-light btn-sm">
           <i class="fa-solid fa-plus"></i> Nuevo registro de rol</a>
       </div>
       <div class="card-body">
@@ -66,7 +66,7 @@ $consultaRol = $rol->consultaRolInnerJoin();
                       <td class="align-middle"><?= htmlspecialchars($dep['id_rol']) ?></td>
                       <td class="text-center align-middle acciones">
                         <div class="d-flex justify-content-center gap-1">
-                        <a href="formulario.php?id=<?= $dep['id_rol'] ?>" class="btn btn-warning btn-sm">
+                        <a href="../login/dashboard2.php?contenido=rol/formulario.php&id=<?= $dep['id_rol'] ?>" class="btn btn-warning btn-sm">
                           <i class="fa-solid fa-pen-to-square"></i> Editar</a>
                         <a href="../../controllers/RolController.php?accion=eliminar&id=<?= $dep['id_rol'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?');">
                           <i class="fa-solid fa-trash"></i> Eliminar</a>

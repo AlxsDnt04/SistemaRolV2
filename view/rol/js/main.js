@@ -53,35 +53,30 @@ function netoAPagar() {
 /* accion del boton submit */
 const formulario = document.getElementById("rolPagos");
 formulario.addEventListener("submit", (e) => {
-  /* e.preventDefault(); */ 
+  // Prevenir envío
+  e.preventDefault();
   calcularIngreso();
   calcularEgresos();
   netoAPagar();
-  // crear formulario oculto y enviar los datos al php
-  /* const form = document.createElement("form");
-  form.method = "POST";
-  form.action = "../../controllers/RolController.php";
 
-  const campos = {
-    
-    total25: document.getElementById("temp_total_25").value,
-    total50: document.getElementById("temp_total_50").value,
-    total100: document.getElementById("temp_total_100").value,
-    total_ingresos: document.getElementById("temp_total_ingresos").value,
-    iesst: document.getElementById("iess").value,
-    totalEgres: document.getElementById("totalEgresos").value,
-    total_a_pagar: document.getElementById("total_a_pagar").value,
-    
-  };
-  // iteracion para ingresos
-  for (const key in campos) {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = key;
-    input.value = campos[key];
-    form.appendChild(input);
-  }
-  // imprimir el formulario mediante php
-  document.body.appendChild(form);
-  form.submit(); */
+  // Verifica que los campos ocultos tengan valores válidos (no vacíos ni NaN)
+  const campos = [
+    "temp_total_25",
+    "temp_total_50",
+    "temp_total_100",
+    "temp_total_ingresos",
+    "iess",
+    "totalEgresos",
+    "total_a_pagar",
+  ];
+  let valid = true;
+  campos.forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el.value || isNaN(parseFloat(el.value))) {
+      el.value = 0;
+    }
+  });
+
+  // Ahora sí, envía el formulario
+  formulario.submit();
 });

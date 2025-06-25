@@ -7,7 +7,7 @@ $rol = new Rol();
 if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
     // llamar a la funcion eliminar
     $rol->eliminar($_GET['id']);
-    header('Location: ../view/rol/listar.php?success=2');
+    header('Location: ../login/dashboard2.php?contenido=rol/listar.php?success=2');
     exit;
 }
 
@@ -42,10 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_POST['accion']) && $_POST['accion'] === 'editar') {
         // Actualizar
         $rol->actualizarRol($data);
-    } else {
+    } elseif($_POST['accion' && $_POST['accion'] ==='crear']) {
         // Crear
         $rol->insertarRol($data);
+    } else {
+        /* resultado */
     }
-    header('Location: ../view/rol/listar.php?success=1');    
+    header('Location: ../view/login/dashboard2.php?contenido=rol/listar.php&success=1');    
     exit;
 }
