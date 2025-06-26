@@ -42,16 +42,18 @@ if (isset($_GET['id'])) {
 ?>
 
 
-<div class="container my-4">
+<div class="container mt-3">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10">
       <div class="card shadow-sm">
+
         <div class="card-header d-flex justify-content-between align-items-center bg-light">
           <h4 class="mb-0"><i class="fa-solid fa-money-bill-wave"></i> Ingresos y Egresos</h4>
           <a href="../login/dashboard2.php?contenido=rol/listar.php" class="btn btn-light btn-sm">
             <i class="fa-solid fa-list"></i> Ver Registro de Roles
           </a>
         </div>
+
         <div class="card-body">
           <form id="rolPagos" action="../../controllers/RolController.php" method="POST">
             <!-- Datos personales -->

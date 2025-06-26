@@ -4,11 +4,11 @@ $usuarios = new Usuarios();
 $userQuery = $usuarios->obtenerTodosUsuarios();
 ?>
 
-  <div class="container">
+  <div class="container mt-3">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0"><i class="fa-solid fa-users"></i> Listado de usuarios</h5>
-        <a href="formulario.php" class="btn btn-outline-light btn-sm">
+        <a href="formulario.php" class="btn btn-light btn-sm">
           <i class="fa-solid fa-plus"></i> Agregar usuario</a>
       </div>
       <div class="card-body">

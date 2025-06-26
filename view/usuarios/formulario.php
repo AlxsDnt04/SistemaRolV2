@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-  <div class="container">
+  <div class="container mt-3">
     <div class="header">
       <h4 class="mb-0"><i class="fa-solid fa-plus"></i> Registrar Usuario</h4>
       <a href="listar.php" class="btn btn-light btn-sm">

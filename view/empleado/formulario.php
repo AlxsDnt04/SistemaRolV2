@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
   ];
 }
 ?>
-  <div class="container">
+  <div class="container mt-3">
     <div class="card mt-4">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="mb-0"><i class="fa-solid fa-user-plus"></i> Insertar Empleado </h4>
@@ -29,31 +29,31 @@ if (isset($_GET['id'])) {
         <form action="../../controllers/EmpleadoController.php" method="POST">
           <div class="row">
             <div class="col-md-6">
-              <label for="cedula" class="form-label text-white">Cedula</label>
+              <label for="cedula" class="form-label">Cedula</label>
               <input type="text" class="form-control" id="cedula" name="ci_empleado" maxlength="10" value="<?= htmlspecialchars($data['ci_empleado']) ?>" required pattern="\d*" title="Solo se permiten números" oninput="this.value = this.value.replace(/[^0-9]/g, ''); " <?= isset($_GET['id']) ? 'readonly' : '' ?>>
             </div>
             <div class="col-md-6">
-              <label for="nombre" class="form-label text-white">Nombre</label>
+              <label for="nombre" class="form-label">Nombre</label>
               <input type="text" class="form-control" id="nombre" name="nombre" maxlength="30" value="<?= htmlspecialchars($data['nombre']) ?>" required>
             </div>
             <div class="col-md-6">
-              <label for="apellido" class="form-label text-white">Apellido</label>
+              <label for="apellido" class="form-label">Apellido</label>
               <input type="text" class="form-control" id="apellido" name="apellido" maxlength="30" value="<?= htmlspecialchars($data['apellido']) ?>" required>
             </div>
             <div class="col-md-6">
-              <label for="telefono" class="form-label text-white">Teléfono</label>
+              <label for="telefono" class="form-label">Teléfono</label>
               <input type="text" class="form-control" id="telefono" name="telefono" maxlength="10" value="<?= htmlspecialchars($data['telefono']) ?>" required pattern="\d*" title="Solo se permiten números" oninput="this.value = this.value.replace(/[^0-9]/g, '');" >
             </div>
             <div class="col-md-6">
-              <label for="direccion" class="form-label text-white">Dirección</label>
+              <label for="direccion" class="form-label">Dirección</label>
               <input type="text" class="form-control" id="direccion" name="direccion" maxlength="120" value="<?= htmlspecialchars($data['direccion']) ?>" required>
             </div>
             <div class="col-md-6">
-              <label for="correo" class="form-label text-white">Correo</label>
+              <label for="correo" class="form-label">Correo</label>
               <input type="email" class="form-control" id="correo" name="correo" maxlength="50" value="<?= htmlspecialchars($data['correo']) ?>" required>
             </div>
             <div class="col-md-6">
-              <label for="id_departamento" class="form-label text-white">Departamento</label>
+              <label for="id_departamento" class="form-label">Departamento</label>
               <select class="form-select" id="id_departamento" name="id_departamento" required>
                 <option value="" disabled <?= empty($data['id_departamento']) ? 'selected' : '' ?>>Seleccione un departamento</option>
                 <?php

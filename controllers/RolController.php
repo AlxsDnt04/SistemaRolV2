@@ -42,11 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_POST['accion']) && $_POST['accion'] === 'editar') {
         // Actualizar
         $rol->actualizarRol($data);
-    } elseif($_POST['accion' && $_POST['accion'] ==='crear']) {
+    } elseif(isset($_POST['accion']) && $_POST['accion'] === 'crear') {
         // Crear
         $rol->insertarRol($data);
     } else {
-        /* resultado */
+        
     }
     header('Location: ../view/login/dashboard2.php?contenido=rol/listar.php&success=1');    
     exit;

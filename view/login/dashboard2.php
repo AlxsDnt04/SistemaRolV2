@@ -13,7 +13,7 @@ $usuario = $_SESSION['usuario'];
     <meta charset="UTF-8">
     <title>Menú de Navegación</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="../../assets/css/listado.css">       --> 
     <style>
         body {
@@ -88,7 +88,7 @@ $usuario = $_SESSION['usuario'];
     <!-- menu lateral -->
     <div class="d-flex" style="min-height: 100vh;">
         <!-- Sidebar -->
-        <nav class="bg-white shadow-sm p-3" style="width: 240px;">
+        <nav class="bg-white shadow-sm p-3 rounded-3" style="width: 240px;">
             <h4 class="mb-4 text-center"><i class="fa-solid fa-bars"></i> Menú</h4>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">
@@ -131,5 +131,6 @@ $usuario = $_SESSION['usuario'];
             ?>
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
 </html>

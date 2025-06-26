@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-  <div class="container">
+  <div class="container mt-3">
     <div class="card mt-4">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="mb-0"><i class="fa-solid fa-plus"></i> Insertar Departamento</h4>
@@ -25,15 +25,15 @@ if (isset($_GET['id'])) {
         <form action="../../controllers/DepartamentoController.php" method="POST">
           <div class="row">
             <div class="col-md-6">
-              <label for="nombre" class="form-label text-white">Nombre del Departamento</label>
+              <label for="nombre" class="form-label">Nombre del Departamento</label>
               <input type="text" class="form-control" id="nombre" name="nombre" maxlength="30" value="<?= htmlspecialchars($data['nombre']) ?>" required>
             </div>
             <div class="col-md-6">
-              <label for="ubicacion" class="form-label text-white">Ubicación</label>
+              <label for="ubicacion" class="form-label">Ubicación</label>
               <input type="text" class="form-control" id="ubicacion" name="ubicacion" maxlength="120" value="<?= htmlspecialchars($data['ubicacion']) ?>" required>
             </div>
             <div class="col-md-6">
-              <label for="area" class="form-label text-white">Área</label>
+              <label for="area" class="form-label">Área</label>
               <input type="text" class="form-control" id="area" name="area" maxlength="30" value="<?= htmlspecialchars($data['area']) ?>" required>
             </div>
           </div>
