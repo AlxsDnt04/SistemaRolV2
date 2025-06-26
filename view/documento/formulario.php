@@ -19,11 +19,13 @@ if (isset($_GET['id'])) {
 ?>
 
   <div class="container mt-3">
-    <div class="header">
-      <h4 class="mb-0"><i class="fa-solid fa-plus"></i> Insertar Documento</h4>
-      <a href="listar.php" class="btn btn-light btn-sm">
-        <i class="fa-solid fa-list"></i> Ver Documentos</a>
-    </div>
+    <div class="card">
+      <div class="card-header header">
+        <h4 class="mb-0"><i class="fa-solid fa-plus"></i> Insertar Documento</h4>
+        <a href="../login/dashboard2.php?contenido=documento/listar.php" class="btn btn-light btn-sm">
+          <i class="fa-solid fa-list"></i> Ver Documentos</a>
+      </div>
+      <div class="card-body">
 
     <form action="../../controllers/DocumentoController.php" method="POST" enctype="multipart/form-data">
       <?php if ($esEdicion): ?>
@@ -73,6 +75,8 @@ if (isset($_GET['id'])) {
       <div class="mt-4 text-center">
         <button type="submit" class="btn btn-success px-5" <?= $esEdicion ? 'name="actualizar"' : 'name="crear"' ?>>
           <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+      </div>
+      </div>
       </div>
     </form>
   </div>

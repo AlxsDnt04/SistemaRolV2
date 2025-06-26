@@ -9,7 +9,7 @@ $consulta = $documento->obtenerDocumentosInnerJ();
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="mb-0"><i class="fa-solid fa-file-lines"></i> Listado de Documentos</h5>
-      <a href="formulario.php" class="btn btn-light btn-sm">
+      <a href="../login/dashboard2.php?contenido=documento/formulario.php" class="btn btn-light btn-sm">
         <i class="fa-solid fa-upload"></i> Subir documento</a>
     </div>
     <div class="card-body">
@@ -42,9 +42,13 @@ $consulta = $documento->obtenerDocumentosInnerJ();
                 <!-- enlace para ver el archivo en el navegador -->
                 <td class="text-center align-middle">
                   <?= htmlspecialchars($dep['archivo']) ?>
-                  <a href="../../<?= htmlspecialchars($dep['archivo']) ?>" target="_blank" class="btn btn-link btn-sm">
-                    <i class="fa-solid fa-eye"></i> Ver</a>
-                </td>
+                  <?php if (trim($dep['archivo']) === 'uploads/' || trim($dep['archivo']) === ''): ?>
+                    <span class="text-muted">Sin archivo</span>
+                  <?php else: ?>
+                    <a href="../../<?= htmlspecialchars($dep['archivo']) ?>" target="_blank" class="btn btn-link btn-sm">
+                      <i class="fa-solid fa-eye"></i> Ver</a>
+                  <?php endif; ?>
+                  </td>
                 <td class="text-center align-middle"><?= htmlspecialchars($dep['id_rol'] . ' - ' . $dep['mes_rol_generado']) ?></td>
 
                 <td class="text-center align-middle">

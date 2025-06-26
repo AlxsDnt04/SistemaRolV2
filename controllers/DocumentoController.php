@@ -6,7 +6,7 @@ $documento = new Documento();
 if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
     // llamar a la funcion eliminar
     $documento->eliminar($_GET['id']);
-    header('Location: ../view/documento/listar.php?success=2');
+    header('Location: ../view/login/dashboard2.php?contenido=documento/listar.php&success=2');
     exit;
 }
 
@@ -26,17 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['accion']) && $_POST['accion'] === 'actualizar') {
         // Actualizar
         $documento->actualizar($_POST, $archivo);
-        
     } elseif (isset($_POST['accion']) && $_POST['accion'] === 'crear') {
         // Crear
         $documento->crearDocumento($_POST, $archivo);
     } else {
         // Redirigir si no se especifica acción
-        header('Location: ../view/documento/listar.php?error=1');
+        header('Location: ../view/login/dashboard2.php?contenido=view/documento/listar.php&error=1');
         exit;
         
 
     }
-    header('Location: ../view/documento/listar.php?success=1');
+    header('Location: ../view/login/dashboard2.php?contenido=documento/listar.php&success=1');
     exit;
 }

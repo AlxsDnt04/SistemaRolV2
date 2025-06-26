@@ -11,10 +11,11 @@ $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
                     <h2 class="mb-3"><i class="fa-solid fa-house-chimney"></i> ¡Bienvenido/a, <span class="text-primary"><?= htmlspecialchars($usuario) ?></span>!</h2>
                     <p class="lead mb-4">
                         Has iniciado sesión como <strong><?= htmlspecialchars($rol) ?></strong>.<br>
-                        Desde este panel puedes gestionar departamentos, empleados, roles de pago y documentos.
+                        Desde este panel puedes gestionar <?php if ($rol === 'empleado') { echo 'tus documentos y consultar tu información personal.'; } else { echo 'los departamentos, empleados, roles de pago y documentos del sistema.'; } ?>
                     </p>
                     <hr>
                     <div class="row justify-content-center">
+                        <?php if ($rol !== 'empleado'): ?>
                         <div class="col-auto">
                             <a href="?contenido=departamento/listar.php" class="btn btn-outline-primary m-1">
                                 <i class="fa-solid fa-building"></i> Departamentos
@@ -25,6 +26,7 @@ $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
                                 <i class="fa-solid fa-users"></i> Empleados
                             </a>
                         </div>
+                        <?php endif; ?>
                         <div class="col-auto">
                             <a href="?contenido=rol/listar.php" class="btn btn-outline-warning m-1">
                                 <i class="fa-solid fa-file-invoice-dollar"></i> Roles de Pago
