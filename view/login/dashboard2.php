@@ -14,7 +14,6 @@ $usuario = $_SESSION['usuario'];
     <title>Menú de Navegación</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="../../assets/css/listado.css">       --> 
     <style>
         body {
             background: #f8f9fa;
@@ -58,17 +57,13 @@ $usuario = $_SESSION['usuario'];
                             Gestionar
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Usuarios</a></li>
+                            <li><a class="dropdown-item" href="dashboard2.php?contenido=usuarios/listar.php">Usuarios</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Solicitudes</a></li>
+                            <li><a class="dropdown-item" href="dashboard2.php?contenido=vacaciones/listar.php">Vacaciones</a></li>
                         </ul>
                     </li>
                 </ul>
                 <?php endif; ?>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
             <div class="d-flex align-items-center ms-3">
                 <span class="text-white me-3">

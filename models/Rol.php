@@ -10,11 +10,7 @@ class Rol
         $this->db = Database::connect();
     }
 
-    //metodo para obtener datos de los empleados
-    public function obtenerEmpleados()
-    {
-        return $this->db->query("SELECT * from empleado")->fetchAll(PDO::FETCH_ASSOC);
-    }
+
 
     // obtener todos los roles
     public function obtenerTodoslosRoles()
@@ -85,22 +81,22 @@ class Rol
         ci_empleado
         ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         return $stat->execute([
-            $data['mes'], // directo del formulario
-            $data['hora25'],
-            $data['hora50'],
-            $data['hora100'],
-            $data['bonos'], //directo del formulario
-            $data['sueldo'], //directo del formulario
+            $data['mes'],
+            $data['total25'],
+            $data['total50'],
+            $data['total100'],
+            $data['bonos'], 
+            $data['sueldo'],
             $data['totalIngreso'],
             $data['iess'],
-            $data['multas'], //directo del formulario
-            $data['atrasos'], //directo del formulario
-            $data['alimentacion'], //directo del formulario
-            $data['anticipo'], //directo del formulario
-            $data['otros'], //directo del formulario
+            $data['multas'], 
+            $data['atrasos'], 
+            $data['alimentacion'],
+            $data['anticipo'], 
+            $data['otros'],
             $data['totalEgreso'],
             $data['totalPagar'],
-            $data['empleadoInfo'] //directo del formulario
+            $data['empleadoInfo'] 
         ]);
     }
 

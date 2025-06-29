@@ -13,6 +13,9 @@ $empleados = $empleado->obtenerTodos();
         <a href="../login/dashboard2.php?contenido=empleado/formulario.php" class="btn btn-light btn-sm"><i class="fa-solid fa-user-plus"></i> Nuevo Empleado</a>
       </div>
       <div class="card-body">
+        <div class="mb-3">
+          <input type="text" id="busquedaUsuario" class="form-control" placeholder="Buscar por cédula">
+        </div>
         <div class="table-responsive">
           <table class="table table-bordered table-hover table-striped align-middle">
             <thead>
@@ -63,6 +66,7 @@ $empleados = $empleado->obtenerTodos();
       </div>
     </div>
   </div>
+  <script src="../../assets/javascript/busquedaUsuario.js"></script>
 <!-- alertas -->
 <?php
   if (isset($_GET['success'])): ?>

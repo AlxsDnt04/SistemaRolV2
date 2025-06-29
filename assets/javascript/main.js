@@ -50,33 +50,9 @@ function netoAPagar() {
   document.getElementById("total_a_pagar").value = total_a_pagar; // Mostrar el total a pagar en el campo correspondiente
 }
 
-/* accion del boton submit */
-const formulario = document.getElementById("rolPagos");
-formulario.addEventListener("submit", (e) => {
-  // Prevenir envío
-  e.preventDefault();
+// Evento para el botón de calcular
+document.getElementById("btnCalcular").addEventListener("click", () => {
   calcularIngreso();
   calcularEgresos();
   netoAPagar();
-
-  // Verifica que los campos ocultos tengan valores válidos (no vacíos ni NaN)
-  const campos = [
-    "temp_total_25",
-    "temp_total_50",
-    "temp_total_100",
-    "temp_total_ingresos",
-    "iess",
-    "totalEgresos",
-    "total_a_pagar",
-  ];
-  let valid = true;
-  campos.forEach((id) => {
-    const el = document.getElementById(id);
-    if (!el.value || isNaN(parseFloat(el.value))) {
-      el.value = 0;
-    }
-  });
-
-  // Ahora sí, envía el formulario
-  formulario.submit();
 });

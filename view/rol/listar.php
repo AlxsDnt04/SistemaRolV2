@@ -7,7 +7,7 @@ $consultaRol = $rol->consultaRolInnerJoin();
   <div class="container mt-3">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0"><i class="fa-solid fa-building"></i> Listado de Roles</h5>
+        <h5 class="mb-0"><i class="fa-solid fa-file-invoice-dollar"></i> Listado de Roles</h5>
         <a href="../login/dashboard2.php?contenido=rol/formulario.php" class="btn btn-light btn-sm">
           <i class="fa-solid fa-plus"></i> Nuevo registro de rol</a>
       </div>
@@ -17,11 +17,10 @@ $consultaRol = $rol->consultaRolInnerJoin();
         </div>
         <div class="tabla-scroll">
           <div class="tabla-scroll overflow-auto" style="max-width: 100%;">
-            <table class="table table-bordered table-hover table-striped table-responsive align-middle">
-              <h1 id="titulo-tabla">Roles registrados</h1>
+            <table class="table table-bordered table-hover table-striped table-responsive align-middle">  
               <thead>
                 <tr>
-                  <th>Usuario</th>
+                  <th>Empleado</th>
                   <th>Mes</th>
                   <th>Hora 25%</th>
                   <th>Hora 50%</th>
@@ -38,7 +37,6 @@ $consultaRol = $rol->consultaRolInnerJoin();
                   <th>Total Egresos</th>
                   <th>Total a Pagar</th>
                   <th>Fecha de Registro</th>
-                  <th>ID</th>
                   <th class="text-center">Acciones</th>
                 </tr>
               </thead>
@@ -63,12 +61,11 @@ $consultaRol = $rol->consultaRolInnerJoin();
                       <td class="align-middle"><?= htmlspecialchars($dep['totalEgreso']) ?></td>
                       <td class="align-middle"><?= htmlspecialchars($dep['totalPagar']) ?></td>
                       <td class="align-middle"><?= htmlspecialchars($dep['fecha_registro']) ?></td>
-                      <td class="align-middle"><?= htmlspecialchars($dep['id_rol']) ?></td>
                       <td class="text-center align-middle acciones">
                         <div class="d-flex justify-content-center gap-1">
                         <a href="../login/dashboard2.php?contenido=rol/formulario.php&id=<?= $dep['id_rol'] ?>" class="btn btn-warning btn-sm">
                           <i class="fa-solid fa-pen-to-square"></i> Editar</a>
-                        <a href="../../controllers/RolController.php?accion=eliminar&id=<?= $dep['id_rol'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?');">
+                        <a href="../../controllers/RolController.php?accion=eliminar&id=<?= $dep['id_rol'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Deseas eliminar este rol registrado?');">
                           <i class="fa-solid fa-trash"></i> Eliminar</a>
                         <a href="../../controllers/ReporteRol.php?id=<?= $dep['id_rol'] ?>" class="btn btn-info btn-sm">
                           <i class="fa-solid fa-file-pdf"></i> PDF</a>

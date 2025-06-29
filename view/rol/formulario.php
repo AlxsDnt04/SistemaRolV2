@@ -1,12 +1,13 @@
 <?php
 require_once '../../models/Rol.php';
-// Instancia de la clase Rol en modelo
-$rolModel = new Rol();
-$rol = $rolModel->obtenerEmpleados();
+require_once '../../models/Empleado.php';
+$empleadoModel = new Empleado(); // instancia modelo empleado
+$rolModel = new Rol(); // instancia modelo rol
+$empleado = $empleadoModel->obtenerTodos(); // funcion para obtener todos los empleados
 
 if (isset($_GET['id'])) {
   // Si se pasa un ID, se asume que es una edición
-  $rolData = $rolModel->obtenerTodoslosRoles($_GET['id']);
+  $rolData = $rolModel->obtenerRolPorId($_GET['id']); // funcion para obtener rol por id
   if ($rolData) {
     // Si se encuentra el rol, se asigna a las variables del formulario
     $data = [
@@ -14,21 +15,27 @@ if (isset($_GET['id'])) {
       'meses' => $rolData['mes'],
       'bonos' => $rolData['bonos'],
       'sueldo' => $rolData['sueldo'],
+      'hora25' => $rolData['hora25'],
+      'hora50' => $rolData['hora50'],
+      'hora100' => $rolData['hora100'],
       'multas' => $rolData['multas'],
       'atrasos' => $rolData['atrasos'],
       'alimentacion' => $rolData['alimentacion'],
-      'anticipo' => $rolData['anticipo'],
+      'anticipo' => $rolData['anticipos'],
       'otros' => $rolData['otros'],
     ];
   } else {
     // Si no se encuentra el rol, redirigir o mostrar un error
-     echo "<div class='alert alert-danger'>Rol no encontrado. <a href='../login/dashboard2.php?contenido=rol/listar.php'>Volver al listado</a></div>";
+    echo "<div class='alert alert-danger'>Rol no encontrado. <a href='../login/dashboard2.php?contenido=rol/listar.php'>Volver al listado</a></div>";
     return;
   }
 } else {
   // Si no hay ID, es una creación nueva
   $data = [
     'empleadoInfo' => '',
+    'hora25' => '',
+    'hora50' => '',
+    'hora100' => '',
     'meses' => '',
     'bonos' => '',
     'sueldo' => '',
@@ -61,7 +68,7 @@ if (isset($_GET['id'])) {
               <label>Empleado</label>
               <select class="form-select" name="empleadoInfo" id="empleadoInfo" required>
                 <option value="">Seleccione un empleado</option>
-                <?php foreach ($rol as $d): ?>
+                <?php foreach ($empleado as $d): ?>
                   <option value="<?= $d['ci_empleado'] ?>" <?= ($data['empleadoInfo'] == $d['ci_empleado']) ? 'selected' : '' ?>>
                     <?= htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']) ?>
                   </option>
@@ -106,25 +113,21 @@ if (isset($_GET['id'])) {
                   </div>
                   <div class="mb-3">
                     <label for="hora25" class="form-label">Hora 25%</label>
-                    <input type="number" class="form-control" id="hora25" name="hora25" placeholder="Valor hora 25%">
+                    <input type="number" class="form-control" id="hora25" name="hora25" placeholder="Valor hora 25%" value="<?= htmlspecialchars($data['hora25']) ?>">
                   </div>
                   <div class="mb-3">
                     <label for="hora50" class="form-label">Hora 50%</label>
-                    <input type="number" class="form-control" id="hora50" name="hora50" placeholder="Valor hora 50%">
+                    <input type="number" class="form-control" id="hora50" name="hora50" placeholder="Valor hora 50%" value="<?= htmlspecialchars($data['hora50']) ?>">
                   </div>
                   <div class="mb-3">
                     <label for="hora100" class="form-label">Hora 100%</label>
-                    <input type="number" class="form-control" id="hora100" name="hora100" placeholder="Valor hora 100%">
+                    <input type="number" class="form-control" id="hora100" name="hora100" placeholder="Valor hora 100%" value="<?= htmlspecialchars($data['hora100']) ?>">
                   </div>
                   <div class="mb-3">
                     <label for="bonos" class="form-label">Bonos</label>
                     <input type="number" class="form-control" id="bonos" name="bonos" placeholder="Valor bonos" value="<?= htmlspecialchars($data['bonos']) ?: '0' ?>">
                   </div>
-                  <!-- Campos ocultos para cálculos -->
-                  <input type="hidden" id="temp_total_25" name="total25">
-                  <input type="hidden" id="temp_total_50" name="total50">
-                  <input type="hidden" id="temp_total_100" name="total100">
-                  <input type="hidden" id="temp_total_ingresos" name="total_ingresos">
+
                 </div>
               </div>
               <!-- Egresos -->
@@ -155,15 +158,43 @@ if (isset($_GET['id'])) {
                     <label for="otros" class="form-label">Otros</label>
                     <input type="number" class="form-control" id="otros" name="otros" placeholder="Otros egresos" value="<?= htmlspecialchars($data['otros']) ?>">
                   </div>
-                  <!-- Campos ocultos para cálculos -->
-                  <input type="hidden" class="form-control" id="totalEgresos" name="totalEgres" readonly>
+
                 </div>
               </div>
             </div>
-            <!-- Total a pagar -->
+            <!-- Totales -->
             <div class="mb-4 mt-4">
-              <label for="totalPagar" class="form-label">Total a Pagar</label>
-              <input type="hidden" class="form-control" id="total_a_pagar" name="totalPagar" readonly>
+              <div class="row mb-3">
+                <h5 class="mb-3 border-bottom pb-2">Totales</h5>
+                <div class="col-md-4 mb-3 mb-md-0">
+                  <label for="temp_total_25" class="form-label">Total 25%</label>
+                  <input type="number" id="temp_total_25" name="total25" class="form-control" readonly placeholder="0.00">
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                  <label for="temp_total_50" class="form-label">Total 50%</label>
+                  <input type="number" id="temp_total_50" name="total50" class="form-control" readonly placeholder="0.00">
+                </div>
+                <div class="col-md-4">
+                  <label for="temp_total_100" class="form-label">Total 100%</label>
+                  <input type="number" id="temp_total_100" name="total100" class="form-control" readonly placeholder="0.00">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label for="temp_total_ingresos" class="form-label">Total Ingresos</label>
+                  <input type="number" id="temp_total_ingresos" name="total_ingresos" class="form-control" readonly placeholder="$ 0.00">
+                </div>
+                <div class="col-md-6">
+                  <label for="totalEgresos" class="form-label">Total Egresos</label>
+                  <input type="number" class="form-control" id="totalEgresos" name="totalEgres" readonly placeholder="$ 0.00">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 offset-md-3">
+                  <label for="total_a_pagar" class="form-label">Total a Pagar</label>
+                  <input type="number" class="form-control text-center fw-bold" id="total_a_pagar" name="totalPagar" readonly placeholder="$ 0.00">
+                </div>
+              </div>
             </div>
             <!-- Campo oculto para identificar si es creación, edición -->
             <input type="hidden" name="accion" value="<?= isset($_GET['id']) ? 'editar' : 'crear' ?>">
@@ -173,8 +204,9 @@ if (isset($_GET['id'])) {
             <?php endif; ?>
             <!-- Botones -->
             <div class="text-center">
-              <button type="submit" class="btn btn-success me-2">Calcular</button>
-              <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+              <button type="button" id="btnCalcular" class="btn btn-primary me-2">Calcular</button>
+              <button type="submit" class="btn btn-success me-2">Enviar</button>
+              <button type="reset" class="btn btn-secondary">Limpiar</button>
             </div>
           </form>
         </div>
@@ -183,4 +215,4 @@ if (isset($_GET['id'])) {
   </div>
 </div>
 
-<script src="js/main.js"></script>
+<script src="../../assets/javascript/main.js"></script>

@@ -1,10 +1,10 @@
 <?php
 require_once '../../models/Documento.php';
-require_once '../../models/Rol.php';
+require_once '../../models/Empleado.php';
 $documento = new Documento();
-$rolModel = new Rol();
+$rolModel = new Empleado();
 
-$rol = $rolModel->obtenerEmpleados();
+$rol = $rolModel->obtenerTodos();
 $esEdicion = false;
 if (isset($_GET['id'])) {
   $data = $documento->obtenerPorIddocumento($_GET['id']);
