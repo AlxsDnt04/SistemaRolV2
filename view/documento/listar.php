@@ -1,7 +1,15 @@
 <?php
 require_once '../../models/Documento.php';
 $documento = new Documento();
-$consulta = $documento->obtenerDocumentosInnerJ();
+/* $consulta = $documento->obtenerDocumentosInnerJ(); */
+
+if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
+  // Si el rol es empleado, obtener solo los documentos del usuario
+  $consulta = $documento->ObtenerPorUsuario();
+} else {
+  // Si el rol es administrador, obtener todos los documentos
+  $consulta = $documento->obtenerDocumentosInnerJ();
+}
 ?>
 
 
@@ -48,25 +56,33 @@ $consulta = $documento->obtenerDocumentosInnerJ();
                     <a href="../../<?= htmlspecialchars($dep['archivo']) ?>" target="_blank" class="btn btn-link btn-sm">
                       <i class="fa-solid fa-eye"></i> Ver</a>
                   <?php endif; ?>
-                  </td>
-                <td class="text-center align-middle"><?= htmlspecialchars($dep['id_rol'] . ' - ' . $dep['mes_rol_generado']) ?></td>
-
-                <td class="text-center align-middle">
-                  <!-- EDITAR -->
-                  <a href="formulario.php?id=<?= $dep['id'] ?>" class="btn btn-warning btn-sm">
-                    <i class="fa-solid fa-pen-to-square"></i> Editar</a>
-                  <!-- ELIMINAR -->
-                  <a href="../../controllers/DocumentoController.php?accion=eliminar&id=<?= $dep['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
-                    <i class="fa-solid fa-trash"></i> Eliminar</a>
                 </td>
+                <!-- botones para admin -->
+                <td class="text-center align-middle"><?= htmlspecialchars($dep['id_rol'] . ' - ' . $dep['mes_rol_generado']) ?></td>
+                <?php if ($_SESSION['rol'] !== 'empleado') : ?>
+                  <td class="text-center align-middle">
+                    <!-- EDITAR -->
+                    <a href="formulario.php?id=<?= $dep['id'] ?>" class="btn btn-warning btn-sm">
+                      <i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                    <!-- ELIMINAR -->
+                    <a href="../../controllers/DocumentoController.php?accion=eliminar&id=<?= $dep['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                      <i class="fa-solid fa-trash"></i> Eliminar</a>
+                  </td>
+                  <!-- si es empleado solo tendra un boton cargar -->
+                <?php else : ?>
+                  <td class="text-center align-middle">
+                    <!-- BOTON CARGAR -->
+                    <a href="#" class="btn btn-primary btn-sm">
+                      <i class="fa-solid fa-upload"></i> Cargar</a>
               </tr>
-              <!-- php endforeach para cerrar el foreach -->
-            <?php endforeach; ?>
-          <?php else : ?>
-            <tr>
-              <td colspan="10" class="text-center text-warning">No hay documentos registrados.</td>
-            </tr>
-          <?php endif; ?>
+            <?php endif; ?>
+            <!-- php endforeach para cerrar el foreach -->
+          <?php endforeach; ?>
+        <?php else : ?>
+          <tr>
+            <td colspan="10" class="text-center text-warning">No hay documentos registrados.</td>
+          </tr>
+        <?php endif; ?>
         </tbody>
       </table>
     </div>

@@ -2,6 +2,7 @@
 // Asegúrate de que la sesión esté iniciada en dashboard2.php
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
+$nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
 ?>
 <div class="container py-5">
     <div class="row justify-content-center">

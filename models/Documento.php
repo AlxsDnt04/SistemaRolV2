@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
+
+if (!isset($_SESSION[$_SESSION['usuario']])) {
+    $user = $_SESSION['usuario'];
+}
+
 class Documento
 {
     //variable que instancie la conexion
@@ -64,7 +69,7 @@ class Documento
             ci_empleado = ? 
             WHERE id = ?";
             $params = [$data['mes'], $data['descripcion'], $archivo, $data['ci_empleado'], $data['id']];
-        } else{
+        } else {
             $sql = "UPDATE documento 
             SET mes = ?,
             descripcion = ?,
@@ -83,4 +88,16 @@ class Documento
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function ObtenerPorUsuario()
+    {
+        if (!isset($_SESSION['usuario'])) {
+            return [];
+        }
+        $ci_empleado = $_SESSION['usuario'];
+        $stmt = $this->db->prepare("SELECT d.id, e.ci_empleado, e.nombre, e.apellido, d.descripcion, d.mes, d.archivo, d.fecha_carga, r.id_rol, r.mes AS mes_rol_generado from empleado e inner join documento d on e.ci_empleado = d.ci_empleado inner join rol r on r.ci_empleado = d.ci_empleado where e.ci_empleado = ?");
+        $stmt->execute([$ci_empleado]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
