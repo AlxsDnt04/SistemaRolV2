@@ -1,6 +1,14 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION[$_SESSION['usuario']])) {
+    $user = $_SESSION['usuario'];
+}
+
 class Rol
 {
     private $db;
@@ -161,4 +169,15 @@ class Rol
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function obtenerRolPorCI(){
+        if (!isset($_SESSION['usuario'])) {
+            return [];
+        }
+        $ci_empleado = $_SESSION['usuario'];
+        $stmt = $this->db->prepare("SELECT e.ci_empleado, e.nombre, e.apellido, r.id_rol, r.mes, r.hora25, r.hora50, r.hora100, r.bonos, r.sueldo, r.totalIngreso, r.iess, r.multas, r.atrasos, r.alimentacion, r.anticipos, r.otros, r.totalEgreso, r.totalPagar, r.fecha_registro FROM rol r INNER JOIN empleado e ON e.ci_empleado = r.ci_empleado WHERE e.ci_empleado = ?;");
+        $stmt->execute([$ci_empleado]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

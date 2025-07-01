@@ -15,7 +15,7 @@ $ci_empleado = $_SESSION['ci_empleado'] ?? null;
 } */
 ?>
 <div class="container mt-3">
-  <div class="card">
+  <div class="card shadow">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="mb-0"><i class="fa-solid fa-umbrella-beach"></i> Solicitudes de Vacaciones</h5>
       <?php if ($rol === 'empleado'): ?>

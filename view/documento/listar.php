@@ -14,11 +14,11 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
 
 
 <div class="container mt-3">
-  <div class="card">
+  <div class="card shadow">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="mb-0"><i class="fa-solid fa-file-lines"></i> Listado de Documentos</h5>
       <a href="../login/dashboard2.php?contenido=documento/formulario.php" class="btn btn-light btn-sm">
-        <i class="fa-solid fa-upload"></i> Subir documento</a>
+        <i class="fa-solid fa-upload"></i> Cargar documento</a>
     </div>
     <div class="card-body">
       <table class="table table-bordered table-hover table-striped table-responsive">
@@ -33,7 +33,9 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
             <th>Fecha de carga</th>
             <th>Archivo</th>
             <th>id - mes generado</th>
-            <th>Acciones</th>
+            <?php if ($_SESSION['rol'] !== 'empleado') : ?>
+              <th class="text-center">Acciones</th>
+            <?php endif; ?>
           </tr>
         </thead>
         <tbody>
@@ -68,12 +70,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
                     <a href="../../controllers/DocumentoController.php?accion=eliminar&id=<?= $dep['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
                       <i class="fa-solid fa-trash"></i> Eliminar</a>
                   </td>
-                  <!-- si es empleado solo tendra un boton cargar -->
-                <?php else : ?>
-                  <td class="text-center align-middle">
-                    <!-- BOTON CARGAR -->
-                    <a href="#" class="btn btn-primary btn-sm">
-                      <i class="fa-solid fa-upload"></i> Cargar</a>
+                  <!-- si es empleado solo se elimina la columna acciones -->
               </tr>
             <?php endif; ?>
             <!-- php endforeach para cerrar el foreach -->

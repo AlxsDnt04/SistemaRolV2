@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
 }
 ?>
   <div class="container mt-3">
-    <div class="card mt-4">
+    <div class="card mt-4 shadow">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="mb-0"><i class="fa-solid fa-user-plus"></i> Insertar Empleado </h4>
         <a href="../login/dashboard2.php?contenido=empleado/listar.php" class="btn btn-light btn-sm"><i class="fa-solid fa-users"></i> Ver Empleados </a>

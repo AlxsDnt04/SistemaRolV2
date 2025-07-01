@@ -5,7 +5,7 @@ $userQuery = $usuarios->obtenerTodosUsuarios();
 ?>
 
   <div class="container mt-3">
-    <div class="card">
+    <div class="card shadow">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0"><i class="fa-solid fa-users"></i> Listado de usuarios</h5>
         <a href="dashboard2.php?contenido=usuarios/formulario.php" class="btn btn-light btn-sm">

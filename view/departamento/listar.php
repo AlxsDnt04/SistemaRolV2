@@ -5,7 +5,7 @@ $departamento = $departamento->obtenerTodos();
 ?>
 
   <div class="container mt-3">
-    <div class="card">
+    <div class="card shadow">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0"><i class="fa-solid fa-building"></i> Listado de Departamentos</h5>
         <a href="../login/dashboard2.php?contenido=departamento/formulario.php" class="btn btn-light btn-sm">

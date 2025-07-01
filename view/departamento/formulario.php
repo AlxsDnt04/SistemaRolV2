@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
 ?>
 
   <div class="container mt-3">
-    <div class="card mt-4">
+    <div class="card mt-4 shadow">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="mb-0"><i class="fa-solid fa-plus"></i> Insertar Departamento</h4>
         <a href="../login/dashboard2.php?contenido=departamento/listar.php" class="btn btn-light btn-sm">

@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
 <div class="container mt-3">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10">
-      <div class="card shadow-sm">
+      <div class="card shadow">
 
         <div class="card-header d-flex justify-content-between align-items-center bg-light">
           <h4 class="mb-0"><i class="fa-solid fa-money-bill-wave"></i> Ingresos y Egresos</h4>
@@ -68,10 +68,30 @@ if (isset($_GET['id'])) {
               <label>Empleado</label>
               <select class="form-select" name="empleadoInfo" id="empleadoInfo" required>
                 <option value="">Seleccione un empleado</option>
+                <?php
+                $usuarioRol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
+                $usuarioCi = isset($_SESSION['ci_empleado']) ? $_SESSION['ci_empleado'] : '';
+                ?>
                 <?php foreach ($empleado as $d): ?>
-                  <option value="<?= $d['ci_empleado'] ?>" <?= ($data['empleadoInfo'] == $d['ci_empleado']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']) ?>
-                  </option>
+                  <?php
+                  // Si el usuario es empleado, solo muestra su opción y deshabilita el select
+                  if ($usuarioRol === 'empleado') {
+                    if ($d['ci_empleado'] == $usuarioCi) {
+                      ?>
+                      <option value="<?= $d['ci_empleado'] ?>" selected>
+                        <?= htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']) ?>
+                      </option>
+                      <?php
+                    }
+                  } else {
+                    // Si es admin, muestra todas las opciones y permite seleccionar
+                    ?>
+                    <option value="<?= $d['ci_empleado'] ?>" <?= ($data['empleadoInfo'] == $d['ci_empleado']) ? 'selected' : '' ?>>
+                      <?= htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']) ?>
+                    </option>
+                    <?php
+                  }
+                  ?>
                 <?php endforeach; ?>
               </select>
             </div>

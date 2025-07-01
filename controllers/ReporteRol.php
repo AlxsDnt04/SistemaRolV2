@@ -108,9 +108,10 @@ $pdf->Ln(20);
 // pie de pagina
 $pdf->Cell(0, 10, "Generado el: " . date('d-m-Y'),0, 1, 'C');
 $pdf->Ln(30);
+$pdf->Image('../assets/img/firmaE.png', 85, 193, 60);
 $pdf->Cell(0, 10, "____________________________", 0, 1, 'C');
 $pdf->Cell(0, 10, "Firma de RRHH", 0, 1, 'C');
-$pdf->Ln(10);
+$pdf->Ln(20);
 $pdf->Cell(0, 10, "____________________________", 0, 1, 'C');
 $pdf->Cell(0, 10, "Firma del Empleado: ".($data['nombre']." ".$data['apellido']), 0, 1, 'C');
 

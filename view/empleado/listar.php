@@ -7,7 +7,7 @@ $empleados = $empleado->obtenerTodos();
 ?>
 
   <div class="container mt-3">
-    <div class="card">
+    <div class="card shadow">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0"><i class="fa-solid fa-users"></i> Listado de Empleados</h5>
         <a href="../login/dashboard2.php?contenido=empleado/formulario.php" class="btn btn-light btn-sm"><i class="fa-solid fa-user-plus"></i> Nuevo Empleado</a>

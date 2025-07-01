@@ -7,7 +7,7 @@ $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card shadow-sm border-0">
+            <div class="card shadow-lg border-0">
                 <div class="card-body text-center">
                     <h2 class="mb-3"><i class="fa-solid fa-house-chimney"></i> ¡Bienvenido/a, <span class="text-primary"><?= htmlspecialchars($usuario) ?></span>!</h2>
                     <p class="lead mb-4">
