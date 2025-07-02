@@ -8,15 +8,15 @@ function calcularIngreso() {
 
   const hora_normal = parseFloat((sueldo / 160).toFixed(2)); //hora normal
   const total_hora_25 = hora_normal * hora_25 * 1.25; //calculo al 25%
-  document.getElementById("temp_total_25").value = total_hora_25; // Mostrar el total al 25% en el campo correspondiente
+  document.getElementById("temp_total_25").value = total_hora_25.toFixed(2); // Mostrar el total al 25% en el campo correspondiente
   const total_hora_50 = hora_normal * hora_50 * 1.5; //calculos al 50%
-  document.getElementById("temp_total_50").value = total_hora_50; // Mostrar el total al 50% en el campo correspondiente
+  document.getElementById("temp_total_50").value = total_hora_50.toFixed(2); // Mostrar el total al 50% en el campo correspondiente
   const total_hora_100 = hora_normal * hora_100 * 2; //calculos al 100%
-  document.getElementById("temp_total_100").value = total_hora_100; // Mostrar el total al 100% en el campo correspondiente
+  document.getElementById("temp_total_100").value = total_hora_100.toFixed(2); // Mostrar el total al 100% en el campo correspondiente
   //calculo total (sueldo + bonos + hora25 + hora50 + hora100)
   const total_ingresos =
     sueldo + total_hora_25 + total_hora_50 + total_hora_100 + bonos;
-  document.getElementById("temp_total_ingresos").value = total_ingresos; // Mostrar el total de ingresos en el campo correspondiente
+  document.getElementById("temp_total_ingresos").value = total_ingresos.toFixed(2); // Mostrar el total de ingresos en el campo correspondiente
 }
 //FUNCION PARA CALCULAR EGRESOS
 function calcularEgresos() {

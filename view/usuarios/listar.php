@@ -33,7 +33,7 @@ $userQuery = $usuarios->obtenerTodosUsuarios();
                   <td><?= htmlspecialchars($UQ['ci_empleado'] . ' - ' . $UQ['nombre'].' '.$UQ['apellido']) ?></td>
                   <td><?= htmlspecialchars($UQ['fecha_user']) ?></td>
                   <td class="text-center">
-                    <a href="formulario.php?id=<?= $UQ['id'] ?>" class="btn btn-warning btn-sm">
+                    <a href="../login/dashboard2.php?contenido=usuarios/formulario.php&id=<?= $UQ['id'] ?>" class="btn btn-warning btn-sm">
                       <i class="fa-solid fa-pen-to-square"></i> Editar</a>
                     <!-- ELIMINAR -->
                     <a href="../../controllers/UsuariosController.php?accion=eliminar&id=<?= $UQ['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">

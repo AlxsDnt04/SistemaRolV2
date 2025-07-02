@@ -36,7 +36,8 @@ if (isset($_GET['id'])) {
         <?php endif; ?>
         <div class="row">
           <div class="col-md-6">
-            <label for="meses" class="form-label">Mes</label>
+            <div class='alert alert-success'>Debe cargar el reporte firmado del mes correspondiente.</div>
+            <label for="meses" class="form-label">Mes del Rol generado</label>
             <select name="mes" class="form-select" required>
               <option value="" disabled <?= empty($data['mes']) ? 'selected' : '' ?>>Seleccione un mes</option>
               <?php

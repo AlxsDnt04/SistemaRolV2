@@ -212,7 +212,7 @@ if (isset($_GET['id'])) {
               <div class="row">
                 <div class="col-md-6 offset-md-3">
                   <label for="total_a_pagar" class="form-label">Total a Pagar</label>
-                  <input type="number" class="form-control text-center fw-bold" id="total_a_pagar" name="totalPagar" readonly placeholder="$ 0.00">
+                  <input type="number" class="form-control text-center fw-bold" id="total_a_pagar" name="totalPagar" readonly placeholder="$ 0.00" >
                 </div>
               </div>
             </div>

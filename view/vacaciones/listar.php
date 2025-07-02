@@ -19,7 +19,7 @@ $ci_empleado = $_SESSION['ci_empleado'] ?? null;
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="mb-0"><i class="fa-solid fa-umbrella-beach"></i> Solicitudes de Vacaciones</h5>
       <?php if ($rol === 'empleado'): ?>
-        <a href="formulario.php" class="btn btn-light btn-sm">
+        <a href="../login/dashboard2.php?contenido=vacaciones/formulario.php" class="btn btn-light btn-sm">
           <i class="fa-solid fa-plus"></i> Solicitar Vacaciones</a>
       <?php endif; ?>
     </div>
