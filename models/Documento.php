@@ -48,7 +48,13 @@ class Documento
     // metodo para consultar documentos por ci_empleado con inner join
     public function obtenerDocumentosInnerJ()
     {
-        $sql = "SELECT d.id, e.ci_empleado, e.nombre, e.apellido, d.descripcion, d.mes, d.fecha_carga, d.archivo, r.id_rol, r.mes AS mes_rol_generado FROM empleado e INNER JOIN documento d ON e.ci_empleado = d.ci_empleado INNER JOIN rol r on r.ci_empleado = d.ci_empleado;";
+        $sql = "SELECT d.id, e.ci_empleado, e.nombre, e.apellido,
+       d.descripcion, d.mes, d.fecha_carga, d.archivo,
+       r.id_rol, r.mes AS mes_rol_generado
+FROM empleado e
+INNER JOIN documento d ON e.ci_empleado = d.ci_empleado
+LEFT JOIN rol r ON r.ci_empleado = d.ci_empleado AND r.mes = d.mes;
+";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -98,9 +104,13 @@ class Documento
             return [];
         }
         $ci_empleado = $_SESSION['usuario'];
-        $stmt = $this->db->prepare("SELECT d.id, e.ci_empleado, e.nombre, e.apellido, d.descripcion, d.mes, d.archivo, d.fecha_carga, r.id_rol, r.mes AS mes_rol_generado from empleado e inner join documento d on e.ci_empleado = d.ci_empleado inner join rol r on r.ci_empleado = d.ci_empleado where e.ci_empleado = ?");
+        $stmt = $this->db->prepare("SELECT d.id, e.ci_empleado, e.nombre, e.apellido, d.descripcion, d.mes, d.archivo, d.fecha_carga, r.id_rol, r.mes AS mes_rol_generado
+FROM empleado e
+INNER JOIN documento d ON e.ci_empleado = d.ci_empleado
+INNER JOIN rol r ON r.ci_empleado = d.ci_empleado AND r.mes = d.mes
+WHERE e.ci_empleado = ?;
+");
         $stmt->execute([$ci_empleado]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }

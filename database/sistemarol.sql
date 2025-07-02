@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 20-06-2025 a las 13:09:25
+-- Tiempo de generación: 02-07-2025 a las 04:18:01
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -41,8 +41,10 @@ CREATE TABLE `departamento` (
 INSERT INTO `departamento` (`id_departamento`, `nombre`, `ubicacion`, `area`) VALUES
 (1, 'UBE', 'SEGUNDO PISO', 'ATENCION '),
 (3, 'VINCULACION', 'CENTRO', 'PSICOLOGIA'),
-(4, 'CNT1', 'NORTE', 'CONTABILIDAD'),
-(5, 'CNT2', 'SUR', 'CONTABILIDAD');
+(4, 'TIC', 'NORTE', 'INFORMACION'),
+(5, 'CENTRO IDIOMAS', 'BLOQUE H', 'IDIOMAS'),
+(8, 'C. ADMINISTRATIVA', 'CAMPUS NORTE', 'COORDINACION'),
+(9, 'Nuevo nombre', 'nueva ub', 'nueva area');
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,8 @@ CREATE TABLE `documento` (
 --
 
 INSERT INTO `documento` (`id`, `mes`, `descripcion`, `archivo`, `fecha_carga`, `ci_empleado`) VALUES
-(5, 'Diciembre', 'Manejo de IAS', 'uploads/EJERCICIO PRÁCTICO 17_6_2025.pdf', '2025-06-16 15:55:33', 1658798465);
+(9, 'Junio', 'Reporte Junio', 'uploads/ReporteRolJunio.pdf', '2025-07-02 03:36:23', 1983657845),
+(10, 'Enero', 'Reporte Febrero', 'uploads/ReporteRolFebrero.pdf', '2025-07-02 03:39:39', 1983657845);
 
 -- --------------------------------------------------------
 
@@ -77,7 +80,7 @@ CREATE TABLE `empleado` (
   `nombre` varchar(30) DEFAULT NULL,
   `apellido` varchar(30) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
-  `direccion` varchar(50) DEFAULT NULL,
+  `direccion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `correo` varchar(30) DEFAULT NULL,
   `id_departamento` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -87,11 +90,11 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`ci_empleado`, `nombre`, `apellido`, `telefono`, `direccion`, `correo`, `id_departamento`) VALUES
-(1657486151, 'Natalia', 'Ceviche', '0986534518', 'caupichuuuu', 'natalizajsk@gmail.com', 4),
-(1658798465, 'Joselito', 'Suarez', '8287808078', 'cas jfalsjdf kjs d', 'sdfas@gmail.com', 1),
+(1657486151, 'Nataly', 'Iza', '0986534518', 'Av. de los Cedros y Calle de los Robles, Edificio Mirador', 'nataliaiz@gmail.com', 1),
+(1658798465, 'Joselito', 'Suarez', '0986525478', 'Graciela Escudero y calle oe132', 'joselito2@gmail.com', 3),
 (1786542312, 'Carlitos', 'Suarez', '98657512', 'Calle quito sur', 'carulitos@gjsa.com', 3),
 (1786542313, 'Lucho', 'Portuano', '984321545', 'Av. Siempredura', 'lucho@hotmail.com', 1),
-(1983657845, 'Hola ', 'Que hace', '0984546416', 'El condado', 'hasdlj@live.com', 4);
+(1983657845, 'Sofia', 'Cardenas', '0984546416', 'Calle del Cóndor 1583, Barrio El Mirador', 'sofiC@live.com', 5);
 
 -- --------------------------------------------------------
 
@@ -126,7 +129,10 @@ CREATE TABLE `rol` (
 
 INSERT INTO `rol` (`id_rol`, `mes`, `hora25`, `hora50`, `hora100`, `bonos`, `sueldo`, `totalIngreso`, `iess`, `multas`, `atrasos`, `alimentacion`, `anticipos`, `otros`, `totalEgreso`, `totalPagar`, `fecha_registro`, `ci_empleado`) VALUES
 (14, 'Junio', 18.75, 56.25, 105.00, 120.00, 1200.00, 1500.00, 5.40, 20.00, 30.00, 40.00, 50.00, 50.00, 195.40, 1304.60, '2025-06-12 16:53:26', 1657486151),
-(15, 'Abril', 12.50, 7.50, 50.00, 50.00, 800.00, 920.00, 3.60, 100.00, 20.00, 80.00, 100.00, 60.00, 363.60, 556.40, '2025-06-16 15:59:40', 1658798465);
+(15, 'Abril', 12.50, 7.50, 50.00, 50.00, 800.00, 920.00, 3.60, 100.00, 20.00, 80.00, 100.00, 60.00, 363.60, 556.40, '2025-06-16 15:59:40', 1658798465),
+(17, 'Junio', 3.91, 9.39, 25.04, 0.00, 500.00, 538.34, 2.25, 50.00, 0.00, 10.00, 0.00, 0.00, 62.25, 476.09, '2025-06-29 15:57:43', 1983657845),
+(18, 'Febrero', 3.91, 9.39, 18.78, 40.00, 500.00, 572.08, 2.25, 80.00, 10.00, 70.00, 50.00, 5.00, 217.25, 354.83, '2025-07-02 02:46:56', 1983657845),
+(19, 'Agosto', 9.38, 16.88, 7.50, 40.00, 600.00, 673.75, 2.70, 50.00, 60.00, 10.00, 10.00, 10.00, 142.70, 531.05, '2025-07-02 03:45:03', 1786542312);
 
 -- --------------------------------------------------------
 
@@ -148,8 +154,28 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `usuario`, `clave`, `rol`, `ci_empleado`, `fecha_user`) VALUES
-(9, '1983657845', '$2y$10$KTDbqOjemZ/8gxE/JmvqxeQn99ALAkLJ/3sgx3HihKRheWZUA2oh2', 'empleado', 1983657845, '2025-06-19 16:04:38'),
-(10, '1657486151', '$2y$10$C2dI3Z.PeFYcw70dEfm/C.V5e.e7vjAC42uVc7F9gTpYaeTEtsWZi', 'empleado', 1657486151, '2025-06-19 16:43:33');
+(10, '1657486151', '$2y$10$C2dI3Z.PeFYcw70dEfm/C.V5e.e7vjAC42uVc7F9gTpYaeTEtsWZi', 'empleado', 1657486151, '2025-06-19 16:43:33'),
+(11, 'eladminx', '$2y$10$TLXNkARxKqdQwZcnJkurteE.o9neMivKJ2UYk8BVk5I3RHhaif8rG', 'admin', NULL, '2025-06-25 04:33:05'),
+(12, '1786542312', '$2y$10$0s7bI6TQjF/tTYYbl8.keuyhtwLXKn5sdcwzfhXlTNNUbLU74tdLe', 'empleado', 1786542312, '2025-07-02 03:49:10'),
+(14, '1983657845', '$2y$10$iXNCxuqTvAEipXQzSJLAJOPyPPcInu4GERLqLFAH7a7Gmcgszy/Gq', 'empleado', 1983657845, '2025-07-02 04:11:58');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vacaciones`
+--
+
+CREATE TABLE `vacaciones` (
+  `id` int NOT NULL,
+  `ci_empleado` int NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `dias` int NOT NULL,
+  `pago` decimal(10,2) NOT NULL,
+  `fecha_emision` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `aprobado` enum('Pendiente','Sí','No') DEFAULT 'Pendiente',
+  `observaciones` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Índices para tablas volcadas
@@ -191,6 +217,13 @@ ALTER TABLE `usuarios`
   ADD KEY `ci_empleado` (`ci_empleado`);
 
 --
+-- Indices de la tabla `vacaciones`
+--
+ALTER TABLE `vacaciones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ci_empleado` (`ci_empleado`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -198,25 +231,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `id_departamento` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_departamento` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `id_rol` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_rol` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `vacaciones`
+--
+ALTER TABLE `vacaciones`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -245,6 +284,12 @@ ALTER TABLE `rol`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`ci_empleado`) REFERENCES `empleado` (`ci_empleado`);
+
+--
+-- Filtros para la tabla `vacaciones`
+--
+ALTER TABLE `vacaciones`
+  ADD CONSTRAINT `vacaciones_ibfk_1` FOREIGN KEY (`ci_empleado`) REFERENCES `empleado` (`ci_empleado`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -24,7 +24,6 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
       <table class="table table-bordered table-hover table-striped table-responsive">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Cédula</th>
             <th>Nombre</th>
             <th>Apellido</th>
@@ -32,7 +31,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
             <th>Mes</th>
             <th>Fecha de carga</th>
             <th>Archivo</th>
-            <th>id - mes generado</th>
+            <th>Mes de Rol de pago</th>
             <?php if ($_SESSION['rol'] !== 'empleado') : ?>
               <th class="text-center">Acciones</th>
             <?php endif; ?>
@@ -42,7 +41,6 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
           <?php if (!empty($consulta)) : ?>
             <?php foreach ($consulta as $dep) : ?>
               <tr>
-                <td class="text-center align-middle"><?= htmlspecialchars($dep['id']) ?></td>
                 <td class="text-center align-middle"><?= htmlspecialchars($dep['ci_empleado']) ?></td>
                 <td class="text-center align-middle"><?= htmlspecialchars($dep['nombre']) ?></td>
                 <td class="text-center align-middle"><?= htmlspecialchars($dep['apellido']) ?></td>
@@ -60,7 +58,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
                   <?php endif; ?>
                 </td>
                 <!-- botones para admin -->
-                <td class="text-center align-middle"><?= htmlspecialchars($dep['id_rol'] . ' - ' . $dep['mes_rol_generado']) ?></td>
+                <td class="text-center align-middle"><?= isset($dep['mes_rol_generado']) ? htmlspecialchars($dep['mes_rol_generado']) : 'No tiene roles generados' ?></td>
                 <?php if ($_SESSION['rol'] !== 'empleado') : ?>
                   <td class="text-center align-middle">
                     <!-- EDITAR -->

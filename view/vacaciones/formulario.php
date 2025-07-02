@@ -1,5 +1,23 @@
 <?php
 require_once '../../models/Empleado.php';
+require_once '../../models/Vacaciones.php';
+
+
+$usuarioRol = $_SESSION['rol'] ?? '';
+$usuarioCi = $_SESSION['ci_empleado'] ?? '';
+
+if ($usuarioRol === 'empleado') {
+    $vacacionesModel = new Vacaciones();
+    $yaSolicito = $vacacionesModel->tieneSolicitud($usuarioCi); // Debes crear este método
+    if ($yaSolicito) {
+        echo "<script>
+            alert('Usted ya realizó su solicitud de vacaciones');
+            window.location.href = 'dashboard2.php?contenido=vacaciones/listar.php';
+        </script>";
+        exit;
+    }
+}
+
 $emp = new Empleado();
 $empleados = $emp->obtenerTodos();
 
@@ -7,14 +25,14 @@ $esEdicion = isset($data['id']); // $data debe ser definido por el controlador s
 
 // Valores por defecto para creación
 $data = $data ?? [
-    'id' => '',
-    'ci_empleado' => '',
-    'fecha_inicio' => '',
-    'fecha_fin' => '',
-    'dias' => '',
-    'pago' => '',
-    'fecha_emision' => date('Y-m-d'),
-    'aprobado' => '',
+  'id' => '',
+  'ci_empleado' => '',
+  'fecha_inicio' => '',
+  'fecha_fin' => '',
+  'dias' => '',
+  'pago' => '',
+  'fecha_emision' => date('Y-m-d'),
+  'aprobado' => '',
 ];
 ?>
 
@@ -37,47 +55,97 @@ $data = $data ?? [
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="ci_empleado" class="form-label">Empleado</label>
-            <select class="form-select" id="ci_empleado" name="ci_empleado" required>
-              <option value="" disabled <?= empty($data['ci_empleado']) ? 'selected' : '' ?>>Seleccione un empleado</option>
-              <?php foreach ($empleados as $e): ?>
-                <option value="<?= htmlspecialchars($e['ci_empleado']) ?>"
-                  <?= ($data['ci_empleado'] == $e['ci_empleado']) ? 'selected' : '' ?>>
-                  <?= htmlspecialchars($e['ci_empleado'] . ' - ' . $e['nombre'] . ' ' . $e['apellido']) ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
+            <?php
+            $usuarioRol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
+            $usuarioCi = isset($_SESSION['ci_empleado']) ? $_SESSION['ci_empleado'] : '';
+            ?>
+
+            <?php if ($usuarioRol === 'empleado'): ?>
+              <input type="hidden" name="ci_empleado" value="<?= htmlspecialchars($usuarioCi) ?>">
+              <input type="text" class="form-control" value="<?php foreach ($empleados as $d) {
+                                                                if ($d['ci_empleado'] == $usuarioCi) {
+                                                                  echo htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']);
+                                                                  break;
+                                                                }
+                                                              }
+                                                              ?>" readonly>
+            <?php else: ?>
+              <select class="form-select" name="ci_empleado" required>
+                <option value="">Seleccione un empleado</option>
+                <?php foreach ($empleados as $d): ?>
+                  <option value="<?= $d['ci_empleado'] ?>" <?= ($data['ci_empleado'] == $d['ci_empleado']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($d['ci_empleado'] . ' - ' . $d['nombre'] . ' ' . $d['apellido']) ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            <?php endif; ?>
           </div>
           <div class="col-md-3">
             <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
-            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required value="<?= htmlspecialchars($data['fecha_inicio']) ?>">
+            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" value="<?= htmlspecialchars($data['fecha_inicio']) ?>" min="<?= date('Y-m-d') ?>" required>
           </div>
           <div class="col-md-3">
             <label for="fecha_fin" class="form-label">Fecha Fin</label>
-            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required value="<?= htmlspecialchars($data['fecha_fin']) ?>">
-          </div>
+            <input 
+              type="date" 
+              class="form-control" 
+              id="fecha_fin" 
+              name="fecha_fin" 
+              value="<?= htmlspecialchars($data['fecha_fin']) ?>" 
+              required readonly
+            >
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+              const fechaInicio = document.getElementById('fecha_inicio');
+              const fechaFin = document.getElementById('fecha_fin');
+
+              function sumarDias(fecha, dias) {
+                const f = new Date(fecha);
+                f.setDate(f.getDate() + dias);
+                // Ajuste para formato yyyy-mm-dd
+                const year = f.getFullYear();
+                const month = String(f.getMonth() + 1).padStart(2, '0');
+                const day = String(f.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+              }
+
+              fechaInicio.addEventListener('change', function() {
+                if (this.value) {
+                fechaFin.value = sumarDias(this.value, 15);
+                } else {
+                fechaFin.value = '';
+                }
+              });
+
+              // Si ya hay fecha_inicio al cargar, autocompletar fecha_fin si está vacío
+              if (fechaInicio.value && !fechaFin.value) {
+                fechaFin.value = sumarDias(fechaInicio.value, 15);
+              }
+              });
+            </script>
+        </div>
+        <div class="col-md-3">
+          <label for="dias" class="form-label">Días</label>
+          <input type="number" class="form-control" id="dias" name="dias" value="<?= htmlspecialchars($data['dias']) ?>" min="1" max="30" required>
+        </div>
+        <div class="col-md-3">
+          <label for="pago" class="form-label">Pago</label>
+          <input type="number" class="form-control" id="pago" name="pago" value="<?= htmlspecialchars($data['pago']) ?>" min="0" step="0.01" required>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-3">
-            <label for="dias" class="form-label">Días</label>
-            <input type="number" class="form-control" id="dias" name="dias" min="1" required value="<?= htmlspecialchars($data['dias']) ?>">
-          </div>
-          <div class="col-md-3">
-            <label for="pago" class="form-label">Pago</label>
-            <input type="number" step="0.01" class="form-control" id="pago" name="pago" required value="<?= htmlspecialchars($data['pago']) ?>">
-          </div>
-          <div class="col-md-3">
-            <label for="fecha_emision" class="form-label">Fecha Emisión</label>
-            <input type="date" class="form-control" id="fecha_emision" name="fecha_emision" required value="<?= htmlspecialchars($data['fecha_emision']) ?>">
-          </div>
-          <div class="col-md-3">
-            <label for="aprobado" class="form-label">Aprobado</label>
-            <select class="form-select" id="aprobado" name="aprobado" required>
-              <option value="" disabled <?= empty($data['aprobado']) ? 'selected' : '' ?>>Seleccione</option>
-              <option value="Sí" <?= ($data['aprobado'] === 'Sí') ? 'selected' : '' ?>>Sí</option>
-              <option value="No" <?= ($data['aprobado'] === 'No') ? 'selected' : '' ?>>No</option>
-              <option value="Pendiente" <?= ($data['aprobado'] === 'Pendiente') ? 'selected' : '' ?>>Pendiente</option>
-            </select>
+            <label for="aprobado" class="form-label">Estado</label>
+            <?php if ($usuarioRol === 'empleado'): ?>
+              <input type="hidden" name="aprobado" value="Pendiente">
+              <input type="text" class="form-control" value="Pendiente" readonly>
+            <?php else: ?>
+              <select class="form-select" id="aprobado" name="aprobado" required>
+                <option value="Pendiente" <?= ($data['aprobado'] === 'Pendiente' || empty($data['aprobado'])) ? 'selected' : '' ?>>Pendiente</option>
+                <option value="Sí" <?= ($data['aprobado'] === 'Sí') ? 'selected' : '' ?>>Sí</option>
+                <option value="No" <?= ($data['aprobado'] === 'No') ? 'selected' : '' ?>>No</option>
+              </select>
+            <?php endif; ?>
           </div>
         </div>
 

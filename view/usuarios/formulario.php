@@ -28,6 +28,11 @@ if (isset($_GET['id'])) {
           <i class="fa-solid fa-list"></i> Ver Usuarios</a>
       </div>
       <div class="card-body">
+        <?php if (isset($_GET['error']) && $_GET['error'] === 'usuario_existente'): ?>
+          <div class="alert alert-danger">
+            El usuario ya está registrado. Por favor, elige otro.
+          </div>
+        <?php endif; ?>
         <form action="../../controllers/UsuariosController.php" method="POST">
           <?php if ($esEdicion): ?>
             <input type="hidden" name="accion" value="actualizar">
