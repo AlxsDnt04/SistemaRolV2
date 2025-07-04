@@ -63,7 +63,7 @@ class Rol
             $data['otros'], //directo del formulario
             $data['totalEgreso'],
             $data['totalPagar'],
-            $data['empleadoInfo'] //directo del formulario
+            $data['id_rol'] //directo del formulario
         ]);
     }
 

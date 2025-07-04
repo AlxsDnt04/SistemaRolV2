@@ -55,4 +55,12 @@ class Empleado
         $stmt = $this->db->prepare("DELETE FROM empleado WHERE ci_empleado = ?");
         return $stmt->execute([$id]);
     }
+
+    public function tieneRoles($ci_empleado)
+    {
+        $sql = "SELECT COUNT(*) FROM rol WHERE ci_empleado = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$ci_empleado]);
+        return $stmt->fetchColumn() > 0;
+    }
 }

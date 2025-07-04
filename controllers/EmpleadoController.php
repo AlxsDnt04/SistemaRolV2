@@ -5,10 +5,16 @@ $empleado = new Empleado();
 
 // Eliminar por GET directamente desde la id de URL
 if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
+    //verificar si el empleado tiene un rol asignado
+    $tieneRoles = $empleado->tieneRoles($_GET['id']);
+    if ($tieneRoles) {
+        header('Location: ../view/login/dashboard2.php?contenido=empleado/listar.php&error=empleado_con_roles');
+        exit;
+    } else{
     // llamar a la funcion eliminar
     $empleado->eliminar($_GET['id']);
     header('Location: ../view/login/dashboard2.php?contenido=empleado/listar.php&success=2');
-    exit;
+    exit;}
 }
 
 // Crear o actualizar por POST desde el formulario

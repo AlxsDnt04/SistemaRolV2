@@ -133,15 +133,15 @@ if (isset($_GET['id'])) {
                   </div>
                   <div class="mb-3">
                     <label for="hora25" class="form-label">Hora 25%</label>
-                    <input type="number" class="form-control" id="hora25" name="hora25" placeholder="Valor hora 25%" value="<?= htmlspecialchars($data['hora25']) ?>">
+                    <input type="number" class="form-control" id="hora25" name="hora25" placeholder="Valor hora 25%">
                   </div>
                   <div class="mb-3">
                     <label for="hora50" class="form-label">Hora 50%</label>
-                    <input type="number" class="form-control" id="hora50" name="hora50" placeholder="Valor hora 50%" value="<?= htmlspecialchars($data['hora50']) ?>">
+                    <input type="number" class="form-control" id="hora50" name="hora50" placeholder="Valor hora 50%">
                   </div>
                   <div class="mb-3">
                     <label for="hora100" class="form-label">Hora 100%</label>
-                    <input type="number" class="form-control" id="hora100" name="hora100" placeholder="Valor hora 100%" value="<?= htmlspecialchars($data['hora100']) ?>">
+                    <input type="number" class="form-control" id="hora100" name="hora100" placeholder="Valor hora 100%" >
                   </div>
                   <div class="mb-3">
                     <label for="bonos" class="form-label">Bonos</label>
@@ -188,15 +188,15 @@ if (isset($_GET['id'])) {
                 <h5 class="mb-3 border-bottom pb-2">Totales</h5>
                 <div class="col-md-4 mb-3 mb-md-0">
                   <label for="temp_total_25" class="form-label">Total 25%</label>
-                  <input type="number" id="temp_total_25" name="total25" class="form-control" readonly placeholder="0.00">
+                  <input type="number" id="temp_total_25" name="total25" class="form-control" value="<?= htmlspecialchars($data['hora25']) ?>" readonly placeholder="0.00">
                 </div>
                 <div class="col-md-4 mb-3 mb-md-0">
                   <label for="temp_total_50" class="form-label">Total 50%</label>
-                  <input type="number" id="temp_total_50" name="total50" class="form-control" readonly placeholder="0.00">
+                  <input type="number" id="temp_total_50" name="total50" class="form-control" value="<?= htmlspecialchars($data['hora50']) ?>" readonly placeholder="0.00">
                 </div>
                 <div class="col-md-4">
                   <label for="temp_total_100" class="form-label">Total 100%</label>
-                  <input type="number" id="temp_total_100" name="total100" class="form-control" readonly placeholder="0.00">
+                  <input type="number" id="temp_total_100" name="total100" class="form-control" value="<?= htmlspecialchars($data['hora100']) ?>" readonly placeholder="0.00">
                 </div>
               </div>
               <div class="row mb-3">

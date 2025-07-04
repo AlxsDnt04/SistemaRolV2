@@ -7,7 +7,7 @@ $rol = new Rol();
 if (isset($_GET['accion']) && $_GET['accion'] === 'eliminar' && isset($_GET['id'])) {
     // llamar a la funcion eliminar
     $rol->eliminar($_GET['id']);
-    header('Location: ../login/dashboard2.php?contenido=rol/listar.php&success=2');
+    header('Location: ../view/login/dashboard2.php?contenido=rol/listar.php&success=2');
     exit;
 }
 
@@ -22,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $data = [
       'mes' => $_POST['meses'] ?? null,
-      'total25' => $_POST['total25'] ?? null,
-      'total50' => $_POST['total50'] ?? null,
-      'total100' => $_POST['total100'] ?? null,
+      'hora25' => $_POST['total25'] ?? null,
+      'hora50' => $_POST['total50'] ?? null,
+      'hora100' => $_POST['total100'] ?? null,
       'bonos' => $_POST['bonos'] ?? null,
       'totalIngreso' => $_POST['total_ingresos'] ?? null,
       'iess' => $_POST['iesst'] ?? null,
@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'totalEgreso' => $_POST['totalEgres'] ?? null,
       'totalPagar' => $_POST['totalPagar'] ?? null,
       'empleadoInfo' => $_POST['empleadoInfo'] ?? null,
+      'id_rol' => $_POST['id_rol'] ?? null,
     ];
 
     if(isset($_POST['accion']) && $_POST['accion'] === 'editar') {
