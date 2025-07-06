@@ -63,4 +63,11 @@ class Empleado
         $stmt->execute([$ci_empleado]);
         return $stmt->fetchColumn() > 0;
     }
+
+    public function existeEmpleado($ci_empleado)
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM empleado WHERE ci_empleado = ?");
+        $stmt->execute([$ci_empleado]);
+        return $stmt->fetchColumn() > 0;
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+require_once '../../config/validacionInicioSesion.php';
 require_once '../../models/Departamento.php';
 $departamento = new Departamento();
 $departamento = $departamento->obtenerTodos();
@@ -13,24 +14,22 @@ $departamento = $departamento->obtenerTodos();
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover table-striped table-responsive aling-middle">
-          <thead>
+          <thead class="table-dark text-center">
             <tr>
-              <th>ID</th>
               <th>Nombre</th>
               <th>Ubicación</th>
               <th>Área</th>
-              <th class="text-center">Acciones</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             <?php if (!empty($departamento)) : ?>
               <?php foreach ($departamento as $dep) : ?>
-                <tr>
-                  <td><?= htmlspecialchars($dep['id_departamento']) ?></td>
-                  <td><?= htmlspecialchars($dep['nombre']) ?></td>
+                <tr class="align-middle text-center">
+                  <td class="fw-bold"><?= htmlspecialchars($dep['nombre']) ?></td>
                   <td><?= htmlspecialchars($dep['ubicacion']) ?></td>
                   <td><?= htmlspecialchars($dep['area']) ?></td>
-                  <td class="text-center">
+                  <td class="btn-group" role="group">
                     <a href="../login/dashboard2.php?contenido=departamento/formulario.php&id=<?= $dep['id_departamento'] ?>" class="btn btn-warning btn-sm">
                       <i class="fa-solid fa-pen-to-square"></i> Editar</a>
                     <!-- ELIMINAR -->

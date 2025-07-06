@@ -79,3 +79,17 @@ if (isset($_GET['id'])) {
       </div>
     </div>
   </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../../assets/javascript/alertas.js"></script>
+<?php
+  if (isset($_GET['success'])): ?>
+    <script>
+      mostrarAlertaSwal('<?= htmlspecialchars($_GET['success']) ?>');
+    </script>
+    <!-- capturar error -->
+  <?php elseif (isset($_GET['error'])): ?>
+    <script>
+      mostrarAlertaSwal('<?= htmlspecialchars($_GET['error']) ?>');
+    </script>
+  <?php endif; ?>
+

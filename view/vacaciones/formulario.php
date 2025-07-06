@@ -8,7 +8,7 @@ $usuarioCi = $_SESSION['ci_empleado'] ?? '';
 
 if ($usuarioRol === 'empleado') {
     $vacacionesModel = new Vacaciones();
-    $yaSolicito = $vacacionesModel->tieneSolicitud($usuarioCi); // Debes crear este método
+    $yaSolicito = $vacacionesModel->tieneSolicitud($usuarioCi);
     if ($yaSolicito) {
         echo "<script>
             alert('Usted ya realizó su solicitud de vacaciones');
@@ -126,13 +126,47 @@ $data = $data ?? [
         </div>
         <div class="col-md-3">
           <label for="dias" class="form-label">Días</label>
-          <input type="number" class="form-control" id="dias" name="dias" value="<?= htmlspecialchars($data['dias']) ?>" min="1" max="30" required>
-        </div>
-        <div class="col-md-3">
-          <label for="pago" class="form-label">Pago</label>
-          <input type="number" class="form-control" id="pago" name="pago" value="<?= htmlspecialchars($data['pago']) ?>" min="0" step="0.01" required>
-        </div>
+            <input 
+            type="number" 
+            class="form-control" 
+            id="dias" 
+            name="dias" 
+            value="<?= htmlspecialchars($data['dias']) ?>" 
+            min="1" 
+            max="30" 
+            required 
+            readonly
+            >
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const fechaInicio = document.getElementById('fecha_inicio');
+              const fechaFin = document.getElementById('fecha_fin');
+              const diasInput = document.getElementById('dias');
 
+              function calcularDias(inicio, fin) {
+              if (!inicio || !fin) return '';
+              const f1 = new Date(inicio);
+              const f2 = new Date(fin);
+              const diff = (f2 - f1) / (1000 * 60 * 60 * 24)+1;
+              return diff > 0 ? diff : '';
+              }
+
+              function actualizarDias() {
+              diasInput.value = calcularDias(fechaInicio.value, fechaFin.value);
+              }
+
+              fechaInicio.addEventListener('change', actualizarDias);
+              fechaFin.addEventListener('change', actualizarDias);
+
+              // Inicializar al cargar
+              actualizarDias();
+            });
+            </script>
+        </div>
+        <div class="col-md-6">
+          <label for="motivo" class="form-label">Motivo</label>
+          <input type="text" class="form-control" id="motivo" name="motivo" maxlength="100" value="<?= htmlspecialchars($data['motivo'] ?? '') ?>" required>
+        </div>
         <div class="row mb-3">
           <div class="col-md-3">
             <label for="aprobado" class="form-label">Estado</label>

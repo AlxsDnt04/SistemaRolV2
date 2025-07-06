@@ -22,7 +22,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
     </div>
     <div class="card-body">
       <table class="table table-bordered table-hover table-striped table-responsive">
-        <thead>
+        <thead class="table-dark text-center">
           <tr>
             <th>Cédula</th>
             <th>Nombre</th>
@@ -40,15 +40,15 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
         <tbody>
           <?php if (!empty($consulta)) : ?>
             <?php foreach ($consulta as $dep) : ?>
-              <tr>
-                <td class="text-center align-middle"><?= htmlspecialchars($dep['ci_empleado']) ?></td>
-                <td class="text-center align-middle"><?= htmlspecialchars($dep['nombre']) ?></td>
-                <td class="text-center align-middle"><?= htmlspecialchars($dep['apellido']) ?></td>
-                <td class="text-center align-middle"><?= htmlspecialchars($dep['descripcion']) ?></td>
-                <td class="text-center align-middle"><?= htmlspecialchars($dep['mes']) ?></td>
-                <td class="text-center align-middle"><?= htmlspecialchars($dep['fecha_carga']) ?></td>
+              <tr class="text-center align-middle">
+                <td><?= htmlspecialchars($dep['ci_empleado']) ?></td>
+                <td><?= htmlspecialchars($dep['nombre']) ?></td>
+                <td><?= htmlspecialchars($dep['apellido']) ?></td>
+                <td><?= htmlspecialchars($dep['descripcion']) ?></td>
+                <td><?= htmlspecialchars($dep['mes']) ?></td>
+                <td><?= htmlspecialchars($dep['fecha_carga']) ?></td>
                 <!-- enlace para ver el archivo en el navegador -->
-                <td class="text-center align-middle">
+                <td>
                   <?= htmlspecialchars($dep['archivo']) ?>
                   <?php if (trim($dep['archivo']) === 'uploads/' || trim($dep['archivo']) === ''): ?>
                     <span class="text-muted">Sin archivo</span>
@@ -58,9 +58,9 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'empleado') {
                   <?php endif; ?>
                 </td>
                 <!-- botones para admin -->
-                <td class="text-center align-middle"><?= isset($dep['mes_rol_generado']) ? htmlspecialchars($dep['mes_rol_generado']) : 'No tiene roles generados' ?></td>
+                <td class="fw-bold"><?= isset($dep['mes_rol_generado']) ? htmlspecialchars($dep['mes_rol_generado']) : 'No tiene roles generados' ?></td>
                 <?php if ($_SESSION['rol'] !== 'empleado') : ?>
-                  <td class="text-center align-middle">
+                  <td class="btn-group" role="group">
                     <!-- EDITAR -->
                     <a href="formulario.php?id=<?= $dep['id'] ?>" class="btn btn-warning btn-sm">
                       <i class="fa-solid fa-pen-to-square"></i> Editar</a>

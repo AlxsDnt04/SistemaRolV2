@@ -1,9 +1,6 @@
 <?php
 //inicio de sesion
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('Location: login.php');
-}
+require_once '../../config/validacionInicioSesion.php';
 $rol = $_SESSION['rol'];
 $usuario = $_SESSION['usuario'];
 ?>

@@ -19,12 +19,22 @@ function mostrarAlertaSwal(tipo) {
   } else if (tipo === "error=2") {
     config.icon = "error";
     config.title = "¡Usuario o contraseña incorrecto!";
-  } else if (tipo === "error=empleado_con_roles") {
+  } else if (tipo === "empleado_con_roles") {
     config.icon = "error";
+    config.timer = 4000;
     config.title = "¡No se puede eliminar un empleado con roles o usuario asociado, Primero elimine la asociación!";
+  } else if (tipo === "usuario_existente") {
+    config.icon = "error";
+    config.timer = 4000;
+    config.title = "¡El usuario ya está registrado. Por favor, elige otro.!";
+  } else if (tipo === "cedula_existente") {
+    config.icon = "error";
+    config.title = "¡La cédula ya está registrada.!";
+    config.timer = 4000;
   } else {
     config.icon = "error";
     config.title = "¡Ha ocurrido un error desconocido!";
   }
   Swal.fire(config);
 }
+

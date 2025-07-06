@@ -14,37 +14,33 @@ $empleados = $empleado->obtenerTodos();
       </div>
       <div class="card-body">
         <div class="mb-3">
-          <input type="text" id="busquedaUsuario" class="form-control" placeholder="Buscar por cédula">
+          <input type="text" id="busquedaUsuario" class="form-control" placeholder="Ingrese el nombre o CI del empleado para buscar..." onkeyup="buscarUsuario()">
         </div>
         <div class="table-responsive">
           <table class="table table-bordered table-hover table-striped align-middle">
-            <thead>
+            <thead class="table-dark text-center">
               <tr>
-                <th>Cedula</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Empleado</th>
                 <th>Correo</th>
                 <th>Dirección</th>
                 <th>Teléfono</th>
                 <th>Departamento</th>
                 <th>Area</th>
-                <th class="text-center">Acciones</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <?php if (!empty($empleados)) : ?>
                 <?php foreach ($empleados as $emp) : ?>
-                  <tr>
-                    <td><?= htmlspecialchars($emp['ci_empleado']) ?></td>
-                    <td><?= htmlspecialchars($emp['nombre']) ?></td>
-                    <td><?= htmlspecialchars($emp['apellido']) ?></td>
+                  <tr class="text-center align-middle">
+                    <td class="fw-bold"><?= htmlspecialchars($emp['ci_empleado'].' - '.$emp['nombre'].' '.$emp['apellido']) ?></td>
                     <td><?= htmlspecialchars($emp['correo']) ?></td>
                     <td><?= htmlspecialchars($emp['direccion']) ?></td>
                     <td><?= htmlspecialchars($emp['telefono']) ?></td>
                     <td><?= htmlspecialchars($emp['departamento_nombre']) ?></td>
                     <td><?= htmlspecialchars($emp['area']) ?></td>
                     
-                    <td class="text-center">
+                    <td class="btn-group" role="group">
                       <a href="../login/dashboard2.php?contenido=empleado/formulario.php&id=<?= $emp['ci_empleado'] ?>" class="btn btn-warning btn-sm">
                         <i class="fa-solid fa-pen-to-square"></i> Editar
                       </a>
@@ -68,11 +64,16 @@ $empleados = $empleado->obtenerTodos();
   </div>
   <script src="../../assets/javascript/busquedaUsuario.js"></script>
 <!-- alertas -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../../assets/javascript/alertas.js"></script>
 <?php
   if (isset($_GET['success'])): ?>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../../assets/javascript/alertas.js"></script>
     <script>
       mostrarAlertaSwal('<?= htmlspecialchars($_GET['success']) ?>');
+    </script>
+    <!-- capturar error -->
+  <?php elseif (isset($_GET['error'])): ?>
+    <script>
+      mostrarAlertaSwal('<?= htmlspecialchars($_GET['error']) ?>');
     </script>
   <?php endif; ?>

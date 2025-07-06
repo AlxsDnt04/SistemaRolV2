@@ -116,4 +116,4 @@ $pdf->Cell(0, 10, "____________________________", 0, 1, 'C');
 $pdf->Cell(0, 10, "Firma del Empleado: ".($data['nombre']." ".$data['apellido']), 0, 1, 'C');
 
 $nombreArchivo = 'RolPago_'.$data['ci_empleado'].'_'.$data['mes'].'_'.$data['fecha_registro'].'.pdf';
-$pdf->Output('I', $nombreArchivo);
+$pdf->Output('D', $nombreArchivo);

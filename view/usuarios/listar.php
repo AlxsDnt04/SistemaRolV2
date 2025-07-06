@@ -13,9 +13,8 @@ $userQuery = $usuarios->obtenerTodosUsuarios();
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover table-striped table-responsive align-middle">
-          <thead>
+          <thead class="table-dark text-center">
             <tr>
-              <th class="text-center">ID</th>
               <th class="text-center">Usuario</th>
               <th class="text-center">Rol de usuario</th>
               <th class="text-center">Empleado</th>
@@ -27,12 +26,11 @@ $userQuery = $usuarios->obtenerTodosUsuarios();
             <?php if (!empty($userQuery)) : ?>
               <?php foreach ($userQuery as $UQ) : ?>
                 <tr class="text-center">
-                  <td><?= htmlspecialchars($UQ['id']) ?></td>
                   <td><?= htmlspecialchars($UQ['usuario']) ?></td>
                   <td><?= htmlspecialchars($UQ['rol']) ?></td>
                   <td><?= htmlspecialchars($UQ['ci_empleado'] . ' - ' . $UQ['nombre'].' '.$UQ['apellido']) ?></td>
                   <td><?= htmlspecialchars($UQ['fecha_user']) ?></td>
-                  <td class="text-center">
+                  <td class="btn-group" role="group">
                     <a href="../login/dashboard2.php?contenido=usuarios/formulario.php&id=<?= $UQ['id'] ?>" class="btn btn-warning btn-sm">
                       <i class="fa-solid fa-pen-to-square"></i> Editar</a>
                     <!-- ELIMINAR -->

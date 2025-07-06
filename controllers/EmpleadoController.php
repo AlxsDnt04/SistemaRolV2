@@ -33,12 +33,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Aquí puedes redirigir o mostrar errores 
         die(implode('<br>', $errores));
     }
+    
 
     if (isset($_POST['accion']) && $_POST['accion'] === 'editar') {
         // Actualizar
         $empleado->actualizar($_POST);
     } elseif (isset($_POST['accion']) && $_POST['accion'] === 'crear') {
         // crear
+        if ($empleado->existeEmpleado($_POST['ci_empleado'])) {
+            // Redirigir con mensaje de error si el empleado ya existe
+            header('Location: ../view/login/dashboard2.php?contenido=empleado/formulario.php&error=cedula_existente');
+            exit;
+        }
         $empleado->crear($_POST);
     } else {
         // Redirigir si no se especifica acción

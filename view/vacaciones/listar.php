@@ -25,7 +25,7 @@ $ci_empleado = $_SESSION['ci_empleado'] ?? null;
     </div>
     <div class="card-body">
       <table class="table table-bordered table-hover table-striped align-middle">
-        <thead>
+        <thead class="table-dark text-center">
           <tr>
             <th>Empleado</th>
             <th>Fecha Inicio</th>
