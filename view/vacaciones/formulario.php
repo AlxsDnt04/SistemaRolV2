@@ -7,15 +7,15 @@ $usuarioRol = $_SESSION['rol'] ?? '';
 $usuarioCi = $_SESSION['ci_empleado'] ?? '';
 
 if ($usuarioRol === 'empleado') {
-    $vacacionesModel = new Vacaciones();
-    $yaSolicito = $vacacionesModel->tieneSolicitud($usuarioCi);
-    if ($yaSolicito) {
-        echo "<script>
+  $vacacionesModel = new Vacaciones();
+  $yaSolicito = $vacacionesModel->tieneSolicitud($usuarioCi);
+  if ($yaSolicito) {
+    echo "<script>
             alert('Usted ya realizó su solicitud de vacaciones');
             window.location.href = 'dashboard2.php?contenido=vacaciones/listar.php';
         </script>";
-        exit;
-    }
+    exit;
+  }
 }
 
 $emp = new Empleado();
@@ -31,7 +31,6 @@ $data = $data ?? [
   'fecha_fin' => '',
   'dias' => '',
   'pago' => '',
-  'fecha_emision' => date('Y-m-d'),
   'aprobado' => '',
 ];
 ?>
@@ -53,7 +52,7 @@ $data = $data ?? [
         <?php endif; ?>
 
         <div class="row mb-3">
-          <div class="col-md-6">
+          <div class="col-md-6 mb-3">
             <label for="ci_empleado" class="form-label">Empleado</label>
             <?php
             $usuarioRol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
@@ -86,111 +85,118 @@ $data = $data ?? [
           </div>
           <div class="col-md-3">
             <label for="fecha_fin" class="form-label">Fecha Fin</label>
-            <input 
-              type="date" 
-              class="form-control" 
-              id="fecha_fin" 
-              name="fecha_fin" 
-              value="<?= htmlspecialchars($data['fecha_fin']) ?>" 
-              required readonly
-            >
+            <input
+              type="date"
+              class="form-control"
+              id="fecha_fin"
+              name="fecha_fin"
+              value="<?= htmlspecialchars($data['fecha_fin']) ?>"
+              required readonly>
             <script>
               document.addEventListener('DOMContentLoaded', function() {
-              const fechaInicio = document.getElementById('fecha_inicio');
-              const fechaFin = document.getElementById('fecha_fin');
+                const fechaInicio = document.getElementById('fecha_inicio');
+                const fechaFin = document.getElementById('fecha_fin');
 
-              function sumarDias(fecha, dias) {
-                const f = new Date(fecha);
-                f.setDate(f.getDate() + dias);
-                // Ajuste para formato yyyy-mm-dd
-                const year = f.getFullYear();
-                const month = String(f.getMonth() + 1).padStart(2, '0');
-                const day = String(f.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-              }
+                function sumarDias(fecha, dias) {
+                  const f = new Date(fecha);
+                  f.setDate(f.getDate() + dias);
+                  // Ajuste para formato yyyy-mm-dd
+                  const year = f.getFullYear();
+                  const month = String(f.getMonth() + 1).padStart(2, '0');
+                  const day = String(f.getDate()).padStart(2, '0');
+                  return `${year}-${month}-${day}`;
+                }
 
-              fechaInicio.addEventListener('change', function() {
-                if (this.value) {
-                fechaFin.value = sumarDias(this.value, 15);
-                } else {
-                fechaFin.value = '';
+                fechaInicio.addEventListener('change', function() {
+                  if (this.value) {
+                    fechaFin.value = sumarDias(this.value, 15);
+                  } else {
+                    fechaFin.value = '';
+                  }
+                });
+
+                // Si ya hay fecha_inicio al cargar, autocompletar fecha_fin si está vacío
+                if (fechaInicio.value && !fechaFin.value) {
+                  fechaFin.value = sumarDias(fechaInicio.value, 15);
                 }
               });
+            </script>
+          </div>
+          <div class="col-md-6">
+            <label for="motivo" class="form-label">Motivo (opcional)</label>
+            <textarea
+              class="form-control"
+              id="motivo"
+              name="motivo"
+              maxlength="100"
+              rows="3"
+              placeholder="Ingrese el motivo de la solicitud (opcional)"
+              style="resize: none; min-height: 80px; max-height: 80px;"><?= htmlspecialchars($data['motivo'] ?? '') ?></textarea>
+          </div>
+          <div class="col-md-3">
+            <label for="dias" class="form-label">Días</label>
+            <input
+              type="number"
+              class="form-control"
+              id="dias"
+              name="dias"
+              value="<?= htmlspecialchars($data['dias']) ?>"
+              min="1"
+              max="30"
+              required
+              readonly>
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                const fechaInicio = document.getElementById('fecha_inicio');
+                const fechaFin = document.getElementById('fecha_fin');
+                const diasInput = document.getElementById('dias');
 
-              // Si ya hay fecha_inicio al cargar, autocompletar fecha_fin si está vacío
-              if (fechaInicio.value && !fechaFin.value) {
-                fechaFin.value = sumarDias(fechaInicio.value, 15);
-              }
+                function calcularDias(inicio, fin) {
+                  if (!inicio || !fin) return '';
+                  const f1 = new Date(inicio);
+                  const f2 = new Date(fin);
+                  const diff = (f2 - f1) / (1000 * 60 * 60 * 24) + 1;
+                  return diff > 0 ? diff : '';
+                }
+
+                function actualizarDias() {
+                  diasInput.value = calcularDias(fechaInicio.value, fechaFin.value);
+                }
+
+                fechaInicio.addEventListener('change', actualizarDias);
+                fechaFin.addEventListener('change', actualizarDias);
+
+                // Inicializar al cargar
+                actualizarDias();
               });
             </script>
-        </div>
-        <div class="col-md-3">
-          <label for="dias" class="form-label">Días</label>
-            <input 
-            type="number" 
-            class="form-control" 
-            id="dias" 
-            name="dias" 
-            value="<?= htmlspecialchars($data['dias']) ?>" 
-            min="1" 
-            max="30" 
-            required 
-            readonly
-            >
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const fechaInicio = document.getElementById('fecha_inicio');
-              const fechaFin = document.getElementById('fecha_fin');
-              const diasInput = document.getElementById('dias');
-
-              function calcularDias(inicio, fin) {
-              if (!inicio || !fin) return '';
-              const f1 = new Date(inicio);
-              const f2 = new Date(fin);
-              const diff = (f2 - f1) / (1000 * 60 * 60 * 24)+1;
-              return diff > 0 ? diff : '';
-              }
-
-              function actualizarDias() {
-              diasInput.value = calcularDias(fechaInicio.value, fechaFin.value);
-              }
-
-              fechaInicio.addEventListener('change', actualizarDias);
-              fechaFin.addEventListener('change', actualizarDias);
-
-              // Inicializar al cargar
-              actualizarDias();
-            });
-            </script>
-        </div>
-        <div class="col-md-6">
-          <label for="motivo" class="form-label">Motivo</label>
-          <input type="text" class="form-control" id="motivo" name="motivo" maxlength="100" value="<?= htmlspecialchars($data['motivo'] ?? '') ?>" required>
-        </div>
-        <div class="row mb-3">
-          <div class="col-md-3">
-            <label for="aprobado" class="form-label">Estado</label>
-            <?php if ($usuarioRol === 'empleado'): ?>
-              <input type="hidden" name="aprobado" value="Pendiente">
-              <input type="text" class="form-control" value="Pendiente" readonly>
-            <?php else: ?>
-              <select class="form-select" id="aprobado" name="aprobado" required>
-                <option value="Pendiente" <?= ($data['aprobado'] === 'Pendiente' || empty($data['aprobado'])) ? 'selected' : '' ?>>Pendiente</option>
-                <option value="Sí" <?= ($data['aprobado'] === 'Sí') ? 'selected' : '' ?>>Sí</option>
-                <option value="No" <?= ($data['aprobado'] === 'No') ? 'selected' : '' ?>>No</option>
-              </select>
-            <?php endif; ?>
+            
+              <div class="col-md-5">
+                <label for="aprobado" class="form-label">Estado</label>
+                <?php if ($usuarioRol === 'empleado'): ?>
+                  <input type="hidden" name="aprobado" value="Pendiente">
+                  <input type="text" class="form-control" value="Pendiente" readonly>
+                <?php else: ?>
+                  <select class="form-select" id="aprobado" name="aprobado" required>
+                    <option value="Pendiente" <?= ($data['aprobado'] === 'Pendiente' || empty($data['aprobado'])) ? 'selected' : '' ?>>Pendiente</option>
+                    <option value="Sí" <?= ($data['aprobado'] === 'Sí') ? 'selected' : '' ?>>Sí</option>
+                    <option value="No" <?= ($data['aprobado'] === 'No') ? 'selected' : '' ?>>No</option>
+                  </select>
+                <?php endif; ?>
+              </div>
+            
           </div>
-        </div>
 
-        <div class="mt-4 text-center">
-          <button type="submit" class="btn btn-success px-5">
-            <i class="fa-solid fa-floppy-disk"></i> Guardar
-          </button>
-          <button type="reset" class="btn btn-secondary px-5">
-            <i class="fa-solid fa-eraser"></i> Limpiar
-          </button>
-        </div>
+
+
+          <div class="mt-4 text-center">
+            <button type="submit" class="btn btn-success px-5">
+              <i class="fa-solid fa-floppy-disk"></i> Guardar
+            </button>
+            <button type="reset" class="btn btn-secondary px-5">
+              <i class="fa-solid fa-eraser"></i> Limpiar
+            </button>
+          </div>
       </form>
     </div>
   </div>

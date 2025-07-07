@@ -19,7 +19,7 @@ $usuario = $_SESSION['usuario'];
             max-width: 400px;
             margin: 60px auto;
             padding: 30px 40px;
-            background: #fff;
+            background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 2px 16px rgba(0,0,0,0.08);
         }
@@ -112,7 +112,7 @@ $usuario = $_SESSION['usuario'];
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="?contenido=vacaciones/formulario.php" class="nav-link text-dark">
+                        <a href="?contenido=vacaciones/listar.php" class="nav-link text-dark">
                             <i class="fa-solid fa-umbrella-beach"></i> Solicitud de Vacaciones
                         </a>
                     </li>

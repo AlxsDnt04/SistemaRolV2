@@ -21,8 +21,10 @@ function mostrarAlertaSwal(tipo) {
     config.title = "¡Usuario o contraseña incorrecto!";
   } else if (tipo === "empleado_con_roles") {
     config.icon = "error";
-    config.timer = 4000;
+    config.timer = 6000;
     config.title = "¡No se puede eliminar un empleado con roles o usuario asociado, Primero elimine la asociación!";
+    config.position = "top-end";
+    config.showConfirmButton = true;
   } else if (tipo === "usuario_existente") {
     config.icon = "error";
     config.timer = 4000;
