@@ -37,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $vacaciones->nuevaSolicitud($data);
     } else {
         // Redirigir si no se especifica acción
-        header('Location: ../view/login/dashboard2.php?contenido=usuarios/listar.php&error=1');
+        header('Location: ../view/login/dashboard2.php?contenido=vacaciones/listar.php&error=1');
         exit;
     }
-    header('Location: ../view/login/dashboard2.php?contenido=usuarios/listar.php&success=1');
+    header('Location: ../view/login/dashboard2.php?contenido=vacaciones/listar.php&success=1');
     exit;
 }

@@ -1,18 +1,18 @@
 <?php
-//require_once '../../models/Vacaciones.php';
+require_once '../../models/Vacaciones.php';
 require_once '../../models/Empleado.php';
 
-//$vacacionesModel = new Vacaciones();
+$vacacionesModel = new Vacaciones();
 $empleadoModel = new Empleado();
 
 $rol = $_SESSION['rol'];
 $ci_empleado = $_SESSION['ci_empleado'] ?? null;
 
-/* if ($rol === 'admin') {
+ if ($rol === 'admin') {
     $solicitudes = $vacacionesModel->obtenerTodas();
 } else {
-    $solicitudes = $vacacionesModel->obtenerPorEmpleado($ci_empleado);
-} */
+    $solicitudes = $vacacionesModel->consultarSolicitud($ci_empleado);
+} 
 ?>
 <div class="container mt-3">
   <div class="card shadow">
@@ -31,8 +31,8 @@ $ci_empleado = $_SESSION['ci_empleado'] ?? null;
             <th>Fecha Inicio</th>
             <th>Fecha Fin</th>
             <th>Días</th>
-            <th>Pago</th>
             <th>Fecha Emisión</th>
+            <th>Motivo</th>
             <th>Aprobado</th>
             <th>Acciones</th>
           </tr>
@@ -41,13 +41,22 @@ $ci_empleado = $_SESSION['ci_empleado'] ?? null;
           <?php if (!empty($solicitudes)) : ?>
             <?php foreach ($solicitudes as $sol) : ?>
               <tr>
-                <td><?= htmlspecialchars($sol['nombre'].' '.$sol['apellido']) ?></td>
+                <td><?= htmlspecialchars($sol['ci_empleado'])?></td>
                 <td><?= htmlspecialchars($sol['fecha_inicio']) ?></td>
                 <td><?= htmlspecialchars($sol['fecha_fin']) ?></td>
                 <td><?= htmlspecialchars($sol['dias']) ?></td>
-                <td>$<?= number_format($sol['pago'], 2) ?></td>
                 <td><?= htmlspecialchars($sol['fecha_emision']) ?></td>
-                <td><?= htmlspecialchars($sol['aprobado']) ?></td>
+                <td><?= htmlspecialchars($sol['observaciones']) ?></td>
+                <!-- cambiar el color de la celda dependiendo de la palabra -->
+                <td class="text-center">
+                  <?php if ($sol['aprobado'] === 'Sí'): ?>
+                    <span class="badge bg-success">Aprobado</span>
+                  <?php elseif ($sol['aprobado'] === 'No'): ?>
+                    <span class="badge bg-danger">Rechazado</span>
+                  <?php else: ?>
+                    <span class="badge bg-secondary">Pendiente</span>
+                  <?php endif; ?>
+                </td>
                 <td>
                   <a href="formulario.php?id=<?= $sol['id'] ?>" class="btn btn-warning btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i> Editar</a>
