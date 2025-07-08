@@ -19,9 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'fecha_inicio' => $_POST['fecha_inicio'] ?? null,
         'fecha_fin' => $_POST['fecha_fin'] ?? null,
         'dias' => $_POST['dias'] ?? null,
-        'pago' => $_POST['pago'] ?? null,
         'aprobado' => $_POST['aprobado'] ?? null,
-        'motivo' => $_POST['motivo'] ?? '',];
+        'observaciones' => $_POST['motivo'] ?? '',];
 
      // Validar que el campo id no esté vacío    
     if (isset($_POST['accion']) && $_POST['accion'] === 'actualizar') {
