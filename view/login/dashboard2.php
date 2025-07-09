@@ -1,8 +1,19 @@
 <?php
 //inicio de sesion
 require_once '../../config/validacionInicioSesion.php';
+require_once '../../models/Empleado.php';
+$empleadoModel = new Empleado();
 $rol = $_SESSION['rol'];
 $usuario = $_SESSION['usuario'];
+
+$nombreCompleto= 'Usuario';
+
+if ($usuario) {
+    $consultaUsuario = $empleadoModel->obtenerPorId($usuario);
+    if ($consultaUsuario && isset($consultaUsuario['nombre'], $consultaUsuario['apellido'])) {
+        $nombreCompleto = $consultaUsuario['nombre'] . ' ' . $consultaUsuario['apellido'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -47,7 +58,7 @@ $usuario = $_SESSION['usuario'];
             </div>
             <div class="d-flex align-items-center ms-3">
                 <span class="text-white me-3">
-                    <i class="fa-solid fa-user"></i> <?php echo htmlspecialchars($usuario); ?>
+                    <i class="fa-solid fa-user"></i> <?php echo htmlspecialchars($nombreCompleto); ?>
                 </span>
                 <a href="logout.php" class="btn btn-danger btn-sm">
                     <i class="fa-solid fa-right-from-bracket"></i> Salir
