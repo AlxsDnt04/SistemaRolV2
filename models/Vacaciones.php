@@ -47,7 +47,7 @@ class Vacaciones
     /* obtener total las solicitudes de vacaciones */
     public function obtenerTodas()
     {
-        $sql = "SELECT v.*, e.nombre, e.apellido FROM vacaciones v JOIN empleados e ON v.ci_empleado = e.ci_empleado";
+        $sql = "SELECT v.*, e.nombre, e.apellido FROM vacaciones v JOIN empleado e ON v.ci_empleado = e.ci_empleado";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

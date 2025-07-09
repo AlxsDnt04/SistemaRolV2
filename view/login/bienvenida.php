@@ -1,15 +1,27 @@
 <?php
+require_once '../../models/Empleado.php';
+$empleadoModel = new Empleado();
+
 // Asegúrate de que la sesión esté iniciada en dashboard2.php
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
-$nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
+
+$nombreCompleto= 'Administrador';
+
+if ($usuario) {
+    $consultaUsuario = $empleadoModel->obtenerPorId($usuario);
+    if ($consultaUsuario && isset($consultaUsuario['nombre'], $consultaUsuario['apellido'])) {
+        $nombreCompleto = $consultaUsuario['nombre'] . ' ' . $consultaUsuario['apellido'];
+    }
+}
+
 ?>
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg border-0">
                 <div class="card-body text-center">
-                    <h2 class="mb-3"><i class="fa-solid fa-house-chimney"></i> ¡Bienvenido/a, <span class="text-primary"><?= htmlspecialchars($usuario) ?></span>!</h2>
+                    <h2 class="mb-3"><i class="fa-solid fa-house-chimney"></i> Bienvenido/a, <span class="text-primary"><?= htmlspecialchars($nombreCompleto) ?></span></h2>
                     <p class="lead mb-4">
                         Has iniciado sesión como <strong><?= htmlspecialchars($rol) ?></strong>.<br>
                         Desde este panel puedes gestionar <?php if ($rol === 'empleado') { echo 'tus documentos y consultar tu información personal.'; } else { echo 'los departamentos, empleados, roles de pago y documentos del sistema.'; } ?>
@@ -40,10 +52,17 @@ $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
                         </div>
                     </div>
                     <hr>
+                    <?php if ($rol === 'empleado'): ?>
                     <p class="text-muted mt-4">
                         Si tienes dudas, contacta al administrador del sistema.<br>
                         ¡Que tengas un excelente día!
                     </p>
+                    <?php else: ?>
+                    <p class="text-muted mt-4">
+                        Si tienes dudas, contacta a tu supervisor o al departamento de recursos humanos.<br>
+                        ¡Que tengas un excelente día!
+                    </p>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
