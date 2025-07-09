@@ -8,11 +8,11 @@ $empleadoModel = new Empleado();
 $rol = $_SESSION['rol'];
 $ci_empleado = $_SESSION['ci_empleado'] ?? null;
 
- if ($rol === 'admin') {
-    $solicitudes = $vacacionesModel->obtenerTodas();
+if ($rol === 'admin') {
+  $solicitudes = $vacacionesModel->obtenerTodas();
 } else {
-    $solicitudes = $vacacionesModel->consultarSolicitud($ci_empleado);
-} 
+  $solicitudes = $vacacionesModel->consultarSolicitud($ci_empleado);
+}
 ?>
 <div class="container mt-3">
   <div class="card shadow">
@@ -33,15 +33,17 @@ $ci_empleado = $_SESSION['ci_empleado'] ?? null;
             <th>Días</th>
             <th>Fecha Emisión</th>
             <th>Motivo</th>
-            <th>Aprobado</th>
+            <th>Estado</th>
+            <?php if($rol !=='empleado'):?>
             <th>Acciones</th>
+            <?php endif;?>
           </tr>
         </thead>
         <tbody>
           <?php if (!empty($solicitudes)) : ?>
             <?php foreach ($solicitudes as $sol) : ?>
               <tr>
-                <td><?= htmlspecialchars($sol['ci_empleado'])?></td>
+                <td><?= htmlspecialchars($sol['ci_empleado']) ?></td>
                 <td><?= htmlspecialchars($sol['fecha_inicio']) ?></td>
                 <td><?= htmlspecialchars($sol['fecha_fin']) ?></td>
                 <td><?= htmlspecialchars($sol['dias']) ?></td>
@@ -57,14 +59,14 @@ $ci_empleado = $_SESSION['ci_empleado'] ?? null;
                     <span class="badge bg-secondary">Pendiente</span>
                   <?php endif; ?>
                 </td>
-                <td>
-                  <a href="formulario.php?id=<?= $sol['id'] ?>" class="btn btn-warning btn-sm">
+                <?php if($rol !=='empleado'):?>
+                <td class="btn-group text-center">
+                  <a href="dashboard2.php?contenido=vacaciones/formulario.php&id=<?= $sol['id'] ?>" class="btn btn-warning btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i> Editar</a>
-                  <?php if ($rol === 'admin'): ?>
-                    <a href="../../controllers/VacacionesController.php?accion=eliminar&id=<?= $sol['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar solicitud?');">
-                      <i class="fa-solid fa-trash"></i> Eliminar</a>
-                  <?php endif; ?>
+                  <a href="../../controllers/VacacionesController.php?accion=eliminar&id=<?= $sol['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar solicitud?');">
+                    <i class="fa-solid fa-trash"></i> Eliminar</a>
                 </td>
+                <?php endif;?>
               </tr>
             <?php endforeach; ?>
           <?php else : ?>

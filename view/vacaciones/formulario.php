@@ -2,37 +2,55 @@
 require_once '../../models/Empleado.php';
 require_once '../../models/Vacaciones.php';
 
+$vacacionesModel = new Vacaciones();
+$emp = new Empleado();
 
+// Verifica que el rol esté definido en sesión
 $usuarioRol = $_SESSION['rol'] ?? '';
 $usuarioCi = $_SESSION['ci_empleado'] ?? '';
 
+// Si el usuario es empleado, se valida si ya tiene una solicitud
 if ($usuarioRol === 'empleado') {
-  $vacacionesModel = new Vacaciones();
-  $yaSolicito = $vacacionesModel->tieneSolicitud($usuarioCi);
-  if ($yaSolicito) {
-    echo "<script>
-            alert('Usted ya realizó su solicitud de vacaciones');
-            window.location.href = 'dashboard2.php?contenido=vacaciones/listar.php';
-        </script>";
-    exit;
-  }
+    $yaSolicito = $vacacionesModel->tieneSolicitud($usuarioCi);
+    if ($yaSolicito) {
+        echo "<script>
+                alert('Usted ya realizó su solicitud de vacaciones');
+                window.location.href = 'dashboard2.php?contenido=vacaciones/listar.php';
+              </script>";
+        exit;
+    }
+} else {
+    // Si es admin u otro rol, se consultan todas
+    $vacacionesModel->obtenerTodas();
 }
 
-$emp = new Empleado();
+// Obtener todos los empleados (para dropdown o display)
 $empleados = $emp->obtenerTodos();
 
-$esEdicion = isset($data['id']); // $data debe ser definido por el controlador según si es edición o creación
+// Modo edición si hay un ID por GET
+if (isset($_GET['id'])) {
+    $esEdicion = true;
+    $data = $vacacionesModel->consultarSolicitudporid($usuarioCi);
 
-// Valores por defecto para creación
-$data = $data ?? [
-  'id' => '',
-  'ci_empleado' => '',
-  'fecha_inicio' => '',
-  'fecha_fin' => '',
-  'dias' => '',
-  'pago' => '',
-  'aprobado' => '',
-];
+    if (!$data) {
+        echo "<script>
+                alert('Solicitud no encontrada.');
+                window.location.href = 'dashboard2.php?contenido=vacaciones/listar.php';
+              </script>";
+        exit;
+    }
+} else {
+    $esEdicion = false;
+    $data = [
+        'id' => '',
+        'ci_empleado' => '',
+        'fecha_inicio' => '',
+        'fecha_fin' => '',
+        'dias' => '',
+        'aprobado' => '',
+        'motivo' => '',
+    ];
+}
 ?>
 
 <div class="container mt-3">

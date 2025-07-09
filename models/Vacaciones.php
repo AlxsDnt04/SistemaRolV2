@@ -36,7 +36,7 @@ class Vacaciones
     }
 
     /* consultar la solicitud del empleado  */
-    public function consultarSolicitud($ci_empleado)
+    public function consultarSolicitudporid($ci_empleado)
     {
         $sql = "SELECT * FROM vacaciones WHERE ci_empleado = ?";
         $stmt = $this->db->prepare($sql);
