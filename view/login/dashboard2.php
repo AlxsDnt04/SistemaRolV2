@@ -60,6 +60,15 @@ if ($usuario) {
                 <span class="text-white me-3">
                     <i class="fa-solid fa-user"></i> <?php echo htmlspecialchars($nombreCompleto); ?>
                 </span>
+                <div class="dropdown me-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-gear"></i> Perfil
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="?contenido=perfil/editar.php">Editar Perfil</a></li>
+                        <li><a class="dropdown-item disabled" href="?contenido=perfil/cambiar_contrasena.php">Cambiar Contraseña</a></li>
+                    </ul>
+                </div>
                 <a href="logout.php" class="btn btn-danger btn-sm">
                     <i class="fa-solid fa-right-from-bracket"></i> Salir
                 </a>

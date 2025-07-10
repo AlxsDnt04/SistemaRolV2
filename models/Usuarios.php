@@ -68,10 +68,32 @@ class Usuarios
         return false; // Usuario o contraseña incorrectos
     }
 
-   public function existeUsuario($usuario) {
-    $sql = "SELECT COUNT(*) FROM usuarios WHERE usuario = ?";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute([$usuario]);
-    return $stmt->fetchColumn() > 0;
-}
+    public function existeUsuario($usuario)
+    {
+        $sql = "SELECT COUNT(*) FROM usuarios WHERE usuario = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$usuario]);
+        return $stmt->fetchColumn() > 0;
+    }
+
+    //metodo para actualizar foto usuario
+    public function actualizarFoto($data, $archivoFullPath = null)
+    {
+        if (!isset($data['id']) || !is_numeric($data['id'])) {
+            throw new InvalidArgumentException("ID inválido o no definido.");
+        }
+
+        if ($archivoFullPath) {
+            // Asegurar que la ruta tenga la barra correcta
+            $archivo = 'uploads/profilePictures/' . basename($archivoFullPath);
+            $sql = "UPDATE usuarios SET foto = ? WHERE id = ?";
+            $params = [$archivo, $data['id']];
+        } else {
+            $sql = "UPDATE usuarios SET foto = NULL WHERE id = ?";
+            $params = [$data['id']];
+        }
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute($params);
+    }
 }
