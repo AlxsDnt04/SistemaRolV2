@@ -52,4 +52,11 @@ class Vacaciones
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    /* eliminar vacacion */
+    public function eliminarSolicitud($id)
+    {
+        $sql = "DELETE FROM vacaciones WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$id]);
+    }
 }

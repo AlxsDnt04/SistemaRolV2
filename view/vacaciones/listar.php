@@ -61,7 +61,7 @@ if ($rol === 'admin') {
                 </td>
                 <?php if($rol !=='empleado'):?>
                 <td class="btn-group text-center">
-                  <a href="dashboard2.php?contenido=vacaciones/formulario.php&id=<?= $sol['id'] ?>" class="btn btn-warning btn-sm">
+                  <a href="dashboard2.php?contenido=vacaciones/formulario.php&id=<?= $sol['ci_empleado'] ?>" class="btn btn-warning btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i> Editar</a>
                   <a href="../../controllers/VacacionesController.php?accion=eliminar&id=<?= $sol['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar solicitud?');">
                     <i class="fa-solid fa-trash"></i> Eliminar</a>
@@ -79,3 +79,19 @@ if ($rol === 'admin') {
     </div>
   </div>
 </div>
+<!-- alertas -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../../assets/javascript/alertas.js"></script>
+<?php
+  if (isset($_GET['success'])): ?>
+    <script>
+      mostrarAlertaSwal('<?= htmlspecialchars($_GET['success']) ?>');
+    </script>
+    <!-- capturar error -->
+  <?php elseif (isset($_GET['error'])): ?>
+    <script>
+      mostrarAlertaSwal('<?= htmlspecialchars($_GET['error']) ?>');
+    </script>
+  <?php endif; ?>
+
+  
