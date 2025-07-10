@@ -6,7 +6,7 @@ $empleadoModel = new Empleado();
 $rol = $_SESSION['rol'];
 $usuario = $_SESSION['usuario'];
 
-$nombreCompleto= 'Usuario';
+$nombreCompleto = 'Administrador';
 
 if ($usuario) {
     $consultaUsuario = $empleadoModel->obtenerPorId($usuario);
@@ -24,7 +24,7 @@ if ($usuario) {
     <link rel="icon" href="../../assets/img/iconnav.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-<link rel="stylesheet" href="../../assets/css/menu.css">
+    <link rel="stylesheet" href="../../assets/css/menu.css">
 </head>
 
 <body>
@@ -60,15 +60,18 @@ if ($usuario) {
                 <span class="text-white me-3">
                     <i class="fa-solid fa-user"></i> <?php echo htmlspecialchars($nombreCompleto); ?>
                 </span>
-                <div class="dropdown me-3">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-gear"></i> Perfil
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="?contenido=perfil/editar.php">Editar Perfil</a></li>
-                        <li><a class="dropdown-item disabled" href="?contenido=perfil/cambiar_contrasena.php">Cambiar Contraseña</a></li>
-                    </ul>
-                </div>
+                <?php if ($rol === 'empleado'): ?>
+                    <div class="dropdown me-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-gear"></i> Perfil
+                        </button>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="?contenido=perfil/editar.php">Cambiar foto</a></li>
+                            <li><a class="dropdown-item disabled" href="?contenido=perfil/cambiar_contrasena.php">Cambiar Contraseña</a></li>
+                        </ul>
+                    </div>
+                <?php endif; ?>
                 <a href="logout.php" class="btn btn-danger btn-sm">
                     <i class="fa-solid fa-right-from-bracket"></i> Salir
                 </a>

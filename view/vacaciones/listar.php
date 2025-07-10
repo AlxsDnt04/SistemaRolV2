@@ -11,7 +11,7 @@ $ci_empleado = $_SESSION['ci_empleado'] ?? null;
 if ($rol === 'admin') {
   $solicitudes = $vacacionesModel->obtenerTodas();
 } else {
-  $solicitudes = $vacacionesModel->consultarSolicitud($ci_empleado);
+  $solicitudes = $vacacionesModel->consultarSolicitudporid($ci_empleado);
 }
 ?>
 <div class="container mt-3">

@@ -41,7 +41,7 @@ class Usuarios
         if (empty($id) || !is_numeric($id)) {
             throw new InvalidArgumentException("El campo 'id' es obligatorio y debe ser numérico.");
         }
-        $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE id = ?");
+        $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE usuario = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -77,23 +77,23 @@ class Usuarios
     }
 
     //metodo para actualizar foto usuario
-    public function actualizarFoto($data, $archivoFullPath = null)
-    {
-        if (!isset($data['id']) || !is_numeric($data['id'])) {
-            throw new InvalidArgumentException("ID inválido o no definido.");
-        }
-
-        if ($archivoFullPath) {
-            // Asegurar que la ruta tenga la barra correcta
-            $archivo = 'uploads/profilePictures/' . basename($archivoFullPath);
-            $sql = "UPDATE usuarios SET foto = ? WHERE id = ?";
-            $params = [$archivo, $data['id']];
-        } else {
-            $sql = "UPDATE usuarios SET foto = NULL WHERE id = ?";
-            $params = [$data['id']];
-        }
-
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($params);
+    public function actualizarFoto($id, $archivoFullPath = null)
+{
+    if (!is_numeric($id)) {
+        throw new InvalidArgumentException("ID inválido o no definido.");
     }
+
+    if ($archivoFullPath) {
+        $archivo = 'uploads/profilePictures/' . basename($archivoFullPath);
+        $sql = "UPDATE usuarios SET foto = ? WHERE id = ?";
+        $params = [$archivo, $id];
+    } else {
+        $sql = "UPDATE usuarios SET foto = NULL WHERE id = ?";
+        $params = [$id];
+    }
+
+    $stmt = $this->db->prepare($sql);
+    return $stmt->execute($params);
+}
+
 }
